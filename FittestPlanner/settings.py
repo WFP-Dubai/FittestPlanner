@@ -152,4 +152,4 @@ LOGGING = {
     }
 }
 
-AUTH_PROFILE_MODULE = 'FittestPlaner.UserProfile'
+AUTH_PROFILE_MODULE = 'FittestPlanner.UserProfile'
