@@ -21,18 +21,17 @@ class Mission(models.Model):
     assingee = models.ForeignKey(User)
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-    fname = models.CharField("First Name",max_length=50)
-    lname = models.CharField("Last Name",max_length=50)
+#class UserProfile(models.Model):
+#    user = models.OneToOneField(User)
+#    contact = models.ManyToOneRel(ContactItem,user)
 
 
 
 # definition of UserProfile from above
 # ...
 
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
+#def create_user_profile(sender, instance, created, **kwargs):
+#    if created:
+#        UserProfile.objects.create(user=instance)
 
-post_save.connect(create_user_profile, sender=User)
+#post_save.connect(create_user_profile, sender=User)
