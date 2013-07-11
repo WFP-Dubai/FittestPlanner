@@ -11,7 +11,7 @@ class ContactItem(models.Model):
     contactCode = models.CharField(max_length=50)
 
 
-class Mission(models.Model):
+class Assignment(models.Model):
     missionName = models.CharField(max_length=50)
     startDate= models.DateField(blank=True, null=True)
     endDate = models.DateField(blank=True, null=True)
@@ -21,17 +21,22 @@ class Mission(models.Model):
     assingee = models.ForeignKey(User)
 
 
-#class UserProfile(models.Model):
-#    user = models.OneToOneField(User)
-#    contact = models.ManyToOneRel(ContactItem,user)
 
+class Mission(models.Model):
+    """Mission Model consists of many Assignments"""
+    
+    name = models.CharField(_('Name'), max_length=250, blank=True, null=True, help_text="")
+    place = models.ForeignKey(Place)
+    description = models.CharField(_('Description'), max_length=500, blank=True, null=True, help_text="")    
+    
+ 
+    class Meta:
+        ordering = ['name',]
 
-
-# definition of UserProfile from above
-# ...
-
-#def create_user_profile(sender, instance, created, **kwargs):
-#    if created:
-#        UserProfile.objects.create(user=instance)
-
-#post_save.connect(create_user_profile, sender=User)
+ 
+    def __unicode__(self):
+        return "%s" % (self.name)
+ 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('')
