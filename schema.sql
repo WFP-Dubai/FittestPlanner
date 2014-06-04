@@ -77,14 +77,19 @@ create table roles (
 );
 
 create table staffroles (
-    id         bigserial    primary key,
+    id         bigserial     primary key,
     role       number,
     staffindex number,
     startdate  datetime,
     enddate    datetime,
     location   varchar(200),
     comments   text          default '',
-    confirmed  --
+    stafftype  varchar(100),
+    foreign key (stafftype) references staffconfirmedtype(stafftype)
+);
+
+create table staffconfirmedtype (
+    stafftype varchar(100) primary key
 );
 
 create table mission (
@@ -94,4 +99,37 @@ create table mission (
     description text,
     startdate   datetime,
     enddate     datetime
+);
+
+create table missionmetatype (
+    missiontype varchar(100) primary key
+);
+
+create table logintable (
+    userid        varchar(100) primary key,
+    email         varchar(256),
+    password      varchar(256),
+    profiletype   varchar(100),
+    createddate   timestamp    default current_timestamp,
+    firstloggedin timestamp,
+    lastloggedin  timestamp,
+    isonline      boolean      default false,
+    ipaddress     varchar(256) not null,
+    foreign key (profiletype) references profiletypes(profile)
+);
+
+create table audittable (
+    auditid     bigserial    primary key,
+    changedtime timestamp    default current_timestamp,
+    userid      varchar(100), --fk
+    tablename   varchar(50),
+    operation   varchar(50), --fk
+    oldvalue    text         default '',
+    newvalue    text         default '',
+    foreign key (userid) references logintable(userid),
+    foreign key (operation) references operationtypes(operationname)
+);
+
+create table operationtypes (
+    operationname varchar(50) primary key
 );
