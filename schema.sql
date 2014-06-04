@@ -10,7 +10,7 @@ create table profiletypes (
 
 
 create table staff (
-    index          integer,
+    index          integer      primary key,
     firstname      varchar(256) not null,
     lastname       varchar(256) not null,
     dateofbirth    datetime,
@@ -31,17 +31,17 @@ create table stafftypes (
 
 create table activities (
     id            bigserial    primary key,
-    activity      varchar(200) not null,
+    activity      text,
     type          varchar(200) not null,
     country       varchar(2),
     etcservicemap varchar(256) default '',
 
+    foreign key (activity) references activitytypes(activity),
     foreign key (country) references countries(iso)
 );
 
 create table activitytypes (
-    id        bigserial    primary key,
-    activity  text         not null,
+    activity  text         primary key,
     colorcode varchar(100) default ''
 );
 
@@ -59,25 +59,26 @@ create table languages (
 
 -- Join with staff table to get staff's languages
 create table languagemapping (
-    staffid     bigserial,
+    staffindex  integer,
     language    varchar(200),
-    primary key (staffid, language),
-    foreign key (staffid) references staff(id),
+    primary key (staffindex, language),
+    foreign key (staffindex) references staff(index),
     foreign key (language) references languages(language)
 );
 
 create table roles (
     id         bigserial     primary key,
-    activityid varchar(200),
+    activity   varchar(200),
     startdate  datetime      default current_timestamp,
     enddate    datetime      default current_timestamp,
     location   varchar(200)  default '',
     foreign key (id) references staffroles(id),
-    foreign key (activityid) references activities(id)
+    foreign key (activity) references activities(activity)
 );
 
+-- Join with staff table to get a staff's role
 create table staffroles (
-    id         bigserial     primary key,
+    id         bigserial,
     role       number,
     staffindex number,
     startdate  datetime,
@@ -85,6 +86,8 @@ create table staffroles (
     location   varchar(200),
     comments   text          default '',
     stafftype  varchar(100),
+    primary key (id, staffindex),
+    foreign key (index) references staff(index),
     foreign key (stafftype) references staffconfirmedtype(stafftype)
 );
 
@@ -95,38 +98,28 @@ create table staffconfirmedtype (
 create table mission (
     id          bigserial    primary key,
     missionname varchar(256),
+    missiontype varchar(100),
     location    varchar(200),
     description text,
     startdate   datetime,
-    enddate     datetime
+    enddate     datetime,
+    foreign key (missiontype) references missionmetatype(missiontype)
 );
 
 create table missionmetatype (
     missiontype varchar(100) primary key
 );
 
-create table logintable (
-    userid        varchar(100) primary key,
-    email         varchar(256),
-    password      varchar(256),
-    profiletype   varchar(100),
-    createddate   timestamp    default current_timestamp,
-    firstloggedin timestamp,
-    lastloggedin  timestamp,
-    isonline      boolean      default false,
-    ipaddress     varchar(256) not null,
-    foreign key (profiletype) references profiletypes(profile)
-);
 
 create table audittable (
     auditid     bigserial    primary key,
     changedtime timestamp    default current_timestamp,
-    userid      varchar(100), --fk
+    userid      varchar(100),
     tablename   varchar(50),
-    operation   varchar(50), --fk
+    operation   varchar(50),
     oldvalue    text         default '',
     newvalue    text         default '',
-    foreign key (userid) references logintable(userid),
+    ipaddress     varchar(256) not null,
     foreign key (operation) references operationtypes(operationname)
 );
 
