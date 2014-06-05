@@ -13,17 +13,17 @@ create table staff (
     index          integer      primary key,
     firstname      varchar(256) not null,
     lastname       varchar(256) not null,
-    dateofbirth    datetime,
+    dateofbirth    date         not null,
     title          varchar(256),
     profile        varchar(200),
     thuraya        varchar(50),
     mobile         varchar(50),
     nationality    varchar(100),
-    type           varchar(200),
+    stafftype      varchar(200),
     staffcolorcode varchar(100),
 
     foreign key (profile) references profiletypes(profile),
-    foreign key (type) references stafftypes(stafftype)
+    foreign key (stafftype) references stafftypes(stafftype)
 );
 create table stafftypes (
     stafftype varchar(200) primary key
@@ -48,8 +48,8 @@ create table activitytypes (
 create table events (
     id        bigserial    primary key,
     event     varchar(256) not null,
-    startdate datetime     default current_timestamp,
-    enddate   datetime     default current_timestamp,
+    startdate timestamp    default current_timestamp,
+    enddate   timestamp    default current_timestamp,
     colorcode varchar(100) default '',
 );
 
@@ -69,8 +69,8 @@ create table languagemapping (
 create table roles (
     id         bigserial     primary key,
     activity   varchar(200),
-    startdate  datetime      default current_timestamp,
-    enddate    datetime      default current_timestamp,
+    startdate  timestamp     default current_timestamp,
+    enddate    timestamp     default current_timestamp,
     location   varchar(200)  default '',
     foreign key (id) references staffroles(id),
     foreign key (activity) references activities(activity)
@@ -81,8 +81,8 @@ create table staffroles (
     id         bigserial,
     role       number,
     staffindex number,
-    startdate  datetime,
-    enddate    datetime,
+    startdate  timestamp     default current_timestamp,
+    enddate    timestamp     default current_timestamp,
     location   varchar(200),
     comments   text          default '',
     stafftype  varchar(100),
@@ -101,8 +101,8 @@ create table mission (
     missiontype varchar(100),
     location    varchar(200),
     description text,
-    startdate   datetime,
-    enddate     datetime,
+    startdate   timestamp    default current_timestamp,
+    enddate     timestamp    default current_timestamp,
     foreign key (missiontype) references missionmetatypes(missiontype)
 );
 
