@@ -1,0 +1,21 @@
+-- Populate static metadata tables
+-- !  copy is a PostgreSQL specific function
+-- !! copy file paths must be absolute, change \cd parameter below
+
+\cd /home/sami/WFP/FittestPlanner/schema
+
+\copy countries (iso, fullname) from 'metadata/countries.csv' delimiter as ','
+
+\copy profiletypes (profile) from 'metadata/profiletypes.csv'
+
+\copy stafftypes (stafftype) from 'metadata/stafftypes.csv'
+
+\copy activitytypes (activity, colorcode) from 'metadata/activitytypes.csv' delimiter as ','
+
+\copy languages (language) from 'metadata/languages.csv'
+
+\copy staffconfirmedtypes (stafftype) from 'metadata/staffconfirmedtypes.csv'
+
+\copy missionmetatypes (missiontype) from 'metadata/missionmetatypes.csv'
+
+\copy operationtypes (operationname) from 'metadata/operationtypes.csv'
