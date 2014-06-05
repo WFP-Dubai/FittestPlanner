@@ -8,6 +8,9 @@ create table profiletypes (
     profile  varchar(200) primary key
 );
 
+create table stafftypes (
+    stafftype varchar(200) primary key
+);
 
 create table staff (
     index          integer      primary key,
@@ -25,8 +28,10 @@ create table staff (
     foreign key (profile) references profiletypes(profile),
     foreign key (stafftype) references stafftypes(stafftype)
 );
-create table stafftypes (
-    stafftype varchar(200) primary key
+
+create table activitytypes (
+    activity  text         primary key,
+    colorcode varchar(100) default ''
 );
 
 create table activities (
@@ -40,17 +45,12 @@ create table activities (
     foreign key (country) references countries(iso)
 );
 
-create table activitytypes (
-    activity  text         primary key,
-    colorcode varchar(100) default ''
-);
-
 create table events (
     id        bigserial    primary key,
     event     varchar(256) not null,
     startdate timestamp    default current_timestamp,
     enddate   timestamp    default current_timestamp,
-    colorcode varchar(100) default '',
+    colorcode varchar(100) default ''
 );
 
 create table languages (
@@ -66,33 +66,37 @@ create table languagemapping (
     foreign key (language) references languages(language)
 );
 
+
+create table staffconfirmedtypes (
+    stafftype varchar(100) primary key
+);
+
 create table roles (
     id         bigserial     primary key,
-    activity   varchar(200),
+    activityid bigserial,
     startdate  timestamp     default current_timestamp,
     enddate    timestamp     default current_timestamp,
     location   varchar(200)  default '',
-    foreign key (id) references staffroles(id),
-    foreign key (activity) references activities(activity)
+    foreign key (activityid) references activities(id)
 );
 
 -- Join with staff table to get a staff's role
 create table staffroles (
-    id         bigserial,
-    role       number,
-    staffindex number,
+    id         bigserial     primary key,
+    staffrole  bigserial,
+    staffindex integer,
     startdate  timestamp     default current_timestamp,
     enddate    timestamp     default current_timestamp,
     location   varchar(200),
     comments   text          default '',
     stafftype  varchar(100),
-    primary key (id, staffindex),
-    foreign key (index) references staff(index),
+    foreign key (staffrole) references roles(id),
+    foreign key (staffindex) references staff(index),
     foreign key (stafftype) references staffconfirmedtypes(stafftype)
 );
 
-create table staffconfirmedtypes (
-    stafftype varchar(100) primary key
+create table missionmetatypes (
+    missiontype varchar(100) primary key
 );
 
 create table mission (
@@ -106,10 +110,9 @@ create table mission (
     foreign key (missiontype) references missionmetatypes(missiontype)
 );
 
-create table missionmetatypes (
-    missiontype varchar(100) primary key
+create table operationtypes (
+    operationname varchar(50) primary key
 );
-
 
 create table audittable (
     auditid     bigserial    primary key,
@@ -121,8 +124,4 @@ create table audittable (
     newvalue    text         default '',
     ipaddress     varchar(256) not null,
     foreign key (operation) references operationtypes(operationname)
-);
-
-create table operationtypes (
-    operationname varchar(50) primary key
 );
