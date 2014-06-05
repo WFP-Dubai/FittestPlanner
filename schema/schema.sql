@@ -88,10 +88,10 @@ create table staffroles (
     stafftype  varchar(100),
     primary key (id, staffindex),
     foreign key (index) references staff(index),
-    foreign key (stafftype) references staffconfirmedtype(stafftype)
+    foreign key (stafftype) references staffconfirmedtypes(stafftype)
 );
 
-create table staffconfirmedtype (
+create table staffconfirmedtypes (
     stafftype varchar(100) primary key
 );
 
@@ -103,10 +103,10 @@ create table mission (
     description text,
     startdate   datetime,
     enddate     datetime,
-    foreign key (missiontype) references missionmetatype(missiontype)
+    foreign key (missiontype) references missionmetatypes(missiontype)
 );
 
-create table missionmetatype (
+create table missionmetatypes (
     missiontype varchar(100) primary key
 );
 

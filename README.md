@@ -1,7 +1,8 @@
 FittestPlanner
---------------
+==============
 
-## Objective
+Objective
+---------
 
 Develop a tool to:
 
@@ -14,20 +15,23 @@ The tool will be used by:
 + Project coordination team
 + Staff in the field
 
-## Deliverables
+Deliverables
+------------
 
 + Web based FITTEST planning tool
 + API and Web services for the tool
 + Documentation
 + Source code
 
-## Future Tasks
+Future Tasks
+------------
 
 + Integrate web-based tool into the STAS geoportal as a separate ecosystem.
 + An Android application for viewing an individual's missions and schedule.
 + Improvements to existing ecosystems for STAS, if required.
 
-## Project Structure
+Project Structure
+-----------------
 
 ### schema
 
