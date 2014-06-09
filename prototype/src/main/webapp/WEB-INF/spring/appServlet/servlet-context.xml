@@ -25,6 +25,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".html" />
 		<beans:property name="templateMode" value="HTML5" />
+		<beans:property name="cacheable" value="false" />
 	</beans:bean>
 
 	<beans:bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
