@@ -95,19 +95,19 @@ create table staffroles (
     foreign key (stafftype) references staffconfirmedtypes(stafftype)
 );
 
-create table missionmetatypes (
+create table missiontypes (
     missiontype varchar(100) primary key
 );
 
-create table mission (
+create table missions (
     id          bigserial    primary key,
-    missionname varchar(256),
+    missionname varchar(256) not null,
     missiontype varchar(100),
-    location    varchar(200),
-    description text,
+    location    varchar(200) not null,
+    description text         default '',
     startdate   timestamp    default current_timestamp,
     enddate     timestamp    default current_timestamp,
-    foreign key (missiontype) references missionmetatypes(missiontype)
+    foreign key (missiontype) references missiontypes(missiontype)
 );
 
 create table operationtypes (
@@ -122,6 +122,6 @@ create table audittable (
     operation   varchar(50),
     oldvalue    text         default '',
     newvalue    text         default '',
-    ipaddress     varchar(256) not null,
+    ipaddress   varchar(256) not null,
     foreign key (operation) references operationtypes(operationname)
 );

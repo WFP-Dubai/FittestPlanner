@@ -11,7 +11,7 @@ public class Activity {
 
 	@Id
 	@Column(name = "id")
-	private Integer id;
+	private Integer ID;
 	
 	// FK
 	@Column(name = "activity")

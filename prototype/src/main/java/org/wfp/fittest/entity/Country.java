@@ -6,12 +6,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "")
+@Table(name = "countries")
 public class Country {
 	
 	@Id
 	@Column(name = "iso")
-	private String isoCode;
+	private String ISOCode;
 	
 	@Column(name = "fullname", nullable = false)
 	private String fullName;
