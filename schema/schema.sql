@@ -21,27 +21,37 @@ create table staff (
     profiletype    varchar(200),
     thuraya        varchar(50)  default '',
     mobile         varchar(50)  default '',
-    nationality    varchar(100) default '',
+    nationality    varchar(2),
     stafftype      varchar(200),
     staffcolorcode varchar(100) default '',
 
     foreign key (profiletype) references profiletypes(profiletype),
-    foreign key (stafftype) references stafftypes(stafftype)
+    foreign key (stafftype) references stafftypes(stafftype),
+    foreign key (nationality) references countries(iso)
+);
+
+-- Join with staff table to get staff's profiles
+create table profiletypemapping (
+    staffindex  integer,
+    profiletype varchar(200),
+    primary key (staffindex, profiletype),
+    foreign key (staffindex) references staff(index),
+    foreign key (profiletype) references profiletypes(profiletype)
 );
 
 create table activitytypes (
-    activity  text         primary key,
-    colorcode varchar(100) default ''
+    activitytype  text         primary key,
+    colorcode     varchar(100) default ''
 );
 
 create table activities (
     id            bigserial    primary key,
-    activity      text,
-    type          varchar(200) not null,
+    description   text         default '',
+    activitytype  text,
     country       varchar(2),
     etcservicemap varchar(256) default '',
 
-    foreign key (activity) references activitytypes(activity),
+    foreign key (activitytype) references activitytypes(activitytype),
     foreign key (country) references countries(iso)
 );
 
@@ -66,12 +76,11 @@ create table languagemapping (
     foreign key (language) references languages(language)
 );
 
-
 create table staffconfirmedtypes (
     stafftype varchar(100) primary key
 );
 
-create table roles (
+create table activityroles (
     id         bigserial     primary key,
     activityid bigserial,
     startdate  timestamp     default current_timestamp,
@@ -80,17 +89,16 @@ create table roles (
     foreign key (activityid) references activities(id)
 );
 
--- Join with staff table to get a staff's role
 create table staffroles (
-    id         bigserial     primary key,
-    staffrole  bigserial,
-    staffindex integer,
-    startdate  timestamp     default current_timestamp,
-    enddate    timestamp     default current_timestamp,
-    location   varchar(200),
-    comments   text          default '',
-    stafftype  varchar(100),
-    foreign key (staffrole) references roles(id),
+    id           bigserial     primary key,
+    activityrole bigserial,
+    staffindex   integer,
+    startdate    timestamp     default current_timestamp,
+    enddate      timestamp     default current_timestamp,
+    location     varchar(200),
+    comments     text          default '',
+    stafftype    varchar(100),
+    foreign key (activityrole) references activityroles(id),
     foreign key (staffindex) references staff(index),
     foreign key (stafftype) references staffconfirmedtypes(stafftype)
 );

@@ -27,10 +27,6 @@ public class Staff {
 	@Column(name = "title")
 	private String title;
 	
-	// FK
-	@Column(name = "profiletype")
-	private ProfileType profileType;
-	
 	@Column(name = "thuraya")
 	private String thuraya;
 	
