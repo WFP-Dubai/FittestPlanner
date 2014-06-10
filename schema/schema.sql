@@ -5,7 +5,7 @@ create table countries (
 );
 
 create table profiletypes (
-    profile  varchar(200) primary key
+    profiletype  varchar(200) primary key
 );
 
 create table stafftypes (
@@ -17,15 +17,15 @@ create table staff (
     firstname      varchar(256) not null,
     lastname       varchar(256) not null,
     dateofbirth    date         not null,
-    title          varchar(256),
-    profile        varchar(200),
-    thuraya        varchar(50),
-    mobile         varchar(50),
-    nationality    varchar(100),
+    title          varchar(256) default '',
+    profiletype    varchar(200),
+    thuraya        varchar(50)  default '',
+    mobile         varchar(50)  default '',
+    nationality    varchar(100) default '',
     stafftype      varchar(200),
-    staffcolorcode varchar(100),
+    staffcolorcode varchar(100) default '',
 
-    foreign key (profile) references profiletypes(profile),
+    foreign key (profiletype) references profiletypes(profiletype),
     foreign key (stafftype) references stafftypes(stafftype)
 );
 

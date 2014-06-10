@@ -6,7 +6,7 @@
 
 \copy countries (iso, fullname) from 'metadata/countries.csv' delimiter as ','
 
-\copy profiletypes (profile) from 'metadata/profiletypes.csv'
+\copy profiletypes (profiletype) from 'metadata/profiletypes.csv'
 
 \copy stafftypes (stafftype) from 'metadata/stafftypes.csv'
 
