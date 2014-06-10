@@ -1,4 +1,4 @@
-package org.wfp.fittest;
+package org.wfp.fittest.web;
 
 import java.text.DateFormat;
 import java.util.Date;
