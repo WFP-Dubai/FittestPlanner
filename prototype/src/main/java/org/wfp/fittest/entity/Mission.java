@@ -27,7 +27,7 @@ public class Mission {
 	private String missionName;
 	
 	@ManyToOne
-	@Column(name = "missiontype")
+	@JoinColumn(name = "missiontype")
 	private MissionType missionType;
 	
 	@ManyToMany

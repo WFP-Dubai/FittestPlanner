@@ -42,7 +42,7 @@ public class StaffRole {
 	private String comments;
 	
 	@ManyToOne
-	@Column(name = "staffconfirmedtype")
+	@JoinColumn(name = "staffconfirmedtype")
 	private StaffConfirmedType staffConfirmedType;
 	
 	@JoinTable(

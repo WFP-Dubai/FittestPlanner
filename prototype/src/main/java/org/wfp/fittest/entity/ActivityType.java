@@ -19,6 +19,6 @@ public class ActivityType {
 	@Column(name = "colorcode")
 	private String colorCode;
 	
-	@OneToMany(mappedBy = "activitytype")
+	@OneToMany(mappedBy = "activityType")
 	private List<Activity> activities;
 }
