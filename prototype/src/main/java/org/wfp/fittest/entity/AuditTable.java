@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +25,7 @@ public class AuditTable {
 	@Column(name = "tablename")
 	private String tablename;
 	
-	// FK
+	@ManyToOne
 	@Column(name = "operation")
 	private OperationType operation;
 	
