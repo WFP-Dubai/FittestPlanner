@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/tx
-            			http://www.springframework.org/schema/tx/spring-tx.xsd">
+            			http://www.springframework.org/schema/tx/spring-tx.xsd
+            			http://www.springframework.org/schema/data/jpa
+            			http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -15,7 +18,6 @@
 		</property>
 	</bean>
 
-	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driver}" />
@@ -23,6 +25,18 @@
 		<property name="username" value="${jdbc.user}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
+
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="database" value="${jdbc.database}" />
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="true" />
+	</bean>
+
+	<!-- <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> 
+		<property name="dataSource" ref="dataSource" /> <property name="packagesToScan" 
+		value="org.wfp.fittest.entity" /> <property name="jpaVendorAdapter" ref="jpaVendorAdapter" 
+		/> </bean> -->
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -43,4 +57,10 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+
+    <!--
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager" />
+    -->
+    
 </beans>

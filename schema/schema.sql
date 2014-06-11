@@ -56,7 +56,7 @@ create table activities (
     description   text         default '',
     activitytype  text,
     etcservicemap varchar(256) default '',
-    foreign key (activitytype) references activitytypes(activitytype),
+    foreign key (activitytype) references activitytypes(activitytype)
 );
 
 create table activity_country_mapping (
@@ -65,7 +65,7 @@ create table activity_country_mapping (
     primary key (activityid, country),
     foreign key (activityid) references activities(id),
     foreign key (country) references countries(iso)
-)
+);
 
 create table events (
     id        bigserial    primary key,
@@ -118,7 +118,7 @@ create table staffrole_activityrole_mapping (
     activityroleid bigserial,
     primary key (staffroleid, activityroleid),
     foreign key (staffroleid) references staffroles(id),
-    foreign key (activityroleid) references activitiyroles(id)
+    foreign key (activityroleid) references activityroles(id)
 );
 
 -- Join with staff to get staff roles
@@ -152,7 +152,7 @@ create table mission_activity_mapping (
     primary key (missionid, activityid),
     foreign key (missionid) references missions(id),
     foreign key (activityid) references activities(id)
-)
+);
 
 create table operationtypes (
     operationname varchar(50) primary key

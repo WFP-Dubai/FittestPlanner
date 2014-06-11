@@ -16,8 +16,8 @@ public class CountryController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CountryController.class);
 	
-	@Autowired
-	private CountryRepository countryRepository;
+//	@Autowired
+//	private CountryRepository countryRepository;
 	
 	@RequestMapping(value = "/country", method = RequestMethod.GET)
 	public String country(Locale locale, Model model) {

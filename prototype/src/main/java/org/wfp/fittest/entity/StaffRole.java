@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class StaffRole {
 		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "id")},
 		inverseJoinColumns = {@JoinColumn(name = "activityroleid", referencedColumnName = "id")}
 	)
+	@ElementCollection(targetClass = ActivityRole.class)
 	private List<ActivityRole> activityRoles;
 	
 	@Column(name = "startdate")
@@ -47,8 +49,10 @@ public class StaffRole {
 	
 	@JoinTable(
 		name = "staff_staffrole_mapping",
-		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "id")},
-		inverseJoinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "id")}
+		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "id")},
+		inverseJoinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "index")}
+
 	)
+	@ElementCollection(targetClass = Staff.class)
 	private List<Staff> staff;
 }
