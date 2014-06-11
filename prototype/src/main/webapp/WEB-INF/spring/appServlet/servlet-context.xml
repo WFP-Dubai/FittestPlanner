@@ -11,7 +11,6 @@
 
     <context:component-scan base-package="org.wfp.fittest"/>
     
-    
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -31,11 +30,11 @@
 		<beans:property name="cacheable" value="false" />
 	</beans:bean>
 
-	<beans:bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+	<beans:bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<beans:property name="templateResolver" ref="templateResolver" />
 	</beans:bean>
 
-	<beans:bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+	<beans:bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<beans:property name="templateEngine" ref="templateEngine" />
 	</beans:bean>
 

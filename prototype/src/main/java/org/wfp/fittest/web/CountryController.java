@@ -1,5 +1,6 @@
 package org.wfp.fittest.web;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.repository.CountryRepository;
 
 @Controller
@@ -22,7 +24,8 @@ public class CountryController {
 	@RequestMapping(value = "/country", method = RequestMethod.GET)
 	public String country(Locale locale, Model model) {
 		logger.info("country Page!", locale);
-		
+		Iterable<Country> countries = countryRepository.findAll();
+		model.addAttribute("countries", countries);
 		return "country";
 	}
 }

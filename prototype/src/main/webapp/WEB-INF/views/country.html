@@ -8,7 +8,7 @@
 
 	<div id="wrapper">
 		<div th:replace="main-template :: sidebar-button"></div>
-	
+
 		<div th:replace="main-template :: sidebar"></div>
 
 		<!-- Page content -->
@@ -19,14 +19,33 @@
 			<div class="page-content inset" th:fragment="page-content">
 				<div class="row">
 					<div class="col-md-12">
-						<p th:text="${title}">hello</p>
+					<!--
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Code</th>
+									<th>Country</th>
+									<th>Region</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="country : ${countries}">
+									<td th:text="${country.iso}">ISO</td>
+									<td th:text="${country.fullName}">FullName</td>
+									<td th:text="${country.region}">Region</td>
+								</tr>
+							</tbody>
+						</table>
+						-->
 					</div>
 					<div class="col-md-4"></div>
 				</div>
 			</div>
 
-		</div><!-- /page-content-wrapper -->
-	</div><!-- /wrapper -->
+		</div>
+		<!-- /page-content-wrapper -->
+	</div>
+	<!-- /wrapper -->
 
 	<div th:replace="main-template :: jsload"></div>
 </body>
