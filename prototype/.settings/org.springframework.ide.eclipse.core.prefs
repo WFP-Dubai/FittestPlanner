@@ -1,9 +1,11 @@
-#Tue Apr 20 16:59:06 EDT 2010
 eclipse.preferences.version=1
 org.springframework.ide.eclipse.core.builders.enable.aopreferencemodelbuilder=true
 org.springframework.ide.eclipse.core.builders.enable.beanmetadatabuilder=true
 org.springframework.ide.eclipse.core.builders.enable.osgibundleupdater=false
 org.springframework.ide.eclipse.core.enable.project.preferences=false
+org.springframework.ide.eclipse.core.locator.enable.org.springframework.ide.eclipse.beans.core.annotatedJavaConfigLocator=true
+org.springframework.ide.eclipse.core.locator.enable.org.springframework.ide.eclipse.beans.core.bootJavaConfigLocator=true
+org.springframework.ide.eclipse.core.locator.enable.org.springframework.ide.eclipse.metadata.webAppBeansConfigLocator=true
 org.springframework.ide.eclipse.core.validator.enable.com.springsource.server.ide.manifest.core.manifestvalidator=true
 org.springframework.ide.eclipse.core.validator.enable.com.springsource.sts.bestpractices.beansvalidator=false
 org.springframework.ide.eclipse.core.validator.enable.com.springsource.sts.server.quickfix.manifestvalidator=false

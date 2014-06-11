@@ -14,6 +14,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<org.postgresql.Driver-version>9.1-901-1.jdbc4</org.postgresql.Driver-version>
+		<org.hibernate-version>4.2.13.Final</org.hibernate-version>
 	</properties>
 	<dependencies>
 	
@@ -36,11 +37,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
@@ -130,13 +126,13 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.1.7.Final</version>
+			<version>${org.hibernate-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.1.7.Final</version>
+			<version>${org.hibernate-version}</version>
 		</dependency>
 
 		<!-- PostgreSQL Driver -->
