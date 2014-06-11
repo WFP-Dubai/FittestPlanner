@@ -5,18 +5,20 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class ActivityRole {
 
 	@Id
 	@Column(name = "id")
 	private Integer ID;
 	
-	// FK
-	@Column(name = "activityid")
+	@ManyToOne
+	@JoinColumn(name = "activityid")
 	private Activity activity;
 	
 	@Column(name = "startdate")

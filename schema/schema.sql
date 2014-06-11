@@ -21,17 +21,24 @@ create table staff (
     profiletype    varchar(200),
     thuraya        varchar(50)  default '',
     mobile         varchar(50)  default '',
-    nationality    varchar(2),
     stafftype      varchar(200),
     staffcolorcode varchar(100) default '',
 
     foreign key (profiletype) references profiletypes(profiletype),
-    foreign key (stafftype) references stafftypes(stafftype),
-    foreign key (nationality) references countries(iso)
+    foreign key (stafftype) references stafftypes(stafftype)
+);
+
+-- Join with staff table to get staff's nationalities
+create table staff_nationality_mapping (
+    staffindex  integer,
+    country     varchar(2),
+    primary key (staffindex, country),
+    foreign key (staffindex) references staff(index),
+    foreign key (country) references countries(iso)
 );
 
 -- Join with staff table to get staff's profiles
-create table profiletypemapping (
+create table staff_profiletype_mapping (
     staffindex  integer,
     profiletype varchar(200),
     primary key (staffindex, profiletype),
@@ -48,12 +55,17 @@ create table activities (
     id            bigserial    primary key,
     description   text         default '',
     activitytype  text,
-    country       varchar(2),
     etcservicemap varchar(256) default '',
-
     foreign key (activitytype) references activitytypes(activitytype),
-    foreign key (country) references countries(iso)
 );
+
+create table activity_country_mapping (
+    activityid  bigserial,
+    country     varchar(2),
+    primary key (activityid, country),
+    foreign key (activityid) references activities(id),
+    foreign key (country) references countries(iso)
+)
 
 create table events (
     id        bigserial    primary key,
@@ -68,7 +80,7 @@ create table languages (
 );
 
 -- Join with staff table to get staff's languages
-create table languagemapping (
+create table staff_language_mapping (
     staffindex  integer,
     language    varchar(200),
     primary key (staffindex, language),
@@ -117,6 +129,15 @@ create table missions (
     enddate     timestamp    default current_timestamp,
     foreign key (missiontype) references missiontypes(missiontype)
 );
+
+-- Join with mission table to get a mission's activities
+create table mission_activity_mapping (
+    missionid  bigserial,
+    activityid bigserial,
+    primary key (missionid, activityid),
+    foreign key (missionid) references missions(id),
+    foreign key (activityid) references activities(id)
+)
 
 create table operationtypes (
     operationname varchar(50) primary key

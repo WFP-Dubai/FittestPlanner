@@ -1,8 +1,14 @@
 package org.wfp.fittest.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,18 +19,22 @@ public class Activity {
 	@Column(name = "id")
 	private Integer ID;
 	
-	// FK
-	@Column(name = "activity")
-	private Activity activity;
+	@Column(name = "description")
+	private String description;
 	
-	@Column(name = "type")
-	private String type;
-	
-	// FK
-	@Column(name = "country")
-	private Country country;
+	@ManyToOne
+	@JoinColumn(name = "activitytype")
+	private ActivityType activityType;
 	
 	@Column(name = "etcservicemap")
 	private String etcServiceMap;
+	
+	@ManyToMany
+	@JoinTable(
+		name = "activity_country_mapping",
+		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "id")},
+		inverseJoinColumns = {@JoinColumn(name = "country", referencedColumnName = "iso")}
+	)
+	private List<Country> countries;
 	
 }

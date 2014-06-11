@@ -1,8 +1,12 @@
 package org.wfp.fittest.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,4 +22,10 @@ public class Country {
 	
 	@Column(name = "region")
 	private String region;
+	
+	@OneToMany(mappedBy = "nationality")
+	private List<Staff> staffByNationality;
+	
+	@ManyToMany(mappedBy = "countries")
+	private List<Activity> activities;
 }

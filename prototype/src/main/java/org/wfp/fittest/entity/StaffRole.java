@@ -13,4 +13,5 @@ public class StaffRole {
 	@Column(name = "id")
 	private Integer ID;
 	
+	private ActivityRole activityRole;
 }

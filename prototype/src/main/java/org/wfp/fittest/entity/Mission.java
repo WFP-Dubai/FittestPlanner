@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +19,8 @@ public class Mission {
 	@Column(name = "missionname", nullable = false)
 	private String missionName;
 	
-	// FK
-	@Column(name = "missionType")
+	@ManyToOne
+	@Column(name = "missiontype")
 	private MissionType missionType;
 	
 	@Column(name = "location", nullable = false)
