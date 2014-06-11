@@ -1,8 +1,14 @@
 package org.wfp.fittest.entity;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,5 +19,33 @@ public class StaffRole {
 	@Column(name = "id")
 	private Integer ID;
 	
-	private ActivityRole activityRole;
+	@JoinTable(
+		name = "staffrole_activityrole_mapping",
+		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "id")},
+		inverseJoinColumns = {@JoinColumn(name = "activityroleid", referencedColumnName = "id")}
+	)
+	private List<ActivityRole> activityRoles;
+	
+	@Column(name = "startdate")
+	private Timestamp startdate;
+	
+	@Column(name = "enddate")
+	private Timestamp enddate;
+	
+	@Column(name = "location")
+	private String location;
+	
+	@Column(name = "comments")
+	private String comments;
+	
+	@ManyToOne
+	@Column(name = "staffconfirmedtype")
+	private StaffConfirmedType staffConfirmedType;
+	
+	@JoinTable(
+		name = "staff_staffrole_mapping",
+		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "id")},
+		inverseJoinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "id")}
+	)
+	private List<Staff> staff;
 }

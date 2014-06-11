@@ -102,17 +102,32 @@ create table activityroles (
 );
 
 create table staffroles (
-    id           bigserial     primary key,
-    activityrole bigserial,
-    staffindex   integer,
-    startdate    timestamp     default current_timestamp,
-    enddate      timestamp     default current_timestamp,
-    location     varchar(200),
-    comments     text          default '',
-    stafftype    varchar(100),
-    foreign key (activityrole) references activityroles(id),
+    id                 bigserial     primary key,
+    activityrole       bigserial,
+    startdate          timestamp     default current_timestamp,
+    enddate            timestamp     default current_timestamp,
+    location           varchar(200),
+    comments           text          default '',
+    staffconfirmedtype varchar(100),
+    foreign key (staffconfirmedtype) references staffconfirmedtypes(stafftype)
+);
+
+-- Join with staff role to get activity roles
+create table staffrole_activityrole_mapping (
+    staffroleid    bigserial,
+    activityroleid bigserial,
+    primary key (staffroleid, activityroleid),
+    foreign key (staffroleid) references staffroles(id),
+    foreign key (activityroleid) references activitiyroles(id)
+);
+
+-- Join with staff to get staff roles
+create table staff_staffrole_mapping (
+    staffindex  bigserial,
+    staffroleid bigserial,
+    primary key (staffindex, staffroleid),
     foreign key (staffindex) references staff(index),
-    foreign key (stafftype) references staffconfirmedtypes(stafftype)
+    foreign key (staffroleid) references staffroles(id)
 );
 
 create table missiontypes (
