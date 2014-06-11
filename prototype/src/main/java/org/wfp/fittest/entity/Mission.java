@@ -1,10 +1,14 @@
 package org.wfp.fittest.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,6 +27,14 @@ public class Mission {
 	@Column(name = "missiontype")
 	private MissionType missionType;
 	
+	@ManyToMany
+	@JoinTable(
+		name = "mission_activity_mapping",
+		joinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "id")},
+		inverseJoinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "id")}
+	)
+	private List<Activity> activities;
+
 	@Column(name = "location", nullable = false)
 	private String location;
 	

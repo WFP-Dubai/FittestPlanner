@@ -37,4 +37,11 @@ public class Activity {
 	)
 	private List<Country> countries;
 	
+	@ManyToMany
+	@JoinTable(
+		name = "mission_activity_mapping",
+		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "id")},
+		inverseJoinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "id")}
+	)
+	private List<Mission> missions;
 }
