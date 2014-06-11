@@ -12,14 +12,13 @@
 		<div th:replace="main-template :: sidebar"></div>
 
 		<!-- Page content -->
-		<div id="page-content-wrapper">
+		<div class="container">
 			<div class="content-header" th:fragment="content-header"></div>
 
 			<!-- Keep all page content within the page-content inset div! -->
 			<div class="page-content inset" th:fragment="page-content">
 				<div class="row">
-					<div class="col-md-12">
-					<!--
+					<div class="col-md-6">
 						<table class="table">
 							<thead>
 								<tr>
@@ -30,13 +29,12 @@
 							</thead>
 							<tbody>
 								<tr th:each="country : ${countries}">
-									<td th:text="${country.iso}">ISO</td>
+									<td th:text="${country.ISOCode}">ISO</td>
 									<td th:text="${country.fullName}">FullName</td>
 									<td th:text="${country.region}">Region</td>
 								</tr>
 							</tbody>
 						</table>
-						-->
 					</div>
 					<div class="col-md-4"></div>
 				</div>

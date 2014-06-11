@@ -89,7 +89,7 @@ create table staff_language_mapping (
 );
 
 create table staffconfirmedtypes (
-    stafftype varchar(100) primary key
+    staffconfirmedtype varchar(100) primary key
 );
 
 create table activityroles (
@@ -109,7 +109,7 @@ create table staffroles (
     location           varchar(200),
     comments           text          default '',
     staffconfirmedtype varchar(100),
-    foreign key (staffconfirmedtype) references staffconfirmedtypes(stafftype)
+    foreign key (staffconfirmedtype) references staffconfirmedtypes(staffconfirmedtype)
 );
 
 -- Join with staff role to get activity roles

@@ -13,8 +13,8 @@ import javax.persistence.Table;
 public class StaffConfirmedType {
 
 	@Id
-	@Column(name = "stafftype")
-	private String staffType;
+	@Column(name = "staffconfirmedtype")
+	private String staffConfirmedType;
 	
 	@OneToMany(mappedBy = "staffConfirmedType")
 	private List<StaffRole> staffRoles;
