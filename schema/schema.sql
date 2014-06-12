@@ -18,13 +18,10 @@ create table staff (
     lastname       varchar(256) not null,
     dateofbirth    date         not null,
     title          varchar(256) default '',
-    profiletype    varchar(200),
     thuraya        varchar(50)  default '',
     mobile         varchar(50)  default '',
     stafftype      varchar(200),
     staffcolorcode varchar(100) default '',
-
-    foreign key (profiletype) references profiletypes(profiletype),
     foreign key (stafftype) references stafftypes(stafftype)
 );
 

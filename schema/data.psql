@@ -1,0 +1,45 @@
+-- Populate tables with test data
+-- !  copy is a PostgreSQL specific function
+-- !! copy file paths must be absolute, change \cd parameter below
+
+\cd /home/public/FittestPlanner/schema
+
+-------------------------------------------------------------------------------
+-- Parent Tables
+-------------------------------------------------------------------------------
+
+\copy staff (index, firstname, lastname, dateofbirth, title, profiletype, thuraya, mobile, stafftype, staffcolorcode) from 'data/staff.csv' delimiter as ','
+
+\copy activities (description, activitytype, etcservicemap)
+
+\copy events (event, startdate, enddate, colorcode) from 'data/events.csv' delimiter as ','
+
+\copy missions (missionname, missiontype, location, description, startdate, enddate) from 'data/missions.csv' delimiter as ','
+
+\copy audittable (changedtime, userid, tablename, operation, oldvalue, newvalue, ipaddress) from 'data/audittable.csv' delimiter as ','
+
+-------------------------------------------------------------------------------
+-- Child Tables
+-------------------------------------------------------------------------------
+
+\copy activityroles (activityid, startdate, enddate, location) from 'data/activityroles.csv' delimiter as ','
+
+\copy staffroles (activityrole, startdate, enddate, location, comments, staffconfirmedtype) from 'data/staffroles.csv' delimiter as ','
+
+-------------------------------------------------------------------------------
+-- Join Tables
+-------------------------------------------------------------------------------
+
+\copy staff_nationality_mapping (staffindex, country) from 'data/staff_nationality.csv' delimiter as ','
+
+\copy staff_profiletype_mapping (staffindex, profiletype) from 'data/staff_profiletype.csv' delimiter as ','
+
+\copy activity_country_mapping (activityid, country) from 'data/activity_country.csv' delimiter as ','
+
+\copy staff_language_mapping (staffindex, language) from 'data/staff_language.csv' delimiter as ','
+
+\copy staffrole_activityrole_mapping (staffroleid, activityroleid) from 'data/staffrole_activityrole.csv' delimiter as ','
+
+\copy staff_staffrole_mapping (staffindex, staffroleid) from 'data/staff_staffrole.csv' delimiter as ','
+
+\copy mission_activity_mapping (missionid, activityid) from 'data/mission_activity.csv' delimiter as ','
