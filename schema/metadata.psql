@@ -2,7 +2,7 @@
 -- !  copy is a PostgreSQL specific function
 -- !! copy file paths must be absolute, change \cd parameter below
 
-\cd /home/sami/WFP/FittestPlanner/schema
+\cd /home/public/FittestPlanner/schema
 
 \copy countries (iso, fullname) from 'metadata/countries.csv' delimiter as ','
 
