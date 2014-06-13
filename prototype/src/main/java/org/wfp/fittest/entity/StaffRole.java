@@ -19,14 +19,14 @@ import javax.persistence.Table;
 public class StaffRole {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "staffroleid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
 	
 	@JoinTable(
 		name = "staffrole_activityrole_mapping",
-		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "id")},
-		inverseJoinColumns = {@JoinColumn(name = "activityroleid", referencedColumnName = "id")}
+		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "staffroleid")},
+		inverseJoinColumns = {@JoinColumn(name = "activityroleid", referencedColumnName = "staffroleid")}
 	)
 	@ElementCollection(targetClass = ActivityRole.class)
 	private List<ActivityRole> activityRoles;
@@ -44,13 +44,13 @@ public class StaffRole {
 	private String comments;
 	
 	@ManyToOne
-	@JoinColumn(name = "staffconfirmedtype")
+	@JoinColumn(name = "staffconfirmedtypeid")
 	private StaffConfirmedType staffConfirmedType;
 	
 	@JoinTable(
 		name = "staff_staffrole_mapping",
-		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "id")},
-		inverseJoinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "index")}
+		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "staffroleid")},
+		inverseJoinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")}
 
 	)
 	@ElementCollection(targetClass = Staff.class)

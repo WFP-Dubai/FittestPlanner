@@ -30,8 +30,8 @@ public class AuditTable {
 	private String tablename;
 	
 	@ManyToOne
-	@JoinColumn(name = "operation")
-	private OperationType operation;
+	@JoinColumn(name = "operationtypeid")
+	private OperationType operationType;
 	
 	@Column(name = "oldvalue")
 	private String oldValue;

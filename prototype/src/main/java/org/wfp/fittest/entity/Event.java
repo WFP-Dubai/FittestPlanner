@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Event {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "eventid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
 	

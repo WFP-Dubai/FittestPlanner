@@ -17,13 +17,13 @@ import javax.persistence.Table;
 public class Staff {
 
 	@Id
-	@Column(name = "index")
+	@Column(name = "staffindex")
 	private Integer index;
 	
-	@Column(name = "firstname")
+	@Column(name = "firstname", nullable = false)
 	private String firstName;
 	
-	@Column(name = "lastname")
+	@Column(name = "lastname", nullable = false)
 	private String lastName;
 	
 	@Column(name = "dateofbirth")
@@ -35,8 +35,8 @@ public class Staff {
 	@ManyToMany
 	@JoinTable(
 		name = "staff_profiletype_mapping",
-		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "index")},
-		inverseJoinColumns = {@JoinColumn(name="profiletype", referencedColumnName = "profiletype")}
+		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
+		inverseJoinColumns = {@JoinColumn(name="profiletypeid", referencedColumnName = "profiletypeid")}
 	)
 	private List<ProfileType> profileTypes;
 	
@@ -49,21 +49,21 @@ public class Staff {
 	@ManyToMany
 	@JoinTable(
 		name = "staff_nationality_mapping",
-		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "index")},
-		inverseJoinColumns = {@JoinColumn(name = "country", referencedColumnName = "iso")}
+		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
+		inverseJoinColumns = {@JoinColumn(name = "countryid", referencedColumnName = "countryid")}
 	)
 	private List<Country> nationalities;
 	
 	@ManyToMany
 	@JoinTable(
 		name = "staff_language_mapping",
-		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "index")},
-		inverseJoinColumns = {@JoinColumn(name = "language", referencedColumnName = "language")}
+		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
+		inverseJoinColumns = {@JoinColumn(name = "languageid", referencedColumnName = "languageid")}
 	)
 	private List<Language> languages;
 	
 	@ManyToOne
-	@JoinColumn(name = "stafftype")
+	@JoinColumn(name = "stafftypeid")
 	private StaffType staffType;
 	
 	@Column(name = "staffcolorcode")

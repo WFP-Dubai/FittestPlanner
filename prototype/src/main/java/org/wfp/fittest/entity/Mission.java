@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Mission {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "missionid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
 	
@@ -27,14 +27,14 @@ public class Mission {
 	private String missionName;
 	
 	@ManyToOne
-	@JoinColumn(name = "missiontype")
+	@JoinColumn(name = "missiontypeid")
 	private MissionType missionType;
 	
 	@ManyToMany
 	@JoinTable(
 		name = "mission_activity_mapping",
-		joinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "id")},
-		inverseJoinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "id")}
+		joinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "missionid")},
+		inverseJoinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")}
 	)
 	private List<Activity> activities;
 

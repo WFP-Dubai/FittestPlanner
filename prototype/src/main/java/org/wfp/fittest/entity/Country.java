@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -14,7 +16,11 @@ import javax.persistence.Table;
 public class Country {
 	
 	@Id
-	@Column(name = "iso")
+	@Column(name = "countryid")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String ID;
+	
+	@Column(name = "iso", nullable = false)
 	private String ISOCode;
 	
 	@Column(name = "fullname", nullable = false)

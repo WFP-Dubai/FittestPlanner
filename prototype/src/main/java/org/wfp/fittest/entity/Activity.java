@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Activity {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "activityid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
 	
@@ -26,7 +26,7 @@ public class Activity {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name = "activitytype")
+	@JoinColumn(name = "activitytypeid")
 	private ActivityType activityType;
 	
 	@Column(name = "etcservicemap")
@@ -35,16 +35,16 @@ public class Activity {
 	@ManyToMany
 	@JoinTable(
 		name = "activity_country_mapping",
-		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "id")},
-		inverseJoinColumns = {@JoinColumn(name = "country", referencedColumnName = "iso")}
+		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
+		inverseJoinColumns = {@JoinColumn(name = "countryid", referencedColumnName = "countryid")}
 	)
 	private List<Country> countries;
 	
 	@ManyToMany
 	@JoinTable(
 		name = "mission_activity_mapping",
-		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "id")},
-		inverseJoinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "id")}
+		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
+		inverseJoinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "missionid")}
 	)
 	private List<Mission> missions;
 }

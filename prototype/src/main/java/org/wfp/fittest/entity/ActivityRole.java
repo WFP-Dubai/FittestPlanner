@@ -16,13 +16,17 @@ import javax.persistence.Table;
 public class ActivityRole {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "activityroleid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
 	
 	@ManyToOne
 	@JoinColumn(name = "activityid")
 	private Activity activity;
+	
+	@ManyToOne
+	@JoinColumn(name = "profiletypeid")
+	private ProfileType profileType;
 	
 	@Column(name = "startdate")
 	private Timestamp startDate;
