@@ -8,7 +8,7 @@
 -- Parent Tables
 -------------------------------------------------------------------------------
 
-\copy staff (staffindex, firstname, lastname, dateofbirth, title, thuraya, mobile, stafftype, staffcolorcode) from 'data/staff.csv' delimiter as ',' null as 'null'
+\copy staff (staffindex, firstname, lastname, dateofbirth, title, thuraya, mobile, stafftypeid, staffcolorcode) from 'data/staff.csv' delimiter as ',' null as 'null'
 
 \copy activities (description, activitytypeid, etcservicemap) from 'data/activities.csv' delimiter as ','
 

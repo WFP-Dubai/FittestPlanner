@@ -23,9 +23,9 @@ create table staff (
     title          varchar(256) default '',
     thuraya        varchar(50)  default '',
     mobile         varchar(50)  default '',
-    stafftype      bigserial,
+    stafftypeid    bigserial,
     staffcolorcode varchar(100) default '',
-    foreign key (stafftype) references stafftypes(stafftypeid)
+    foreign key (stafftypeid) references stafftypes(stafftypeid)
 );
 
 -- Join with staff table to get staff's nationalities
