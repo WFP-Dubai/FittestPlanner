@@ -7,16 +7,14 @@
 	<div th:replace="main-template :: navbar"></div>
 
 	<div id="wrapper">
-		<div th:replace="main-template :: sidebar-button"></div>
-
 		<div th:replace="main-template :: sidebar"></div>
-
+        <div th:replace="main-template :: sidebar-button"></div>
+        
 		<!-- Page content -->
 		<div class="container">
-			<div class="content-header" th:fragment="content-header"></div>
-
+			<div th:replace="main-template :: content-header"></div>
 			<!-- Keep all page content within the page-content inset div! -->
-			<div class="page-content inset" th:fragment="page-content">
+			<div class="page-content inset">
 				<div class="row">
 					<div class="col-md-6">
 						<table class="table">
