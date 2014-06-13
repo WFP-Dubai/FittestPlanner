@@ -19,7 +19,7 @@ create table staff (
     staffindex     integer      primary key,
     firstname      varchar(256) not null,
     lastname       varchar(256) not null,
-    dateofbirth    date         not null,
+    dateofbirth    date,
     title          varchar(256) default '',
     thuraya        varchar(50)  default '',
     mobile         varchar(50)  default '',
@@ -98,10 +98,12 @@ create table staffconfirmedtypes (
 create table activityroles (
     activityroleid bigserial     primary key,
     activityid     bigserial,
+    profiletypeid  bigserial,
     startdate      timestamp     default current_timestamp,
     enddate        timestamp     default current_timestamp,
     location       varchar(200)  default '',
-    foreign key (activityid) references activities(activityid)
+    foreign key (activityid) references activities(activityid),
+    foreign key (profiletypeid) references profiletypes(profiletypeid)
 );
 
 create table staffroles (

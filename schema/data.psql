@@ -8,7 +8,7 @@
 -- Parent Tables
 -------------------------------------------------------------------------------
 
-\copy staff (staffindex, firstname, lastname, dateofbirth, title, thuraya, mobile, stafftype, staffcolorcode) from 'data/staff.csv' delimiter as ','
+\copy staff (staffindex, firstname, lastname, dateofbirth, title, thuraya, mobile, stafftype, staffcolorcode) from 'data/staff.csv' delimiter as ',' null as 'null'
 
 \copy activities (description, activitytypeid, etcservicemap) from 'data/activities.csv' delimiter as ','
 
@@ -22,9 +22,9 @@
 -- Child Tables
 -------------------------------------------------------------------------------
 
-\copy activityroles (activityid, startdate, enddate, location) from 'data/activityroles.csv' delimiter as ','
+\copy activityroles (activityid, profiletypeid, startdate, enddate, location) from 'data/activityroles.csv' delimiter as ',' null as 'null'
 
-\copy staffroles (startdate, enddate, location, comments, staffconfirmedtypeid) from 'data/staffroles.csv' delimiter as ','
+\copy staffroles (startdate, enddate, location, comments, staffconfirmedtypeid) from 'data/staffroles.csv' delimiter as ',' null as 'null'
 
 -------------------------------------------------------------------------------
 -- Join Tables
