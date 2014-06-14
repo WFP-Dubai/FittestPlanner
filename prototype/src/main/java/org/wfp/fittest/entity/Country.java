@@ -1,14 +1,15 @@
 package org.wfp.fittest.entity;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +19,7 @@ public class Country {
 	@Id
 	@Column(name = "countryid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String ID;
+	private Integer ID;
 	
 	@Column(name = "iso", nullable = false)
 	private String ISOCode;
@@ -29,11 +30,11 @@ public class Country {
 	@Column(name = "region")
 	private String region;
 	
-	@ManyToMany(mappedBy = "nationalities")
-	private List<Staff> staffByNationality;
+	@ManyToMany(mappedBy = "nationalities", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Staff> staffByNationality;
 	
-	@ManyToMany(mappedBy = "countries")
-	private List<Activity> activities;
+	@ManyToMany(mappedBy = "countries", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Activity> activities;
 	
 	public Country() {}
 
@@ -61,19 +62,19 @@ public class Country {
 		this.region = region;
 	}
 
-	public List<Staff> getStaffByNationality() {
+	public Set<Staff> getStaffByNationality() {
 		return staffByNationality;
 	}
 
-	public void setStaffByNationality(List<Staff> staffByNationality) {
+	public void setStaffByNationality(Set<Staff> staffByNationality) {
 		this.staffByNationality = staffByNationality;
 	}
 
-	public List<Activity> getActivities() {
+	public Set<Activity> getActivities() {
 		return activities;
 	}
 
-	public void setActivities(List<Activity> activities) {
+	public void setActivities(Set<Activity> activities) {
 		this.activities = activities;
 	}
 	

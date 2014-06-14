@@ -1,9 +1,11 @@
 package org.wfp.fittest.entity;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +24,6 @@ public class OperationType {
 	@Column(name = "operationname")
 	private String operationName;
 
-	@OneToMany(mappedBy = "operationType")
-	private List<AuditTable> audits;
+	@OneToMany(mappedBy = "operationType", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<AuditTable> audits;
 }

@@ -1,9 +1,11 @@
 package org.wfp.fittest.entity;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +24,6 @@ public class Language {
 	@Column(name = "language")
 	private String language;
 	
-	@ManyToMany(mappedBy = "languages")
-	private List<Staff> staffByLanguage;
+	@ManyToMany(mappedBy = "languages", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Staff> staffByLanguage;
 }

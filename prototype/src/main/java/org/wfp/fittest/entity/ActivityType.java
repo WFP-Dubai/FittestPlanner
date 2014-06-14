@@ -1,6 +1,6 @@
 package org.wfp.fittest.entity;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,5 +26,5 @@ public class ActivityType {
 	private String colorCode;
 	
 	@OneToMany(mappedBy = "activityType")
-	private List<Activity> activities;
+	private Set<Activity> activities;
 }

@@ -1,9 +1,11 @@
 package org.wfp.fittest.entity;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,19 +34,69 @@ public class Activity {
 	@Column(name = "etcservicemap")
 	private String etcServiceMap;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "activity_country_mapping",
 		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
 		inverseJoinColumns = {@JoinColumn(name = "countryid", referencedColumnName = "countryid")}
 	)
-	private List<Country> countries;
+	private Set<Country> countries;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "mission_activity_mapping",
 		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
 		inverseJoinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "missionid")}
 	)
-	private List<Mission> missions;
+	private Set<Mission> missions;
+	
+	public Activity() {}
+
+	public Integer getID() {
+		return ID;
+	}
+
+	public void setID(Integer iD) {
+		ID = iD;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ActivityType getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(ActivityType activityType) {
+		this.activityType = activityType;
+	}
+
+	public String getEtcServiceMap() {
+		return etcServiceMap;
+	}
+
+	public void setEtcServiceMap(String etcServiceMap) {
+		this.etcServiceMap = etcServiceMap;
+	}
+
+	public Set<Country> getCountries() {
+		return countries;
+	}
+
+	public void setCountries(Set<Country> countries) {
+		this.countries = countries;
+	}
+
+	public Set<Mission> getMissions() {
+		return missions;
+	}
+
+	public void setMissions(Set<Mission> missions) {
+		this.missions = missions;
+	}
 }

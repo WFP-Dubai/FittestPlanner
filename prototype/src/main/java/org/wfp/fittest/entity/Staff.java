@@ -1,10 +1,12 @@
 package org.wfp.fittest.entity;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -32,13 +34,13 @@ public class Staff {
 	@Column(name = "title")
 	private String title;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "staff_profiletype_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
 		inverseJoinColumns = {@JoinColumn(name="profiletypeid", referencedColumnName = "profiletypeid")}
 	)
-	private List<ProfileType> profileTypes;
+	private Set<ProfileType> profileTypes;
 	
 	@Column(name = "thuraya")
 	private String thuraya;
@@ -46,21 +48,21 @@ public class Staff {
 	@Column(name = "mobile")
 	private String mobile;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "staff_nationality_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
 		inverseJoinColumns = {@JoinColumn(name = "countryid", referencedColumnName = "countryid")}
 	)
-	private List<Country> nationalities;
+	private Set<Country> nationalities;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "staff_language_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
 		inverseJoinColumns = {@JoinColumn(name = "languageid", referencedColumnName = "languageid")}
 	)
-	private List<Language> languages;
+	private Set<Language> languages;
 	
 	@ManyToOne
 	@JoinColumn(name = "stafftypeid")
@@ -68,4 +70,101 @@ public class Staff {
 	
 	@Column(name = "staffcolorcode")
 	private String staffColorCode;
+
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Set<ProfileType> getProfileTypes() {
+		return profileTypes;
+	}
+
+	public void setProfileTypes(Set<ProfileType> profileTypes) {
+		this.profileTypes = profileTypes;
+	}
+
+	public String getThuraya() {
+		return thuraya;
+	}
+
+	public void setThuraya(String thuraya) {
+		this.thuraya = thuraya;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Set<Country> getNationalities() {
+		return nationalities;
+	}
+
+	public void setNationalities(Set<Country> nationalities) {
+		this.nationalities = nationalities;
+	}
+
+	public Set<Language> getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(Set<Language> languages) {
+		this.languages = languages;
+	}
+
+	public StaffType getStaffType() {
+		return staffType;
+	}
+
+	public void setStaffType(StaffType staffType) {
+		this.staffType = staffType;
+	}
+
+	public String getStaffColorCode() {
+		return staffColorCode;
+	}
+
+	public void setStaffColorCode(String staffColorCode) {
+		this.staffColorCode = staffColorCode;
+	}
+	
 }

@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "activityroles")
 public class ActivityRole {
 
 	@Id
