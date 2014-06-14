@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -9,8 +9,6 @@
 		http://www.springframework.org/schema/data/jpa
                         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <context:component-scan base-package="org.wfp.fittest"/>
-    
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -22,20 +20,10 @@
 	<resources mapping="/img/**" location="/resources/img/" />
 	<resources mapping="/js/**" location="/resources/js/" />
 
-	<beans:bean id="templateResolver"
-		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".html" />
-		<beans:property name="templateMode" value="HTML5" />
-		<beans:property name="cacheable" value="false" />
-	</beans:bean>
-
-	<beans:bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
-		<beans:property name="templateResolver" ref="templateResolver" />
-	</beans:bean>
-
-	<beans:bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-		<beans:property name="templateEngine" ref="templateEngine" />
+		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
 	<context:component-scan base-package="org.wfp.fittest" />
