@@ -140,13 +140,13 @@ create table missiontypes (
 );
 
 create table missions (
-    missionid     bigserial    primary key,
-    missionname   varchar(256) not null,
-    missiontypeid bigserial,
-    location    varchar(200) not null,
-    description text         default '',
-    startdate   timestamp    default current_timestamp,
-    enddate     timestamp    default current_timestamp,
+    missionid       bigserial    primary key,
+    missionname     varchar(256) not null,
+    missiontypeid   bigserial,
+    missionlocation varchar(200) not null,
+    description     text         default '',
+    startdate       timestamp    default current_timestamp,
+    enddate         timestamp    default current_timestamp,
     foreign key (missiontypeid) references missiontypes(missiontypeid)
 );
 

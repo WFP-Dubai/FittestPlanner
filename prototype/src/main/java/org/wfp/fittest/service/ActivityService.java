@@ -1,8 +1,10 @@
 package org.wfp.fittest.service;
 
+import java.util.List;
+
 import org.wfp.fittest.entity.Activity;
 
 public interface ActivityService {
 
-	public Iterable<Activity> findAllActivities();
+	public List<Activity> findAllActivities();
 }
