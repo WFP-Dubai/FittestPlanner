@@ -19,8 +19,8 @@ public class ActivityType {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
 	
-	@Column(name = "description")
-	private String description;
+	@Column(name = "activitytype")
+	private String activityType;
 	
 	@Column(name = "colorcode")
 	private String colorCode;

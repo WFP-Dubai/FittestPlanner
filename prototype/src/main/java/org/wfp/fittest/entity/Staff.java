@@ -73,6 +73,15 @@ public class Staff {
 	
 	@Column(name = "staffcolorcode")
 	private String staffColorCode;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+		name = "staff_staffrole_mapping",
+		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
+		inverseJoinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "staffroleid")}
+
+	)
+	private Set<StaffRole> staffRoles;
 
 	public Integer getIndex() {
 		return index;

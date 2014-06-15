@@ -25,5 +25,5 @@ public class OperationType {
 	private String operationName;
 
 	@OneToMany(mappedBy = "operationType", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<AuditTable> audits;
+	private Set<AuditRecord> auditRecords;
 }

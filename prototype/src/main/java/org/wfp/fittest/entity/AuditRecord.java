@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "audittable")
-public class AuditTable {
+public class AuditRecord {
 
 	@Id
 	@Column(name = "auditid")

@@ -53,12 +53,6 @@ public class StaffRole {
 	@JoinColumn(name = "staffconfirmedtypeid")
 	private StaffConfirmedType staffConfirmedType;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(
-		name = "staff_staffrole_mapping",
-		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "staffroleid")},
-		inverseJoinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")}
-
-	)
+	@ManyToMany(mappedBy="staffRoles")
 	private Set<Staff> staff;
 }

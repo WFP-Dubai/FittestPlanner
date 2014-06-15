@@ -1,6 +1,5 @@
 package org.wfp.fittest.entity;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -44,7 +43,7 @@ public class Mission {
 	private Set<Activity> activities;
 
 	@Column(name = "location", nullable = false)
-	private String location;
+	private String missionLocation;
 	
 	@Column(name = "description")
 	private String description;
@@ -91,12 +90,12 @@ public class Mission {
 		this.activities = activities;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getMissionLocation() {
+		return missionLocation;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLocation(String missionLocation) {
+		this.missionLocation = missionLocation;
 	}
 
 	public String getDescription() {
