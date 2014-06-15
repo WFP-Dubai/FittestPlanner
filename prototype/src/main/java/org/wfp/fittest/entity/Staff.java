@@ -1,6 +1,6 @@
 package org.wfp.fittest.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "staff")
@@ -28,6 +30,7 @@ public class Staff {
 	@Column(name = "lastname", nullable = false)
 	private String lastName;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "dateofbirth")
 	private Date dateOfBirth;
 	

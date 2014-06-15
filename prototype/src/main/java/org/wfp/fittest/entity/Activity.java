@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -50,6 +51,9 @@ public class Activity {
 	)
 	private Set<Mission> missions;
 	
+	@OneToMany(mappedBy="activity", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<ActivityRole> activityRoles;
+		
 	public Activity() {}
 
 	public Integer getID() {
@@ -98,5 +102,13 @@ public class Activity {
 
 	public void setMissions(Set<Mission> missions) {
 		this.missions = missions;
+	}
+
+	public Set<ActivityRole> getActivityRoles() {
+		return activityRoles;
+	}
+
+	public void setActivityRoles(Set<ActivityRole> activityRoles) {
+		this.activityRoles = activityRoles;
 	}
 }

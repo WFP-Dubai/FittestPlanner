@@ -1,6 +1,6 @@
 package org.wfp.fittest.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "staffroles")
@@ -33,11 +35,13 @@ public class StaffRole {
 	)
 	private Set<ActivityRole> activityRoles;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "startdate")
-	private Timestamp startdate;
+	private Date startDate;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "enddate")
-	private Timestamp enddate;
+	private Date endDate;
 	
 	@Column(name = "location")
 	private String location;

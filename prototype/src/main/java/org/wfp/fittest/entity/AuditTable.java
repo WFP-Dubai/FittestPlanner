@@ -1,6 +1,6 @@
 package org.wfp.fittest.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "audittable")
@@ -20,8 +22,9 @@ public class AuditTable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer auditID;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "changedtime")
-	private Timestamp changedTime;
+	private Date changedTime;
 	
 	@Column(name = "userid")
 	private String userID;
