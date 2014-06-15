@@ -9,6 +9,9 @@
 		http://www.springframework.org/schema/data/jpa
                         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
+
+    <context:component-scan base-package="org.wfp.fittest.web" />
+
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -25,7 +28,5 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-
-	<context:component-scan base-package="org.wfp.fittest" />
 
 </beans:beans>
