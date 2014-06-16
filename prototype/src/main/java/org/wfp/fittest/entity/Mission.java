@@ -1,12 +1,11 @@
 package org.wfp.fittest.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,15 +35,15 @@ public class Mission {
 	@JoinColumn(name = "missiontypeid")
 	private MissionType missionType;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name = "mission_activity_mapping",
 		joinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "missionid")},
 		inverseJoinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")}
 	)
-	private Set<Activity> activities;
+	private Set<Activity> activities = new HashSet<Activity>();
 
-	@Column(name = "location", nullable = false)
+	@Column(name = "missionlocation", nullable = false)
 	private String missionLocation;
 	
 	@Column(name = "description")
@@ -122,5 +121,30 @@ public class Mission {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mission other = (Mission) obj;
+		if (ID == null) {
+			if (other.ID != null)
+				return false;
+		} else if (!ID.equals(other.ID))
+			return false;
+		return true;
 	}
 }

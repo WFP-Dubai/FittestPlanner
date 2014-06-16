@@ -1,12 +1,11 @@
 package org.wfp.fittest.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -37,13 +36,13 @@ public class Staff {
 	@Column(name = "title")
 	private String title;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name = "staff_profiletype_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
 		inverseJoinColumns = {@JoinColumn(name="profiletypeid", referencedColumnName = "profiletypeid")}
 	)
-	private Set<ProfileType> profileTypes;
+	private Set<ProfileType> profileTypes = new HashSet<ProfileType>();
 	
 	@Column(name = "thuraya")
 	private String thuraya;
@@ -51,21 +50,21 @@ public class Staff {
 	@Column(name = "mobile")
 	private String mobile;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name = "staff_nationality_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
 		inverseJoinColumns = {@JoinColumn(name = "countryid", referencedColumnName = "countryid")}
 	)
-	private Set<Country> nationalities;
+	private Set<Country> nationalities = new HashSet<Country>();
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name = "staff_language_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
 		inverseJoinColumns = {@JoinColumn(name = "languageid", referencedColumnName = "languageid")}
 	)
-	private Set<Language> languages;
+	private Set<Language> languages = new HashSet<Language>();
 	
 	@ManyToOne
 	@JoinColumn(name = "stafftypeid")
@@ -74,15 +73,17 @@ public class Staff {
 	@Column(name = "staffcolorcode")
 	private String staffColorCode;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name = "staff_staffrole_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
 		inverseJoinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "staffroleid")}
 
 	)
-	private Set<StaffRole> staffRoles;
+	private Set<StaffRole> staffRoles = new HashSet<StaffRole>();
 
+	public Staff() {}
+	
 	public Integer getIndex() {
 		return index;
 	}
@@ -177,6 +178,31 @@ public class Staff {
 
 	public void setStaffColorCode(String staffColorCode) {
 		this.staffColorCode = staffColorCode;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((index == null) ? 0 : index.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Staff other = (Staff) obj;
+		if (index == null) {
+			if (other.index != null)
+				return false;
+		} else if (!index.equals(other.index))
+			return false;
+		return true;
 	}
 	
 }

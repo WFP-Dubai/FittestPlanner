@@ -46,4 +46,68 @@ public class AuditRecord {
 	
 	@Column(name = "ipaddress")
 	private String IPAddress;
+
+	public Integer getAuditID() {
+		return auditID;
+	}
+
+	public void setAuditID(Integer auditID) {
+		this.auditID = auditID;
+	}
+
+	public Date getChangedTime() {
+		return changedTime;
+	}
+
+	public void setChangedTime(Date changedTime) {
+		this.changedTime = changedTime;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	public String getTablename() {
+		return tablename;
+	}
+
+	public void setTablename(String tablename) {
+		this.tablename = tablename;
+	}
+
+	public OperationType getOperationType() {
+		return operationType;
+	}
+
+	public void setOperationType(OperationType operationType) {
+		this.operationType = operationType;
+	}
+
+	public String getOldValue() {
+		return oldValue;
+	}
+
+	public void setOldValue(String oldValue) {
+		this.oldValue = oldValue;
+	}
+
+	public String getNewValue() {
+		return newValue;
+	}
+
+	public void setNewValue(String newValue) {
+		this.newValue = newValue;
+	}
+
+	public String getIPAddress() {
+		return IPAddress;
+	}
+
+	public void setIPAddress(String iPAddress) {
+		IPAddress = iPAddress;
+	}
 }

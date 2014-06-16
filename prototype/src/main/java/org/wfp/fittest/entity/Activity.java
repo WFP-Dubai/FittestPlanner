@@ -1,11 +1,10 @@
 package org.wfp.fittest.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,24 +36,24 @@ public class Activity {
 	@Column(name = "etcservicemap")
 	private String etcServiceMap;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name = "activity_country_mapping",
 		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
 		inverseJoinColumns = {@JoinColumn(name = "countryid", referencedColumnName = "countryid")}
 	)
-	private Set<Country> countries;
+	private Set<Country> countries = new HashSet<Country>();
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name = "mission_activity_mapping",
 		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
 		inverseJoinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "missionid")}
 	)
-	private Set<Mission> missions;
+	private Set<Mission> missions = new HashSet<Mission>();
 	
-	@OneToMany(mappedBy="activity", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<ActivityRole> activityRoles;
+	@OneToMany(mappedBy="activity")
+	private Set<ActivityRole> activityRoles = new HashSet<ActivityRole>();
 		
 	public Activity() {}
 
@@ -112,5 +111,30 @@ public class Activity {
 
 	public void setActivityRoles(Set<ActivityRole> activityRoles) {
 		this.activityRoles = activityRoles;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Activity other = (Activity) obj;
+		if (ID == null) {
+			if (other.ID != null)
+				return false;
+		} else if (!ID.equals(other.ID))
+			return false;
+		return true;
 	}
 }

@@ -1,12 +1,11 @@
 package org.wfp.fittest.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,13 +28,13 @@ public class StaffRole {
 	@GeneratedValue(generator="staffroles_staffroleid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name = "staffrole_activityrole_mapping",
 		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "staffroleid")},
 		inverseJoinColumns = {@JoinColumn(name = "activityroleid", referencedColumnName = "activityroleid")}
 	)
-	private Set<ActivityRole> activityRoles;
+	private Set<ActivityRole> activityRoles = new HashSet<ActivityRole>();
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "startdate")
@@ -56,5 +55,97 @@ public class StaffRole {
 	private StaffConfirmedType staffConfirmedType;
 	
 	@ManyToMany(mappedBy="staffRoles")
-	private Set<Staff> staff;
+	private Set<Staff> staff = new HashSet<Staff>();
+
+	public StaffRole() {}
+	
+	public Integer getID() {
+		return ID;
+	}
+
+	public void setID(Integer iD) {
+		ID = iD;
+	}
+
+	public Set<ActivityRole> getActivityRoles() {
+		return activityRoles;
+	}
+
+	public void setActivityRoles(Set<ActivityRole> activityRoles) {
+		this.activityRoles = activityRoles;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public StaffConfirmedType getStaffConfirmedType() {
+		return staffConfirmedType;
+	}
+
+	public void setStaffConfirmedType(StaffConfirmedType staffConfirmedType) {
+		this.staffConfirmedType = staffConfirmedType;
+	}
+
+	public Set<Staff> getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Set<Staff> staff) {
+		this.staff = staff;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StaffRole other = (StaffRole) obj;
+		if (ID == null) {
+			if (other.ID != null)
+				return false;
+		} else if (!ID.equals(other.ID))
+			return false;
+		return true;
+	}
+	
 }

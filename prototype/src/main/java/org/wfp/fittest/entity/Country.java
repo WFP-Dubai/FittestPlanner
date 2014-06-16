@@ -2,7 +2,6 @@ package org.wfp.fittest.entity;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,10 +31,10 @@ public class Country {
 	@Column(name = "region")
 	private String region;
 	
-	@ManyToMany(mappedBy = "nationalities", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "nationalities", fetch = FetchType.EAGER)
 	private Set<Staff> staffByNationality;
 	
-	@ManyToMany(mappedBy = "countries", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "countries", fetch = FetchType.EAGER)
 	private Set<Activity> activities;
 	
 	public Country() {}

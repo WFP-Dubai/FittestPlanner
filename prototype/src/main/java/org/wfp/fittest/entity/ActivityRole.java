@@ -47,4 +47,61 @@ public class ActivityRole {
 	
 	@ManyToMany(mappedBy="activityRoles")
 	private Set<StaffRole> staffRoles;
+
+	public Integer getID() {
+		return ID;
+	}
+
+	public void setID(Integer iD) {
+		ID = iD;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
+	public ProfileType getProfileType() {
+		return profileType;
+	}
+
+	public void setProfileType(ProfileType profileType) {
+		this.profileType = profileType;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public Set<StaffRole> getStaffRoles() {
+		return staffRoles;
+	}
+
+	public void setStaffRoles(Set<StaffRole> staffRoles) {
+		this.staffRoles = staffRoles;
+	}
+	
 }
