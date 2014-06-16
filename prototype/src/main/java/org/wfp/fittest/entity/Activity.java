@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +23,8 @@ public class Activity {
 
 	@Id
 	@Column(name = "activityid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="activities_activityid_seq", name="activities_activityid_seq")
+	@GeneratedValue(generator="activities_activityid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
 	@Column(name = "description")

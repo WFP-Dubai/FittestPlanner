@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +19,8 @@ public class MissionType {
 
 	@Id
 	@Column(name = "missiontypeid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="missiontypes_missiontypeid_seq", name="missiontypes_missiontypeid_seq")
+	@GeneratedValue(generator="missiontypes_missiontypeid_seq", strategy=GenerationType.SEQUENCE)
 	private String missionType;
 	
 	@OneToMany(mappedBy = "missionType", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

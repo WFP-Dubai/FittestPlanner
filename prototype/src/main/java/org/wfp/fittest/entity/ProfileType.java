@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +20,8 @@ public class ProfileType {
 
 	@Id
 	@Column(name = "profiletypeid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="profiletypes_profiletypeid_seq", name="profiletypes_profiletypeid_seq")
+	@GeneratedValue(generator="profiletypes_profiletypeid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
 	@Column(name = "profiletype", nullable = false)

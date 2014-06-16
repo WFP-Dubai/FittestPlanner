@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +25,8 @@ public class Mission {
 
 	@Id
 	@Column(name = "missionid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="missions_missionid_seq", name="missions_missionid_seq")
+	@GeneratedValue(generator="missions_missionid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
 	@Column(name = "missionname", nullable = false)

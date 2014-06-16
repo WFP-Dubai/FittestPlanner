@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +19,8 @@ public class Language {
 
 	@Id
 	@Column(name = "languageid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="languages_languageid_seq", name="languages_languageid_seq")
+	@GeneratedValue(generator="languages_languageid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
 	@Column(name = "language")

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,7 +18,8 @@ public class Event {
 
 	@Id
 	@Column(name = "eventid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="events_eventid_seq", name="events_eventid_seq")
+	@GeneratedValue(generator = "events_eventid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
 	@Column(name = "event")

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,7 +20,8 @@ public class AuditRecord {
 
 	@Id
 	@Column(name = "auditid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="audittable_auditid_seq", name="audittable_auditid_seq")
+	@GeneratedValue(generator="audittable_auditid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer auditID;
 	
 	@Temporal(TemporalType.TIMESTAMP)

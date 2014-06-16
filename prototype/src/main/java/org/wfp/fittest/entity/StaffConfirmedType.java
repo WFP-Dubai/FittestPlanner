@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +19,8 @@ public class StaffConfirmedType {
 
 	@Id
 	@Column(name = "staffconfirmedtypeid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="staffconfirmedtypes_staffconfirmedtypeid_seq", name="staffconfirmedtypes_staffconfirmedtypeid_seq")
+	@GeneratedValue(generator="staffconfirmedtypes_staffconfirmedtypeid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
 	@Column(name = "staffconfirmedtype")
