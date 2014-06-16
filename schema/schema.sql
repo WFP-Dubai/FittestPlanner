@@ -26,6 +26,7 @@ create table staff (
     stafftypeid    bigserial,
     staffcolorcode varchar(100) default '',
     foreign key (stafftypeid) references stafftypes(stafftypeid)
+        on update cascade
 );
 
 -- Join with staff table to get staff's nationalities
@@ -33,8 +34,10 @@ create table staff_nationality_mapping (
     staffindex  integer,
     countryid   bigserial,
     primary key (staffindex, countryid),
-    foreign key (staffindex) references staff(staffindex),
+    foreign key (staffindex) references staff(staffindex)
+        on update cascade,
     foreign key (countryid) references countries(countryid)
+        on update cascade
 );
 
 -- Join with staff table to get staff's profiles
@@ -42,8 +45,10 @@ create table staff_profiletype_mapping (
     staffindex    integer,
     profiletypeid bigserial,
     primary key (staffindex, profiletypeid),
-    foreign key (staffindex) references staff(staffindex),
+    foreign key (staffindex) references staff(staffindex)
+        on update cascade,
     foreign key (profiletypeid) references profiletypes(profiletypeid)
+        on update cascade
 );
 
 create table activitytypes (
@@ -58,14 +63,20 @@ create table activities (
     activitytypeid bigserial,
     etcservicemap  varchar(256) default '',
     foreign key (activitytypeid) references activitytypes(activitytypeid)
+        on update cascade
+        on delete cascade
 );
 
 create table activity_country_mapping (
     activityid  bigserial,
     countryid   bigserial,
     primary key (activityid, countryid),
-    foreign key (activityid) references activities(activityid),
+    foreign key (activityid) references activities(activityid)
+        on update cascade
+        on delete cascade,
     foreign key (countryid) references countries(countryid)
+        on update cascade
+        on delete cascade
 );
 
 create table events (
@@ -86,8 +97,12 @@ create table staff_language_mapping (
     staffindex  integer,
     languageid  bigserial,
     primary key (staffindex, languageid),
-    foreign key (staffindex) references staff(staffindex),
+    foreign key (staffindex) references staff(staffindex)
+        on update cascade
+        on delete cascade,
     foreign key (languageid) references languages(languageid)
+        on update cascade
+        on delete cascade
 );
 
 create table staffconfirmedtypes (
@@ -102,8 +117,12 @@ create table activityroles (
     startdate      timestamp     default current_timestamp,
     enddate        timestamp     default current_timestamp,
     location       varchar(200)  default '',
-    foreign key (activityid) references activities(activityid),
+    foreign key (activityid) references activities(activityid)
+        on update cascade
+        on delete cascade,
     foreign key (profiletypeid) references profiletypes(profiletypeid)
+        on update cascade
+        on delete cascade
 );
 
 create table staffroles (
@@ -114,6 +133,8 @@ create table staffroles (
     comments             text          default '',
     staffconfirmedtypeid bigserial,
     foreign key (staffconfirmedtypeid) references staffconfirmedtypes(staffconfirmedtypeid)
+        on update cascade
+        on delete cascade
 );
 
 -- Join with staff role to get activity roles
@@ -121,8 +142,12 @@ create table staffrole_activityrole_mapping (
     staffroleid    bigserial,
     activityroleid bigserial,
     primary key (staffroleid, activityroleid),
-    foreign key (staffroleid) references staffroles(staffroleid),
+    foreign key (staffroleid) references staffroles(staffroleid)
+        on update cascade
+        on delete cascade,
     foreign key (activityroleid) references activityroles(activityroleid)
+        on update cascade
+        on delete cascade
 );
 
 -- Join with staff to get staff roles
@@ -130,8 +155,12 @@ create table staff_staffrole_mapping (
     staffindex  bigserial,
     staffroleid bigserial,
     primary key (staffindex, staffroleid),
-    foreign key (staffindex) references staff(staffindex),
+    foreign key (staffindex) references staff(staffindex)
+        on update cascade
+        on delete cascade,
     foreign key (staffroleid) references staffroles(staffroleid)
+        on update cascade
+        on delete cascade
 );
 
 create table missiontypes (
@@ -148,6 +177,8 @@ create table missions (
     startdate       timestamp    default current_timestamp,
     enddate         timestamp    default current_timestamp,
     foreign key (missiontypeid) references missiontypes(missiontypeid)
+        on update cascade
+        on delete cascade
 );
 
 -- Join with mission table to get a mission's activities
@@ -155,8 +186,12 @@ create table mission_activity_mapping (
     missionid bigserial,
     activityid  bigserial,
     primary key (missionid, activityid),
-    foreign key (missionid) references missions(missionid),
+    foreign key (missionid) references missions(missionid)
+        on update cascade
+        on delete cascade,
     foreign key (activityid) references activities(activityid)
+        on update cascade
+        on delete cascade
 );
 
 create table operationtypes (
@@ -174,4 +209,6 @@ create table audittable (
     newvalue        text         default '',
     ipaddress       varchar(256) not null,
     foreign key (operationtypeid) references operationtypes(operationtypeid)
+        on update cascade
+        on delete cascade
 );

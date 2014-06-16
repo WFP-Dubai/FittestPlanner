@@ -1,0 +1,10 @@
+
+\cd /home/public/FittestPlanner/schema
+
+\copy missiontypes (missiontype) from 'testdata/missiontypes.csv'
+
+\copy missions (missionname, missiontypeid, missionlocation, description, startdate, enddate) from 'testdata/missions.csv' delimiter as ','
+
+\copy audittable (changedtime, userid, tablename, operationtypeid, oldvalue, newvalue, ipaddress) from 'testdata/audittable.csv' delimiter as ','
+
+\copy mission_activity_mapping (missionid, activityid) from 'testdata/mission_activity.csv' delimiter as ','
