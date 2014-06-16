@@ -46,6 +46,13 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 	}
 
 	@Override
+	public <E> E findOneByPropertyEqual(Class<E> entityClass,
+			String propertyName, Object propertyValue) {
+		Criterion criterion = Restrictions.eq(propertyName, propertyValue);
+		return findOneByCriteria(entityClass, criterion);
+	}
+
+	@Override
 	public <E> List<E> findByPropertyEqual(Class<E> entityClass,
 			String propertyName, Object propertyValue) {
 		Criterion criterion = Restrictions.eq(propertyName, propertyValue);
@@ -60,6 +67,14 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public <E> E findOneByCriteria(Class<E> entityClass, Criterion criterion) {
+		Criteria criteria = createCriteria(entityClass);
+		criteria.add(criterion);
+		return (E) criteria.uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public <E> List<E> findByCriteria(Class<E> entityClass, Criterion criterion) {
 		Criteria criteria = createCriteria(entityClass);
 		criteria.add(criterion);
@@ -67,24 +82,45 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 	}
 
 	@Override
-	public <E> List<E> findByStartDateAfter(Class<E> entityClass, Date startDate) {
-		Criterion criterion = Restrictions.ge("startDate", startDate);
+	public <E> List<E> findByPropertyGreaterThanOrEqual(Class<E> entityClass,
+			String propertyName, Object propretyValue) {
+		Criterion criterion = Restrictions.ge(propertyName, propretyValue);
 		return findByCriteria(entityClass, criterion);
 	}
 
 	@Override
-	public <E> List<E> findByEndDateBefore(Class<E> entityClass, Date endDate) {
-		Criterion criterion = Restrictions.le("endDate", endDate);
+	public <E> List<E> findByPropertyLessThanOrEqual(Class<E> entityClass,
+			String propertyName, Object propretyValue) {
+		Criterion criterion = Restrictions.le(propertyName, propretyValue);
 		return findByCriteria(entityClass, criterion);
+	}
+
+	@Override
+	public <E> List<E> findByPropertiesInRange(Class<E> entityClass,
+			String lowerName, Object lowerValue, String upperName,
+			Object upperValue) {
+		Criteria criteria = createCriteria(entityClass);
+		criteria.add(Restrictions.ge(lowerName, lowerValue));
+		criteria.add(Restrictions.le(upperName, upperValue));
+		return findByCriteria(criteria);
+	}
+
+	@Override
+	public <E> List<E> findByStartDateAfter(Class<E> entityClass, Date startDate) {
+		return findByPropertyGreaterThanOrEqual(entityClass, "startDate",
+				startDate);
+	}
+
+	@Override
+	public <E> List<E> findByEndDateBefore(Class<E> entityClass, Date endDate) {
+		return findByPropertyLessThanOrEqual(entityClass, "endDate", endDate);
 	}
 
 	@Override
 	public <E> List<E> findByDuration(Class<E> entityClass, Date startDate,
 			Date endDate) {
-		Criteria criteria = createCriteria(entityClass);
-		criteria.add(Restrictions.ge("startDate", startDate));
-		criteria.add(Restrictions.le("endDate", endDate));
-		return findByCriteria(criteria);
+		return findByPropertiesInRange(entityClass, "startDate", startDate,
+				"endDate", endDate);
 	}
 
 	@Override

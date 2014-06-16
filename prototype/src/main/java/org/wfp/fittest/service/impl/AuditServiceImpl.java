@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.wfp.fittest.service.AuditService;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class AuditServiceImpl implements AuditService {
 
 }

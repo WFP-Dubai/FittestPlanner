@@ -8,6 +8,7 @@ import org.wfp.fittest.entity.Language;
 import org.wfp.fittest.entity.ProfileType;
 import org.wfp.fittest.entity.Staff;
 import org.wfp.fittest.entity.StaffConfirmedType;
+import org.wfp.fittest.entity.StaffRole;
 import org.wfp.fittest.entity.StaffType;
 
 public interface StaffDao {
@@ -33,21 +34,9 @@ public interface StaffDao {
 
 	public List<Staff> findStaffByDateOfBirth(Date dateOfBirth);
 
-	public List<Staff> findStaffByAge(Integer age);
-
-	public List<Staff> findStaffByAgeLessThan(Integer age);
-
-	public List<Staff> findStaffByAgeGreaterThan(Integer age);
-
-	public List<Staff> findStaffByNationality(Country nationality);
-
-	public List<Staff> findStaffByLanguage(Language language);
-
 	public List<Staff> findStaffByStaffType(StaffType staffType);
 
-	public List<Staff> findStaffByColorCode(StaffType staffType);
-
-	public List<Staff> findStaffByProfileType(ProfileType profileType);
+	public List<Staff> findStaffByColorCode(String colorCode);
 
 	public List<Staff> findStaffByAllOfLanguages(List<Language> languages);
 
@@ -81,7 +70,7 @@ public interface StaffDao {
 	// Staff Role
 	/* ====================================================================== */
 
-	public List<StaffType> findAllStaffRoles();
+	public List<StaffRole> findAllStaffRoles();
 
 	/* ====================================================================== */
 	// Profile Type

@@ -128,8 +128,7 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 
 	@Override
 	public ActivityRole findActivityRoleById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return findById(ActivityRole.class, id);
 	}
 
 	@Override
