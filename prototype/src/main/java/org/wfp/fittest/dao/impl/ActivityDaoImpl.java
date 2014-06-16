@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.wfp.fittest.dao.ActivityDao;
 import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
@@ -39,11 +37,6 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 	}
 
 	@Override
-	public List<Activity> findActivitiesByCountry(Country country) {
-		return findByPropertyEqual(Activity.class, "country", country);
-	}
-
-	@Override
 	public void deleteActivity(Activity activity) {
 		delete(activity);
 	}
@@ -61,12 +54,6 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 	@Override
 	public void deleteActivitiesByDescription(String description) {
 		deleteByPropertyEqual(Activity.class, "description", description);
-	}
-
-	@Override
-	public void deleteActivitiesByCountry(Country country) {
-		deleteByPropertyEqual(Activity.class, "country", country);
-
 	}
 
 	@Override

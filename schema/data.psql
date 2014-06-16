@@ -14,7 +14,7 @@
 
 \copy events (event, startdate, enddate, colorcode) from 'data/events.csv' delimiter as ','
 
-\copy missions (missionname, missiontypeid, location, description, startdate, enddate) from 'data/missions.csv' delimiter as ','
+\copy missions (missionname, missiontypeid, missionlocation, description, startdate, enddate) from 'data/missions.csv' delimiter as ','
 
 \copy audittable (changedtime, userid, tablename, operationtypeid, oldvalue, newvalue, ipaddress) from 'data/audittable.csv' delimiter as ','
 

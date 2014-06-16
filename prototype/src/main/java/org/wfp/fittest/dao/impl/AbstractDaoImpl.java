@@ -8,12 +8,11 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.wfp.fittest.dao.AbstractDao;
 
 @Repository
@@ -38,11 +37,10 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 		return (E) getCurrentSession().get(entityClass, id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <E> List<E> findAll(Class<E> entityClass) {
 		Criteria criteria = createCriteria(entityClass);
-		return criteria.list();
+		return findByCriteria(criteria);
 	}
 
 	@Override
@@ -62,6 +60,7 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <E> List<E> findByCriteria(Criteria criteria) {
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		return criteria.list();
 	}
 
@@ -73,12 +72,11 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 		return (E) criteria.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <E> List<E> findByCriteria(Class<E> entityClass, Criterion criterion) {
 		Criteria criteria = createCriteria(entityClass);
 		criteria.add(criterion);
-		return criteria.list();
+		return findByCriteria(criteria);
 	}
 
 	@Override

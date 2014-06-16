@@ -25,8 +25,6 @@ public interface ActivityDao {
 
 	public List<Activity> findActivitiesByDescription(String description);
 
-	public List<Activity> findActivitiesByCountry(Country country);
-
 	public void deleteActivity(Activity activity);
 
 	public void deleteActivityById(Integer id);
@@ -34,8 +32,6 @@ public interface ActivityDao {
 	public void deleteActivityByActivityType(ActivityType activityType);
 
 	public void deleteActivitiesByDescription(String description);
-
-	public void deleteActivitiesByCountry(Country country);
 
 	public void saveActivity(Activity activity);
 

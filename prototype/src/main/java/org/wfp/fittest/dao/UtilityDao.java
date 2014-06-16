@@ -13,6 +13,8 @@ public interface UtilityDao {
 
 	public List<Country> findAllCountries();
 	
+	public Country findCountryByISOCode(String code);
+	
 	/* ====================================================================== */
 	// Language
 	/* ====================================================================== */
