@@ -13,7 +13,7 @@
 		<org.springframework.data-version>1.6.0.RELEASE</org.springframework.data-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
-		<org.postgresql.Driver-version>9.1-901-1.jdbc4</org.postgresql.Driver-version>
+		<org.postgresql.Driver-version>9.3-1101-jdbc4</org.postgresql.Driver-version>
 		<org.hibernate-version>4.2.13.Final</org.hibernate-version>
 		<org.antlr-version>3.5.2</org.antlr-version>
 	</properties>
@@ -117,7 +117,7 @@
 
 		<!-- PostgreSQL Driver -->
 		<dependency>
-			<groupId>postgresql</groupId>
+			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${org.postgresql.Driver-version}</version>
 		</dependency>

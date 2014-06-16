@@ -6,7 +6,6 @@ import java.util.List;
 import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
-import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.entity.Event;
 import org.wfp.fittest.entity.Mission;
 import org.wfp.fittest.entity.MissionType;

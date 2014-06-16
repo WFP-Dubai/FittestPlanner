@@ -1,5 +1,6 @@
 package org.wfp.fittest.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class ActivityServiceImpl implements ActivityService {
 	ActivityDao activityDao;
 
 	public List<Activity> findAllActivities() {
-		return activityDao.findAllActivities();
+		return new ArrayList<Activity>();
 	}
 
 }

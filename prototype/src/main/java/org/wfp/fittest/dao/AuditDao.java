@@ -39,7 +39,7 @@ public interface AuditDao {
 
 	public List<AuditRecord> findAuditsByTableName(String tableName);
 
-	public List<AuditRecord> findAUditsByUserID(String userID);
+	public List<AuditRecord> findAuditsByUserID(String userID);
 
 	public void deleteAudit(AuditRecord audit);
 

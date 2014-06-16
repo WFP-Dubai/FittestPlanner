@@ -8,7 +8,6 @@ import org.wfp.fittest.dao.ActivityDao;
 import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
-import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.entity.Event;
 import org.wfp.fittest.entity.Mission;
 import org.wfp.fittest.entity.MissionType;
@@ -163,7 +162,7 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 
 	@Override
 	public void deleteActivityRolesByLocation(String activityRoleLocation) {
-		deleteByPropertyEqual(ActivityRole.class, "activityRoleLocation",
+		deleteByPropertyEqual(ActivityRole.class, "location",
 				activityRoleLocation);
 	}
 
