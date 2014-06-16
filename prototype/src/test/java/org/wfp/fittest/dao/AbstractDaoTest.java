@@ -1,5 +1,10 @@
 package org.wfp.fittest.dao;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -20,5 +25,8 @@ public abstract class AbstractDaoTest {
 	@After
 	public abstract void tearDown();
 	
-	
+	public <E> void assertListSize(List<E> lst, int size) {
+		assertNotNull(lst);
+		assertEquals(lst.size(), size);
+	}
 }
