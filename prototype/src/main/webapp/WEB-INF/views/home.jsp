@@ -18,7 +18,24 @@
 
 			<div class="page-content inset">
 				<div class="row">
-					<div class="col-lg-12"></div>
+					<div class="col-lg-12">
+						<table class="table table-bordered table-responsive">
+							<thead>
+								<tr>
+									<th>Activity</th>
+									<th>Staff</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="act" items="${activitySummary}">
+									<tr>
+										<td>${act.activityType}</td>
+										<td>${act.numberOfStaff}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

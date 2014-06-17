@@ -196,3 +196,24 @@ create table audittable (
     foreign key (operationtypeid) references operationtypes(operationtypeid)
         on delete restrict
 );
+
+--------------------------------------------------------------------------------
+-- Views
+--------------------------------------------------------------------------------
+
+create view activitytypes_staff_count
+as
+    select activitytypeid, staffindex, activityrolestartdate, activityroleenddate
+    from activities
+    natural join activityroles a
+    natural join staffrole_activityrole_mapping s
+    natural join staff_staffrole_mapping;
+
+create view staffconfirmedtypes_activitytypes
+as
+    select staffconfirmedtypeid, activitytypeid
+    from staffconfirmedtypes
+    natural join staffroles sr
+    natural join staffrole_activityrole_mapping s
+    natural join activityroles a
+    natural join activities;
