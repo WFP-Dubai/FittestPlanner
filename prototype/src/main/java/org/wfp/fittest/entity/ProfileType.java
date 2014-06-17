@@ -3,8 +3,10 @@ package org.wfp.fittest.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,10 +28,10 @@ public class ProfileType {
 	@Column(name = "profiletype", nullable = false)
 	private String profileType;
 	
-	@ManyToMany(mappedBy = "profileTypes")
+	@ManyToMany(mappedBy = "profileTypes", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Staff> staff = new HashSet<Staff>();
 	
-	@OneToMany(mappedBy = "profileType")
+	@OneToMany(mappedBy = "profileType", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<ActivityRole> activityRoles = new HashSet<ActivityRole>();
 
 	public ProfileType() {}

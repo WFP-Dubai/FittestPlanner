@@ -3,8 +3,10 @@ package org.wfp.fittest.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,17 +29,18 @@ public class Activity {
 	@GeneratedValue(generator="activities_activityid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
-	@Column(name = "description")
+	@Column(name = "activitydescription")
 	private String description;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "activitytypeid")
 	private ActivityType activityType;
 	
-	@Column(name = "etcservicemap")
+	@Column(name = "activityetcservicemap")
 	private String etcServiceMap;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OrderBy
 	@JoinTable(
 		name = "activity_country_mapping",
 		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
@@ -44,7 +48,8 @@ public class Activity {
 	)
 	private Set<Country> countries = new HashSet<Country>();
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OrderBy
 	@JoinTable(
 		name = "mission_activity_mapping",
 		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
@@ -52,7 +57,8 @@ public class Activity {
 	)
 	private Set<Mission> missions = new HashSet<Mission>();
 	
-	@OneToMany(mappedBy="activity")
+	@OneToMany(mappedBy="activity", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OrderBy
 	private Set<ActivityRole> activityRoles = new HashSet<ActivityRole>();
 		
 	public Activity() {}

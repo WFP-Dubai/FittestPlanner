@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -36,7 +38,7 @@ public class Staff {
 	@Column(name = "title")
 	private String title;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 		name = "staff_profiletype_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
@@ -50,7 +52,7 @@ public class Staff {
 	@Column(name = "mobile")
 	private String mobile;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 		name = "staff_nationality_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
@@ -58,7 +60,7 @@ public class Staff {
 	)
 	private Set<Country> nationalities = new HashSet<Country>();
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 		name = "staff_language_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},
@@ -66,14 +68,14 @@ public class Staff {
 	)
 	private Set<Language> languages = new HashSet<Language>();
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "stafftypeid")
 	private StaffType staffType;
 	
 	@Column(name = "staffcolorcode")
 	private String staffColorCode;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 		name = "staff_staffrole_mapping",
 		joinColumns = {@JoinColumn(name = "staffindex", referencedColumnName = "staffindex")},

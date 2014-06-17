@@ -1,34 +1,48 @@
 package org.wfp.fittest.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "activitytypes")
+@NamedQueries({ @NamedQuery(name = "ActivityType.findWithStaffCount", query = "select at, count(*) "
+		+ "from ActivityType at "
+		+ "join at.activities a "
+		+ "join a.activityRoles ar "
+		+ "join ar.staffRoles sr "
+		+ "join sr.staff "
+		+ "where ar.startDate <= :startDate "
+		+ "group by at.ID") })
 public class ActivityType {
 
 	@Id
 	@Column(name = "activitytypeid")
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="activitytypes_activitytypeid_seq", name="activitytypes_activitytypeid_seq")
-	@GeneratedValue(generator="activitytypes_activitytypeid_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "activitytypes_activitytypeid_seq", name = "activitytypes_activitytypeid_seq")
+	@GeneratedValue(generator = "activitytypes_activitytypeid_seq", strategy = GenerationType.SEQUENCE)
 	private Integer ID;
-	
+
 	@Column(name = "activitytype")
 	private String activityType;
-	
-	@Column(name = "colorcode")
+
+	@Column(name = "activitytypecolorcode")
 	private String colorCode;
-	
-	@OneToMany(mappedBy = "activityType")
-	private Set<Activity> activities;
+
+	@OneToMany(mappedBy = "activityType", fetch = FetchType.EAGER, cascade = {
+			CascadeType.PERSIST, CascadeType.MERGE })
+	private Set<Activity> activities = new HashSet<Activity>();
 
 	public Integer getID() {
 		return ID;
@@ -61,5 +75,5 @@ public class ActivityType {
 	public void setActivities(Set<Activity> activities) {
 		this.activities = activities;
 	}
-	
+
 }

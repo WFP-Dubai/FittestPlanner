@@ -2,8 +2,10 @@ package org.wfp.fittest.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +36,7 @@ public class AuditRecord {
 	@Column(name = "tablename")
 	private String tablename;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "operationtypeid")
 	private OperationType operationType;
 	

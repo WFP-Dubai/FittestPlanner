@@ -3,8 +3,10 @@ package org.wfp.fittest.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ public class Language {
 	@Column(name = "language")
 	private String language;
 	
-	@ManyToMany(mappedBy = "languages")
+	@ManyToMany(mappedBy = "languages", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Staff> staffByLanguage = new HashSet<Staff>();
 
 	public Language() {}

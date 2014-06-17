@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,11 +33,11 @@ public class Mission {
 	@Column(name = "missionname", nullable = false)
 	private String missionName;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "missiontypeid")
 	private MissionType missionType;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 		name = "mission_activity_mapping",
 		joinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "missionid")},
@@ -46,15 +48,15 @@ public class Mission {
 	@Column(name = "missionlocation", nullable = false)
 	private String missionLocation;
 	
-	@Column(name = "description")
+	@Column(name = "missiondescription")
 	private String description;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "startdate")
+	@Column(name = "missionstartdate")
 	private Date startDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "enddate")
+	@Column(name = "missionenddate")
 	private Date endDate;
 
 	public Mission() {}

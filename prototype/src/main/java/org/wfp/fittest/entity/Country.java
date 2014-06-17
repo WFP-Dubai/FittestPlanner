@@ -1,7 +1,9 @@
 package org.wfp.fittest.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,11 +33,11 @@ public class Country {
 	@Column(name = "region")
 	private String region;
 	
-	@ManyToMany(mappedBy = "nationalities", fetch = FetchType.EAGER)
-	private Set<Staff> staffByNationality;
+	@ManyToMany(mappedBy = "nationalities", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private Set<Staff> staffByNationality = new HashSet<Staff>();
 	
-	@ManyToMany(mappedBy = "countries", fetch = FetchType.EAGER)
-	private Set<Activity> activities;
+	@ManyToMany(mappedBy = "countries", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private Set<Activity> activities = new HashSet<Activity>();
 	
 	public Country() {}
 

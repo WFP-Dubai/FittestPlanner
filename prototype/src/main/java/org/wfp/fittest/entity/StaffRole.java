@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +30,7 @@ public class StaffRole {
 	@GeneratedValue(generator="staffroles_staffroleid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 		name = "staffrole_activityrole_mapping",
 		joinColumns = {@JoinColumn(name = "staffroleid", referencedColumnName = "staffroleid")},
@@ -37,24 +39,24 @@ public class StaffRole {
 	private Set<ActivityRole> activityRoles = new HashSet<ActivityRole>();
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "startdate")
+	@Column(name = "staffrolestartdate")
 	private Date startDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "enddate")
+	@Column(name = "staffroleenddate")
 	private Date endDate;
 	
-	@Column(name = "location")
+	@Column(name = "staffrolelocation")
 	private String location;
 	
-	@Column(name = "comments")
+	@Column(name = "staffrolecomments")
 	private String comments;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "staffconfirmedtypeid")
 	private StaffConfirmedType staffConfirmedType;
 	
-	@ManyToMany(mappedBy="staffRoles")
+	@ManyToMany(mappedBy="staffRoles", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Staff> staff = new HashSet<Staff>();
 
 	public StaffRole() {}

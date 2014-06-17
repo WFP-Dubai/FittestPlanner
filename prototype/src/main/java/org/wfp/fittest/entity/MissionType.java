@@ -3,8 +3,10 @@ package org.wfp.fittest.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ public class MissionType {
 	@Column(name = "missiontype")
 	private String missionType;
 	
-	@OneToMany(mappedBy = "missionType")
+	@OneToMany(mappedBy = "missionType", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Mission> missions = new HashSet<Mission>();
 
 	public MissionType() {}

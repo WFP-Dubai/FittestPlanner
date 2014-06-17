@@ -3,8 +3,10 @@ package org.wfp.fittest.entity;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,26 +28,26 @@ public class ActivityRole {
 	@GeneratedValue(generator="activityroles_activityroleid_seq", strategy=GenerationType.SEQUENCE)
 	private Integer ID;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "activityid")
 	private Activity activity;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "profiletypeid")
 	private ProfileType profileType;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "startdate")
+	@Column(name = "activityrolestartdate")
 	private Date startDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "enddate")
+	@Column(name = "activityroleenddate")
 	private Date endDate;
 	
-	@Column(name = "location")
+	@Column(name = "activityrolelocation")
 	private String location;
 	
-	@ManyToMany(mappedBy="activityRoles")
+	@ManyToMany(mappedBy="activityRoles", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<StaffRole> staffRoles;
 
 	public Integer getID() {

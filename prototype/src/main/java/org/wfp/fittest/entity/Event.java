@@ -26,14 +26,14 @@ public class Event {
 	private String event;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "startdate")
+	@Column(name = "eventstartdate")
 	private Date startDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "enddate")
+	@Column(name = "eventenddate")
 	private Date endDate;
 	
-	@Column(name = "colorcode")
+	@Column(name = "eventcolorcode")
 	private String colorCode;
 
 	public Event() {}
