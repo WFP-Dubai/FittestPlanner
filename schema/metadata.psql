@@ -10,7 +10,7 @@
 
 \copy stafftypes (stafftype) from 'metadata/stafftypes.csv'
 
-\copy activitytypes (activitytype, colorcode) from 'metadata/activitytypes.csv' delimiter as ','
+\copy activitytypes (activitytype, activitytypecolorcode) from 'metadata/activitytypes.csv' delimiter as ','
 
 \copy languages (language) from 'metadata/languages.csv'
 

@@ -10,11 +10,11 @@
 
 \copy staff (staffindex, firstname, lastname, dateofbirth, title, thuraya, mobile, stafftypeid, staffcolorcode) from 'data/staff.csv' delimiter as ',' null as 'null'
 
-\copy activities (description, activitytypeid, etcservicemap) from 'data/activities.csv' delimiter as ','
+\copy activities (activitydescription, activitytypeid, activityetcservicemap) from 'data/activities.csv' delimiter as ','
 
-\copy events (event, startdate, enddate, colorcode) from 'data/events.csv' delimiter as ','
+\copy events (event, eventstartdate, eventenddate, eventcolorcode) from 'data/events.csv' delimiter as ','
 
-\copy missions (missionname, missiontypeid, missionlocation, description, startdate, enddate) from 'data/missions.csv' delimiter as ','
+\copy missions (missionname, missiontypeid, missionlocation, missiondescription, missionstartdate, missionenddate) from 'data/missions.csv' delimiter as ','
 
 \copy audittable (changedtime, userid, tablename, operationtypeid, oldvalue, newvalue, ipaddress) from 'data/audittable.csv' delimiter as ','
 
@@ -22,9 +22,9 @@
 -- Child Tables
 -------------------------------------------------------------------------------
 
-\copy activityroles (activityid, profiletypeid, startdate, enddate, location) from 'data/activityroles.csv' delimiter as ',' null as 'null'
+\copy activityroles (activityid, profiletypeid, activityrolestartdate, activityroleenddate, activityrolelocation) from 'data/activityroles.csv' delimiter as ',' null as 'null'
 
-\copy staffroles (startdate, enddate, location, comments, staffconfirmedtypeid) from 'data/staffroles.csv' delimiter as ',' null as 'null'
+\copy staffroles (staffrolestartdate, staffroleenddate, staffrolelocation, staffrolecomments, staffconfirmedtypeid) from 'data/staffroles.csv' delimiter as ',' null as 'null'
 
 -------------------------------------------------------------------------------
 -- Join Tables
