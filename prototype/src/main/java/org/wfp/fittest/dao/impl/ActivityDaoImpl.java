@@ -3,6 +3,7 @@ package org.wfp.fittest.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.wfp.fittest.dao.ActivityDao;
 import org.wfp.fittest.entity.Activity;
@@ -69,7 +70,7 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 	public List<ActivityType> findAllActivityTypes() {
 		return findAll(ActivityType.class);
 	}
-
+	
 	@Override
 	public List<ActivityType> findActivityTypesByActivityType(
 			String activityType) {
@@ -77,6 +78,14 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 				activityType);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> findActivityTypesWithStaffCount(Date startDate) {
+		Query q = getCurrentSession().getNamedQuery("ActivityType.findWithStaffCount");
+		q.setDate("startDate", startDate);
+		return q.list();
+	}
+	
 	@Override
 	public List<ActivityType> findActivityTypesByColorCode(String colorCode) {
 		return findByPropertyEqual(ActivityType.class, "colorCode", colorCode);
@@ -249,6 +258,11 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 	@Override
 	public MissionType findMissionTypeById(Integer id) {
 		return findById(MissionType.class, id);
+	}
+	
+	@Override
+	public List<MissionType> findMissionTypesByMissionType(String missionType) {
+		return findByPropertyEqual(MissionType.class, "missionType", missionType);
 	}
 
 	@Override

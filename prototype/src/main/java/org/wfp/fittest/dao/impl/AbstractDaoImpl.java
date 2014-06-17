@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,6 +41,8 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 	@Override
 	public <E> List<E> findAll(Class<E> entityClass) {
 		Criteria criteria = createCriteria(entityClass);
+		String idName = sessionFactory.getClassMetadata(entityClass).getIdentifierPropertyName();
+		criteria.addOrder(Order.asc(idName));
 		return findByCriteria(criteria);
 	}
 

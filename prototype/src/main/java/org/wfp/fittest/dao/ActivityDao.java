@@ -45,6 +45,8 @@ public interface ActivityDao {
 	public List<ActivityType> findActivityTypesByActivityType(
 			String activityType);
 
+	public List<Object[]> findActivityTypesWithStaffCount(Date startDate);
+	
 	public List<ActivityType> findActivityTypesByColorCode(String colorCode);
 
 	public void deleteActivityType(ActivityType activityType);
@@ -126,6 +128,8 @@ public interface ActivityDao {
 	/* ====================================================================== */
 
 	public MissionType findMissionTypeById(Integer id);
+	
+	public List<MissionType> findMissionTypesByMissionType(String missionType);
 
 	public List<MissionType> findAllMissionTypes();
 
