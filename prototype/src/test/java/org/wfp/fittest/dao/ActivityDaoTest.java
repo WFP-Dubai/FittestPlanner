@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.wfp.fittest.entity.Activity;
@@ -146,7 +147,7 @@ public class ActivityDaoTest extends AbstractDaoTest {
 		assertNull(activityType2);
 	}
 
-	@Test
+	@Test(expected=ConstraintViolationException.class)
 	public void testDeleteAllActivityTypes() {
 		List<ActivityType> activityTypes = activityDao.findAllActivityTypes();
 		assertListSize(activityTypes, 10);
@@ -155,7 +156,7 @@ public class ActivityDaoTest extends AbstractDaoTest {
 		assertListSize(activityTypes2, 0);
 	}
 
-	@Test
+	@Test(expected=ConstraintViolationException.class)
 	public void testDeleteActivityTypesByActivityType() {
 		List<ActivityType> activityTypes = activityDao
 				.findActivityTypesByActivityType("Installation");
@@ -166,7 +167,7 @@ public class ActivityDaoTest extends AbstractDaoTest {
 		assertListSize(activityTypes2, 0);
 	}
 
-	@Test
+	@Test(expected=ConstraintViolationException.class)
 	public void testDeleteActivityTypesByColorCode() {
 		String colorCode = "FF3366";
 		List<ActivityType> activityTypes = activityDao.findActivityTypesByColorCode(colorCode);
@@ -226,7 +227,6 @@ public class ActivityDaoTest extends AbstractDaoTest {
 		assertListSize(activityRoles, 9);		
 	}
 
-	@Test
 	public void testDeleteActivityRole() {
 		Integer id = 2;
 		ActivityRole activityRole = activityDao.findActivityRoleById(id);
@@ -236,7 +236,6 @@ public class ActivityDaoTest extends AbstractDaoTest {
 		assertNull(activityRole2);
 	}
 
-	@Test
 	public void testDeleteActivityRoleById() {
 		Integer id = 2;
 		ActivityRole activityRole = activityDao.findActivityRoleById(id);
@@ -246,7 +245,7 @@ public class ActivityDaoTest extends AbstractDaoTest {
 		assertNull(activityRole2);
 	}
 
-	@Test
+	@Test(expected=ConstraintViolationException.class)
 	public void testDeleteAllActivityRoles() {
 		List<ActivityRole> activityRoles = activityDao.findAllActivityRoles();
 		assertListSize(activityRoles, 48);
@@ -255,7 +254,7 @@ public class ActivityDaoTest extends AbstractDaoTest {
 		assertListSize(activityRoles2, 0);
 	}
 
-	@Test
+	@Test(expected=ConstraintViolationException.class)
 	public void testDeleteActivityRoleByLocation() {
 		String location = "Bangui";
 		List<ActivityRole> activityRoles = activityDao.findActivityRolesByLocation(location);
@@ -396,32 +395,56 @@ public class ActivityDaoTest extends AbstractDaoTest {
 
 	@Test
 	public void testSaveMission() {
-
+		Mission mission = new Mission();
+		mission.setMissionName("Hello Test");
+		MissionType missionType = activityDao.findMissionTypeById(1);
+		mission.setMissionType(missionType);
+		mission.setLocation("Another Planet");
+		activityDao.saveMission(mission);
+		List<Mission> missions = activityDao.findMissionsByName("Hello Test");
+		assertListSize(missions, 1);
+		assertEquals(missions.get(0).getMissionName(), "Hello Test");
 	}
 
 	@Test
 	public void testFindMissionTypeById() {
-
+		MissionType missionType = activityDao.findMissionTypeById(1);
+		assertEquals(missionType.getMissionType(), "Emergency");
 	}
 
 	@Test
 	public void testFindAllMissionTypes() {
-
+		List<MissionType> missionTypes = activityDao.findAllMissionTypes();
+		assertListSize(missionTypes, 5);
 	}
 
 	@Test
 	public void testDeleteMissionType() {
-
+		MissionType missionType = activityDao.findMissionTypeById(1);
+		assertNotNull(missionType);
+		activityDao.deleteMissionType(missionType);
+		missionType = activityDao.findMissionTypeById(1);
+		assertNull(missionType);
 	}
 
 	@Test
 	public void testDeleteMissionTypeById() {
-
+		Integer id = 1;
+		MissionType missionType = activityDao.findMissionTypeById(id);
+		assertNotNull(missionType);
+		activityDao.deleteMissionTypeById(id);
+		missionType = activityDao.findMissionTypeById(id);
+		assertNull(missionType);
 	}
 
 	@Test
 	public void testSaveMissionType() {
-
+		MissionType missionType = new MissionType();
+		missionType.setMissionType("Testing 123");
+		activityDao.saveMissionType(missionType);
+		List<MissionType> missionTypes = activityDao.findMissionTypesByMissionType("Testing 123");
+		assertListSize(missionTypes, 1);
+		assertEquals(missionTypes.get(0).getMissionType(), "Testing 123");
 	}
 
 	@Test
@@ -456,7 +479,7 @@ public class ActivityDaoTest extends AbstractDaoTest {
 
 	@Test
 	public void testDeleteEventById() {
-
+		
 	}
 
 	@Test
