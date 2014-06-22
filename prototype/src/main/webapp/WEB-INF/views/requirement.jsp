@@ -18,90 +18,83 @@
 			<div class="content-header"></div>
 
 			<div class="page-content inset">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="col-lg-6">
-							<div class="well bs-component">
-								<form class="form-horizontal">
-									<fieldset>
-										<legend>Date</legend>
-										<div class="form-group">
-											<label for="startDate" class="col-lg-3 control-label">Start
-												Date</label>
-											<div class="col-lg-9">
-												<input type="text" class="form-control" id="startDate"
-													placeholder="Start Date" />
+				<form:form modelAttribute="requirementCriteria" method="POST">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="well bs-component">
+									<div class="form-horizontal">
+										<fieldset>
+											<legend>Date</legend>
+											<div class="form-group">
+												<label for="startDate" class="col-md-3 control-label">Start
+													Date</label>
+												<div class="col-md-9">
+													<input type="text" class="form-control" id="startDate"
+														placeholder="Start Date" />
+												</div>
 											</div>
-										</div>
-										<div class="form-group">
-											<label for="endDate" class="col-lg-3 control-label">End
-												Date</label>
-											<div class="col-lg-9">
-												<input type="datetime" class="form-control" id="endDate"
-													placeholder="End Date" />
+											<div class="form-group">
+												<label for="endDate" class="col-md-3 control-label">End
+													Date</label>
+												<div class="col-md-9">
+													<input type="datetime" class="form-control" id="endDate"
+														placeholder="End Date" />
+												</div>
 											</div>
-										</div>
-										<div class="col-lg-6 col-lg-offset-3">
-											<div class="input-group">
-												<span class="input-group-addon"> <input
-													type="checkbox" />
-												</span> <label class="form-control">Show Today</label>
+											<div class="col-md-6 col-md-offset-3">
+												<div class="input-group">
+													<span class="input-group-addon"> <input
+														type="checkbox" />
+													</span> <label class="form-control">Show Today</label>
+												</div>
+												<!-- /input-group -->
 											</div>
-											<!-- /input-group -->
-										</div>
-										<!-- /.col-lg-6 -->
-									</fieldset>
-								</form>
+											<!-- /.col-lg-6 -->
+										</fieldset>
+									</div>
+								</div>
 							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="well bs-component">
-								<form class="form-horizontal">
-									<fieldset>
-										<legend>Weekly</legend>
-										<div class="form-group">
-											<label for="startDate" class="col-lg-3 control-label">Start
-												Date</label>
-											<div class="col-lg-9">
-												<input type="text" class="form-control" id="startDate"
-													placeholder="Start Date" />
+							<div class="col-md-6">
+								<div class="well bs-component">
+									<div class="form-horizontal">
+										<fieldset>
+											<legend>Weekly</legend>
+											<div class="form-group">
+												<label for="startDate" class="col-md-3 control-label">Start
+													Date</label>
+												<div class="col-md-9">
+													<input type="text" class="form-control" id="startDate"
+														placeholder="Start Date" />
+												</div>
 											</div>
-										</div>
-										<div class="form-group">
-											<label for="endDate" class="col-lg-3 control-label">End
-												Date</label>
-											<div class="col-lg-9">
-												<input type="datetime" class="form-control" id="endDate"
-													placeholder="End Date" />
+											<div class="form-group">
+												<label for="endDate" class="col-md-3 control-label">End
+													Date</label>
+												<div class="col-md-9">
+													<input type="datetime" class="form-control" id="endDate"
+														placeholder="End Date" />
+												</div>
 											</div>
-										</div>
-									</fieldset>
-								</form>
+										</fieldset>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="col-lg-6">
-							<div class="well bs-component">
-								<form:form class="form-horizontal" commandName="selectedActivity">
-									<fieldset>
-										<legend>Activities</legend>
-										<div class="col-lg-12">
-											<form:select class="form-control" path="ID" multiple="true">
-												<form:options items="${activities}" itemValue="ID"
-													itemLabel="description" />
-												<form:errors path="ID" cssClass="error" />
-											</form:select>
-										</div>
-									</fieldset>
-								</form:form>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="well bs-component">
+								    <form:select multiple="true" path="activities">
+								        <form:options items="${activities}" itemLabel="description" itemValue="ID"/>
+								    </form:select>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form:form>
 			</div>
 		</div>
 	</div>

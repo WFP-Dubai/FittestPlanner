@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.wfp.fittest.beans.Activities;
 import org.wfp.fittest.beans.ActivitySummary;
 import org.wfp.fittest.beans.Deployment;
 import org.wfp.fittest.beans.DeploymentCriteria;
@@ -26,8 +27,23 @@ public class ActivityServiceImpl implements ActivityService {
 	ActivityDao activityDao;
 
 	@Override
-	public List<Activity> findAllActivities() {
-		return activityDao.findAllActivities();
+	public Activity findActivityById(Integer activityId) {
+		return activityDao.findActivityById(activityId);
+	}
+	
+	@Override
+	public Activities findAllActivities() {
+		return new Activities(activityDao.findAllActivities());
+	}
+	
+	@Override
+	public Activities findActivitiesByActivityType(ActivityType activityType) {
+		return new Activities(activityDao.findActivitiesByActivityType(activityType));
+	}
+
+	@Override
+	public Activities findActivitiesByDescription(String description) {
+		return new Activities(activityDao.findActivitiesByDescription(description));
 	}
 
 	@Override

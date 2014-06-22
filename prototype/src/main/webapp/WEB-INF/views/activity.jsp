@@ -19,7 +19,7 @@
 			<div class="page-content inset">
 				<div class="row">
 					<div class="col-lg-12">
-						<table class="table table-bordered table-responsive">
+						<table class="table table-striped table-bordered table-responsive">
 							<thead>
 								<tr>
 									<th>ID</th>

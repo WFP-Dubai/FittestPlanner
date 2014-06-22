@@ -16,6 +16,7 @@
 		<org.postgresql.Driver-version>9.3-1101-jdbc4</org.postgresql.Driver-version>
 		<org.hibernate-version>4.2.13.Final</org.hibernate-version>
 		<org.antlr-version>3.5.2</org.antlr-version>
+		<org.eclipse.persistence.moxy-version>2.5.2-RC1</org.eclipse.persistence.moxy-version>
 	</properties>
 
 	<dependencies>
@@ -114,6 +115,14 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${org.hibernate-version}</version>
 		</dependency>
+
+<!--
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.moxy</artifactId>
+			<version>${org.eclipse.persistence.moxy-version}</version>
+		</dependency>
+-->
 
 		<!-- PostgreSQL Driver -->
 		<dependency>

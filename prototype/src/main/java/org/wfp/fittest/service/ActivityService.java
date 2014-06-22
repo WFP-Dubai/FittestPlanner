@@ -3,13 +3,20 @@ package org.wfp.fittest.service;
 import java.util.Date;
 import java.util.List;
 
+import org.wfp.fittest.beans.Activities;
 import org.wfp.fittest.beans.ActivitySummary;
 import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityType;
 
 public interface ActivityService {
 
-	public List<Activity> findAllActivities();
+	public Activity findActivityById(Integer activityId);
+	
+	public Activities findAllActivities();
+	
+	public Activities findActivitiesByActivityType(ActivityType activityType);
+
+	public Activities findActivitiesByDescription(String description);
 	
 	public List<ActivityType> findAllActivityTypes();
 	
