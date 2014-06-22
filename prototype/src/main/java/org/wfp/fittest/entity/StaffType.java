@@ -13,9 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "stafftypes")
+@XmlRootElement
 public class StaffType {
 
 	@Id
@@ -32,12 +39,19 @@ public class StaffType {
 
 	public StaffType() {}
 	
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
 
 	public void setID(Integer iD) {
 		ID = iD;
+	}
+	
+	@XmlID
+	@XmlElement(name = "ID")
+	public String getStringID() {
+		return Integer.toString(getID());
 	}
 
 	public String getStaffType() {
@@ -48,6 +62,9 @@ public class StaffType {
 		this.staffType = staffType;
 	}
 
+	@XmlElementWrapper(name = "staffList")
+	@XmlElement(name = "staff")
+	@XmlIDREF
 	public Set<Staff> getStaff() {
 		return staff;
 	}

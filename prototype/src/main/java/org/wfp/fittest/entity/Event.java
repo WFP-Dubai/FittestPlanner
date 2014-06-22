@@ -11,9 +11,14 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "events")
+@XmlRootElement
 public class Event {
 
 	@Id
@@ -38,6 +43,7 @@ public class Event {
 
 	public Event() {}
 	
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
@@ -45,7 +51,13 @@ public class Event {
 	public void setID(Integer iD) {
 		ID = iD;
 	}
-
+	
+	@XmlID
+	@XmlElement(name = "ID")
+	public String getStringID() {
+		return Integer.toString(getID());
+	}
+	
 	public String getEvent() {
 		return event;
 	}

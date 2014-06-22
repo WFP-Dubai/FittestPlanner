@@ -13,9 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "countries")
+@XmlRootElement
 public class Country {
 	
 	@Id
@@ -41,6 +47,7 @@ public class Country {
 	
 	public Country() {}
 
+	@XmlID
 	public String getISOCode() {
 		return ISOCode;
 	}
@@ -65,6 +72,9 @@ public class Country {
 		this.region = region;
 	}
 
+	@XmlElementWrapper(name = "staffNationality")
+	@XmlElement(name = "staff")
+	@XmlIDREF
 	public Set<Staff> getStaffByNationality() {
 		return staffByNationality;
 	}
@@ -73,6 +83,9 @@ public class Country {
 		this.staffByNationality = staffByNationality;
 	}
 
+	@XmlElementWrapper(name = "activities")
+	@XmlElement(name = "activity")
+	@XmlIDREF
 	public Set<Activity> getActivities() {
 		return activities;
 	}

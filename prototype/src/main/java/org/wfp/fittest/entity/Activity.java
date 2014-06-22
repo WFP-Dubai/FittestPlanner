@@ -18,9 +18,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "activities")
+@XmlRootElement(name = "activity")
 public class Activity {
 
 	@Id
@@ -63,6 +70,7 @@ public class Activity {
 		
 	public Activity() {}
 
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
@@ -71,6 +79,12 @@ public class Activity {
 		ID = iD;
 	}
 
+	@XmlID
+	@XmlElement(name = "ID")
+	public String getStringID() {
+		return Integer.toString(getID());
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -79,6 +93,7 @@ public class Activity {
 		this.description = description;
 	}
 
+	@XmlIDREF
 	public ActivityType getActivityType() {
 		return activityType;
 	}
@@ -95,6 +110,7 @@ public class Activity {
 		this.etcServiceMap = etcServiceMap;
 	}
 
+	@XmlIDREF
 	public Set<Country> getCountries() {
 		return countries;
 	}
@@ -103,6 +119,9 @@ public class Activity {
 		this.countries = countries;
 	}
 
+	@XmlElementWrapper(name = "missions")
+	@XmlElement(name = "mission")
+	@XmlIDREF
 	public Set<Mission> getMissions() {
 		return missions;
 	}
@@ -111,6 +130,9 @@ public class Activity {
 		this.missions = missions;
 	}
 
+	@XmlElementWrapper(name = "activityRoles")
+	@XmlElement(name = "activityRole")
+	@XmlIDREF
 	public Set<ActivityRole> getActivityRoles() {
 		return activityRoles;
 	}

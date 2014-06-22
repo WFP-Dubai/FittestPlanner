@@ -19,9 +19,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "missions")
+@XmlRootElement
 public class Mission {
 
 	@Id
@@ -61,12 +68,19 @@ public class Mission {
 
 	public Mission() {}
 	
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
 
 	public void setID(Integer iD) {
 		ID = iD;
+	}
+	
+	@XmlID
+	@XmlElement(name = "ID")
+	public String getStringID() {
+		return Integer.toString(getID());
 	}
 
 	public String getMissionName() {
@@ -77,6 +91,7 @@ public class Mission {
 		this.missionName = missionName;
 	}
 
+	@XmlIDREF
 	public MissionType getMissionType() {
 		return missionType;
 	}
@@ -85,6 +100,9 @@ public class Mission {
 		this.missionType = missionType;
 	}
 
+	@XmlElementWrapper(name = "activities")
+	@XmlElement(name = "activity")
+	@XmlIDREF
 	public Set<Activity> getActivities() {
 		return activities;
 	}

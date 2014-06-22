@@ -15,9 +15,15 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "audittable")
+@XmlRootElement
 public class AuditRecord {
 
 	@Id
@@ -49,12 +55,19 @@ public class AuditRecord {
 	@Column(name = "ipaddress")
 	private String IPAddress;
 
+	@XmlTransient
 	public Integer getAuditID() {
 		return auditID;
 	}
 
 	public void setAuditID(Integer auditID) {
 		this.auditID = auditID;
+	}
+	
+	@XmlID
+	@XmlElement(name = "auditID")
+	public String getStringID() {
+		return Integer.toString(getAuditID());
 	}
 
 	public Date getChangedTime() {
@@ -81,6 +94,7 @@ public class AuditRecord {
 		this.tablename = tablename;
 	}
 
+	@XmlIDREF
 	public OperationType getOperationType() {
 		return operationType;
 	}

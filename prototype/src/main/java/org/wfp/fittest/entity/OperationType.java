@@ -13,31 +13,47 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "operationtypes")
+@XmlRootElement
 public class OperationType {
 
 	@Id
 	@Column(name = "operationtypeid")
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="operationtypes_operationtypeid_seq", name="operationtypes_operationtypeid_seq")
-	@GeneratedValue(generator="operationtypes_operationtypeid_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "operationtypes_operationtypeid_seq", name = "operationtypes_operationtypeid_seq")
+	@GeneratedValue(generator = "operationtypes_operationtypeid_seq", strategy = GenerationType.SEQUENCE)
 	private Integer ID;
-	
+
 	@Column(name = "operationname")
 	private String operationName;
 
-	@OneToMany(mappedBy = "operationType", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(mappedBy = "operationType", fetch = FetchType.EAGER, cascade = {
+			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<AuditRecord> auditRecords = new HashSet<AuditRecord>();
 
-	public OperationType() {}
-	
+	public OperationType() {
+	}
+
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
 
 	public void setID(Integer iD) {
 		ID = iD;
+	}
+
+	@XmlID
+	@XmlElement(name = "ID")
+	public String getStringID() {
+		return Integer.toString(getID());
 	}
 
 	public String getOperationName() {
@@ -48,6 +64,9 @@ public class OperationType {
 		this.operationName = operationName;
 	}
 
+	@XmlElementWrapper(name = "audits")
+	@XmlElement(name = "audit")
+	@XmlIDREF
 	public Set<AuditRecord> getAuditRecords() {
 		return auditRecords;
 	}
@@ -80,5 +99,5 @@ public class OperationType {
 			return false;
 		return true;
 	}
-	
+
 }

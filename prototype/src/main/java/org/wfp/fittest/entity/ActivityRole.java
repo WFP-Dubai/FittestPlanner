@@ -17,9 +17,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "activityroles")
+@XmlRootElement
 public class ActivityRole {
 
 	@Id
@@ -50,6 +57,7 @@ public class ActivityRole {
 	@ManyToMany(mappedBy="activityRoles", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<StaffRole> staffRoles;
 
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
@@ -58,6 +66,13 @@ public class ActivityRole {
 		ID = iD;
 	}
 
+	@XmlID
+	@XmlElement(name = "ID")
+	public String getStringID() {
+		return Integer.toString(getID());
+	}
+	
+	@XmlIDREF
 	public Activity getActivity() {
 		return activity;
 	}
@@ -66,6 +81,7 @@ public class ActivityRole {
 		this.activity = activity;
 	}
 
+	@XmlIDREF
 	public ProfileType getProfileType() {
 		return profileType;
 	}
@@ -98,6 +114,9 @@ public class ActivityRole {
 		this.location = location;
 	}
 
+	@XmlElementWrapper(name = "staffRoles")
+	@XmlElement(name = "staffRole")
+	@XmlIDREF
 	public Set<StaffRole> getStaffRoles() {
 		return staffRoles;
 	}

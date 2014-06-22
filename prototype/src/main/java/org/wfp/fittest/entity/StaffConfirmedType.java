@@ -13,9 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "staffconfirmedtypes")
+@XmlRootElement
 public class StaffConfirmedType {
 
 	@Id
@@ -32,6 +39,7 @@ public class StaffConfirmedType {
 
 	public StaffConfirmedType() {}
 	
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
@@ -39,7 +47,8 @@ public class StaffConfirmedType {
 	public void setID(Integer iD) {
 		ID = iD;
 	}
-
+	
+	@XmlID
 	public String getStaffConfirmedType() {
 		return staffConfirmedType;
 	}
@@ -48,6 +57,9 @@ public class StaffConfirmedType {
 		this.staffConfirmedType = staffConfirmedType;
 	}
 
+	@XmlElementWrapper(name = "staffRoles")
+	@XmlElement(name = "staffRole")
+	@XmlIDREF
 	public Set<StaffRole> getStaffRoles() {
 		return staffRoles;
 	}

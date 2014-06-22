@@ -16,9 +16,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "staff")
+@XmlRootElement
 public class Staff {
 
 	@Id
@@ -86,6 +93,7 @@ public class Staff {
 
 	public Staff() {}
 	
+	@XmlTransient
 	public Integer getIndex() {
 		return index;
 	}
@@ -94,6 +102,12 @@ public class Staff {
 		this.index = index;
 	}
 
+	@XmlID
+	@XmlElement(name = "staffIndex")
+	public String getStringID() {
+		return Integer.toString(getIndex());
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -126,6 +140,8 @@ public class Staff {
 		this.title = title;
 	}
 
+	@XmlElementWrapper(name = "profileTypes")
+	@XmlIDREF
 	public Set<ProfileType> getProfileTypes() {
 		return profileTypes;
 	}
@@ -150,6 +166,10 @@ public class Staff {
 		this.mobile = mobile;
 	}
 
+	@XmlElementWrapper(name = "nationalitites")
+	@XmlElement(name = "nationality")
+	@XmlIDREF
+	
 	public Set<Country> getNationalities() {
 		return nationalities;
 	}
@@ -158,6 +178,9 @@ public class Staff {
 		this.nationalities = nationalities;
 	}
 
+	@XmlElementWrapper(name = "languages")
+	@XmlElement(name = "language")
+	@XmlIDREF
 	public Set<Language> getLanguages() {
 		return languages;
 	}
@@ -170,6 +193,7 @@ public class Staff {
 		return staffType;
 	}
 
+	@XmlIDREF
 	public void setStaffType(StaffType staffType) {
 		this.staffType = staffType;
 	}

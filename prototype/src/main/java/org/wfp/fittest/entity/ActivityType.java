@@ -15,6 +15,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "activitytypes")
@@ -26,6 +31,8 @@ import javax.persistence.Table;
 		+ "join sr.staff "
 		+ "where ar.startDate <= :startDate "
 		+ "group by at.ID") })
+
+@XmlRootElement
 public class ActivityType {
 
 	@Id
@@ -52,6 +59,12 @@ public class ActivityType {
 		ID = iD;
 	}
 
+	@XmlID
+	@XmlElement(name = "ID")
+	public String getStringID() {
+		return Integer.toString(getID());
+	}
+	
 	public String getActivityType() {
 		return activityType;
 	}
@@ -68,6 +81,9 @@ public class ActivityType {
 		this.colorCode = colorCode;
 	}
 
+	@XmlElementWrapper(name = "activities")
+	@XmlElement(name = "activity")
+	@XmlIDREF
 	public Set<Activity> getActivities() {
 		return activities;
 	}

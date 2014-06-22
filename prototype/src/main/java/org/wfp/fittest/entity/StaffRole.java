@@ -19,9 +19,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "staffroles")
+@XmlRootElement
 public class StaffRole {
 
 	@Id
@@ -61,6 +68,7 @@ public class StaffRole {
 
 	public StaffRole() {}
 	
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
@@ -68,7 +76,16 @@ public class StaffRole {
 	public void setID(Integer iD) {
 		ID = iD;
 	}
+	
+	@XmlID
+	@XmlElement(name = "ID")
+	public String getStringID() {
+		return Integer.toString(getID());
+	}
 
+	@XmlElementWrapper(name = "activityRoles")
+	@XmlElement(name = "activityRole")
+	@XmlIDREF
 	public Set<ActivityRole> getActivityRoles() {
 		return activityRoles;
 	}
@@ -109,6 +126,8 @@ public class StaffRole {
 		this.comments = comments;
 	}
 
+	@XmlElement(name = "staffConfirmedType")
+	@XmlIDREF
 	public StaffConfirmedType getStaffConfirmedType() {
 		return staffConfirmedType;
 	}
@@ -117,6 +136,9 @@ public class StaffRole {
 		this.staffConfirmedType = staffConfirmedType;
 	}
 
+	@XmlElementWrapper(name = "staffList")
+	@XmlElement(name = "staff")
+	@XmlIDREF
 	public Set<Staff> getStaff() {
 		return staff;
 	}

@@ -13,9 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "languages")
+@XmlRootElement
 public class Language {
 
 	@Id
@@ -32,6 +39,7 @@ public class Language {
 
 	public Language() {}
 	
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
@@ -39,7 +47,8 @@ public class Language {
 	public void setID(Integer iD) {
 		ID = iD;
 	}
-
+	
+	@XmlID
 	public String getLanguage() {
 		return language;
 	}
@@ -48,6 +57,9 @@ public class Language {
 		this.language = language;
 	}
 
+	@XmlElementWrapper(name = "staffLanguage")
+	@XmlElement(name = "staff")
+	@XmlIDREF
 	public Set<Staff> getStaffByLanguage() {
 		return staffByLanguage;
 	}

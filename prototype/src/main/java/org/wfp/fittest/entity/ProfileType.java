@@ -14,9 +14,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "profiletypes")
+@XmlRootElement
 public class ProfileType {
 
 	@Id
@@ -36,6 +43,7 @@ public class ProfileType {
 
 	public ProfileType() {}
 	
+	@XmlTransient
 	public Integer getID() {
 		return ID;
 	}
@@ -44,6 +52,12 @@ public class ProfileType {
 		ID = iD;
 	}
 
+	@XmlID
+	@XmlElement(name = "ID")
+	public String getStringID() {
+		return Integer.toString(getID());
+	}
+	
 	public String getProfileType() {
 		return profileType;
 	}
@@ -52,6 +66,7 @@ public class ProfileType {
 		this.profileType = profileType;
 	}
 
+	@XmlIDREF
 	public Set<Staff> getStaff() {
 		return staff;
 	}
@@ -60,6 +75,9 @@ public class ProfileType {
 		this.staff = staff;
 	}
 
+	@XmlElementWrapper(name = "activityRoles")
+	@XmlElement(name = "activityRole")
+	@XmlIDREF
 	public Set<ActivityRole> getActivityRoles() {
 		return activityRoles;
 	}
