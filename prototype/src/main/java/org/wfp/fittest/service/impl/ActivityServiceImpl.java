@@ -47,6 +47,11 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
+	public ActivityType findActivityTypeById(Integer id) {
+		return activityDao.findActivityTypeById(id);
+	}
+	
+	@Override
 	public List<ActivityType> findAllActivityTypes() {
 		return activityDao.findAllActivityTypes();
 	}

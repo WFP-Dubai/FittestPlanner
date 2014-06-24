@@ -201,19 +201,11 @@ create table audittable (
 -- Views
 --------------------------------------------------------------------------------
 
-create view activitytypes_staff_count
+create view activitytype_staff
 as
-    select activitytypeid, staffindex, activityrolestartdate, activityroleenddate
-    from activities
-    natural join activityroles a
-    natural join staffrole_activityrole_mapping s
-    natural join staff_staffrole_mapping;
-
-create view staffconfirmedtypes_activitytypes
-as
-    select staffconfirmedtypeid, activitytypeid
-    from staffconfirmedtypes
+    select * from activitytypes at
+    natural join activities a
+    natural join activityroles ar
+    natural join staffrole_activityrole_mapping sam
     natural join staffroles sr
-    natural join staffrole_activityrole_mapping s
-    natural join activityroles a
-    natural join activities;
+    natural join staff s;

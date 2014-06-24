@@ -116,13 +116,13 @@
 			<version>${org.hibernate-version}</version>
 		</dependency>
 
-<!--
+		<!-- Apache Commons -->
 		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.moxy</artifactId>
-			<version>${org.eclipse.persistence.moxy-version}</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
 		</dependency>
--->
+
 
 		<!-- PostgreSQL Driver -->
 		<dependency>

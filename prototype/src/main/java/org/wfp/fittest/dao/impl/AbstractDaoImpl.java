@@ -41,7 +41,8 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 	@Override
 	public <E> List<E> findAll(Class<E> entityClass) {
 		Criteria criteria = createCriteria(entityClass);
-		String idName = sessionFactory.getClassMetadata(entityClass).getIdentifierPropertyName();
+		String idName = sessionFactory.getClassMetadata(entityClass)
+				.getIdentifierPropertyName();
 		criteria.addOrder(Order.asc(idName));
 		return findByCriteria(criteria);
 	}
@@ -122,6 +123,12 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 			Date endDate) {
 		return findByPropertiesInRange(entityClass, "startDate", startDate,
 				"endDate", endDate);
+	}
+
+	@Override
+	public <E> List<E> findByDurationAround(Class<E> entityClass, Date fromDate) {
+		return findByPropertiesInRange(entityClass, "endDate", fromDate,
+				"startDate", fromDate);
 	}
 
 	@Override

@@ -42,6 +42,8 @@ public interface ActivityDao {
 
 	public List<ActivityType> findAllActivityTypes();
 
+	public ActivityType findActivityTypeByActivityType(String activityType);
+	
 	public List<ActivityType> findActivityTypesByActivityType(
 			String activityType);
 

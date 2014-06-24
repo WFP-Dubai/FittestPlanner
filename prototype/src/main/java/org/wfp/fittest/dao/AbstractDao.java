@@ -46,6 +46,8 @@ public interface AbstractDao {
 
 	public <E> List<E> findByDuration(Class<E> entityClass, Date startDate,
 			Date endDate);
+	
+	public <E> List<E> findByDurationAround(Class<E> entityClass, Date fromDate);
 
 	public <E> void saveOrUpdate(E entity);
 

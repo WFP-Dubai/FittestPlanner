@@ -3,6 +3,7 @@ package org.wfp.fittest.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.wfp.fittest.entity.ActivityType;
 import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.entity.Language;
 import org.wfp.fittest.entity.ProfileType;
@@ -41,7 +42,19 @@ public interface StaffDao {
 	public List<Staff> findStaffByAllOfLanguages(List<Language> languages);
 
 	public List<Staff> findStaffByAnyOfLanguages(List<Language> languages);
+	
+	public List<Staff> findStaffByActivityType(ActivityType activityType);
+	
+	public List<Staff> findStaffByActivityTypeInDate(ActivityType activityType, Date fromDate);
+	
+	public List<Staff> findStaffAvailable();
 
+	public List<Staff> findStaffAvailable(Date fromDate);
+	
+	public List<Staff> findStaffNotAvailable();
+
+	public List<Staff> findStaffNotAvailable(Date fromDate);
+	
 	/* ====================================================================== */
 	// Country
 	/* ====================================================================== */
@@ -71,6 +84,8 @@ public interface StaffDao {
 	/* ====================================================================== */
 
 	public List<StaffRole> findAllStaffRoles();
+	
+	public List<StaffRole> findStaffRolesActiveInDate(Date activeDate);
 
 	/* ====================================================================== */
 	// Profile Type

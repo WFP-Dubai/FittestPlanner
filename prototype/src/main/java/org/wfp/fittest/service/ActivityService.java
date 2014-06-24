@@ -18,6 +18,8 @@ public interface ActivityService {
 
 	public Activities findActivitiesByDescription(String description);
 	
+	public ActivityType findActivityTypeById(Integer id);
+	
 	public List<ActivityType> findAllActivityTypes();
 	
 	public List<ActivitySummary> findActivitySummary(Date date);

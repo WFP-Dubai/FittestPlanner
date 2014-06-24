@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.wfp.fittest.dao.StaffDao;
+import org.wfp.fittest.entity.ActivityType;
 import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.entity.Language;
 import org.wfp.fittest.entity.ProfileType;
@@ -116,4 +117,61 @@ public class StaffDaoImpl extends AbstractDaoImpl implements StaffDao {
 		return findAll(ProfileType.class);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Staff> findStaffByActivityType(ActivityType activityType) {
+		Criteria criteria = getCurrentSession()
+				.createCriteria(Staff.class, "staff")
+				.createAlias("staff.staffRoles", "staffRole")
+				.createAlias("staffRole.activityRoles", "activityRole")
+				.createAlias("activityRole.activity", "activity")
+				.createAlias("activity.activityType", "activityType")
+				.add(Restrictions.eq("activityType.ID", activityType.getID()));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Staff> findStaffByActivityTypeInDate(ActivityType activityType,
+			Date fromDate) {
+		Criteria criteria = getCurrentSession()
+				.createCriteria(Staff.class, "staff")
+				.createAlias("staff.staffRoles", "staffRole")
+				.createAlias("staffRole.activityRoles", "activityRole")
+				.createAlias("activityRole.activity", "activity")
+				.createAlias("activity.activityType", "activityType")
+				.add(Restrictions.eq("activityType.ID", activityType.getID()));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return criteria.list();
+	}
+
+	@Override
+	public List<Staff> findStaffAvailable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Staff> findStaffAvailable(Date fromDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Staff> findStaffNotAvailable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Staff> findStaffNotAvailable(Date fromDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StaffRole> findStaffRolesActiveInDate(Date activeDate) {
+		return findByDurationAround(StaffRole.class, activeDate);
+	}
 }

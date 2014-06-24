@@ -25,4 +25,5 @@ public class ActivityController {
 		model.addAttribute("activities", activityService.findAllActivities().getActivities());
 		return "activity";
 	}
+	
 }

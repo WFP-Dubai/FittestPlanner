@@ -1,12 +1,88 @@
 package org.wfp.fittest.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.wfp.fittest.dao.ActivityDao;
+import org.wfp.fittest.dao.StaffDao;
+import org.wfp.fittest.entity.ActivityType;
+import org.wfp.fittest.entity.Staff;
+import org.wfp.fittest.entity.StaffRole;
 import org.wfp.fittest.service.StaffService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class StaffServiceImpl implements StaffService {
 
+	@Autowired
+	private StaffDao staffDao;
+	
+	@Autowired
+	private ActivityDao activityDao;
+	
+	@Override
+	public Map<String, List<Staff>> findStaffByActivityType() {
+		Map<String, List<Staff>> mapStaff = new HashMap<String, List<Staff>>();
+		List<ActivityType> activityTypes = activityDao.findAllActivityTypes();
+		for (ActivityType activityType : activityTypes) {
+			List<Staff> staff = staffDao.findStaffByActivityType(activityType);
+			mapStaff.put(activityType.getActivityType(), staff);
+		}
+		return mapStaff;
+	}
+
+	@Override
+	public List<Staff> findStaffByActivityType(ActivityType activityType) {
+		return staffDao.findStaffByActivityType(activityType);
+	}
+
+	@Override
+	public List<Staff> findStaffAvailable(Date fromDate) {
+		return staffDao.findStaffAvailable(fromDate);
+	}
+	
+	@Override
+	public List<Staff> findStaffAvailable() {
+		return null;
+	}
+
+	@Override
+	public List<Staff> findStaffNotAvailable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Staff> findStaffNotAvailable(Date fromDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Staff> findStaffBreakInService(Date fromDate) {
+		ActivityType activityType = activityDao.findActivityTypeByActivityType("Break in Service");
+		return staffDao.findStaffByActivityTypeInDate(activityType, fromDate);
+	}
+
+	@Override
+	public List<Staff> findStaffBreakInService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StaffRole> findAllStaffRoles() {
+		return staffDao.findAllStaffRoles();
+	}
+
+	@Override
+	public List<StaffRole> findStaffRolesActiveInDate(Date activeDate) {
+		return staffDao.findStaffRolesActiveInDate(activeDate);
+	}
 }

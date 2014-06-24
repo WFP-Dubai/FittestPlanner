@@ -78,6 +78,14 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 				activityType);
 	}
 
+	@Override
+	public ActivityType findActivityTypeByActivityType(String activityType) {
+		List<ActivityType> activityTypes = findActivityTypesByActivityType(activityType);
+		if (activityTypes.size() == 0)
+			return null;
+		return activityTypes.get(0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Object[]> findActivityTypesWithStaffCount(Date startDate) {
