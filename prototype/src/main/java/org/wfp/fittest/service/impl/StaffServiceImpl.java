@@ -1,5 +1,6 @@
 package org.wfp.fittest.service.impl;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +39,17 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
+	public Map<String, List<Staff>> findStaffByActivityType(Date fromDate) {
+		Map<String, List<Staff>> mapStaff = new HashMap<String, List<Staff>>();
+		List<ActivityType> activityTypes = activityDao.findAllActivityTypes();
+		for (ActivityType activityType : activityTypes) {
+			List<Staff> staff = staffDao.findStaffByActivityTypeInDate(activityType, fromDate);
+			mapStaff.put(activityType.getActivityType(), staff);
+		}
+		return mapStaff;
+	}
+	
+	@Override
 	public List<Staff> findStaffByActivityType(ActivityType activityType) {
 		return staffDao.findStaffByActivityType(activityType);
 	}
@@ -46,36 +58,19 @@ public class StaffServiceImpl implements StaffService {
 	public List<Staff> findStaffAvailable(Date fromDate) {
 		return staffDao.findStaffAvailable(fromDate);
 	}
-	
-	@Override
-	public List<Staff> findStaffAvailable() {
-		return null;
-	}
-
-	@Override
-	public List<Staff> findStaffNotAvailable() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Staff> findStaffNotAvailable(Date fromDate) {
-		// TODO Auto-generated method stub
-		return null;
+		return staffDao.findStaffNotAvailable(fromDate);
 	}
 
 	@Override
 	public List<Staff> findStaffBreakInService(Date fromDate) {
-		ActivityType activityType = activityDao.findActivityTypeByActivityType("Break in Service");
-		return staffDao.findStaffByActivityTypeInDate(activityType, fromDate);
+		ActivityType activityType1 = activityDao.findActivityTypeByActivityType("Break in Service");
+		ActivityType activityType2 = activityDao.findActivityTypeByActivityType("Leave");
+		return staffDao.findStaffByActivityTypesInDate(Arrays.asList(activityType1, activityType2), fromDate);
 	}
-
-	@Override
-	public List<Staff> findStaffBreakInService() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public List<StaffRole> findAllStaffRoles() {
 		return staffDao.findAllStaffRoles();

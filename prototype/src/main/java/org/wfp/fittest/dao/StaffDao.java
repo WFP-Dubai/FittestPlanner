@@ -47,11 +47,9 @@ public interface StaffDao {
 	
 	public List<Staff> findStaffByActivityTypeInDate(ActivityType activityType, Date fromDate);
 	
-	public List<Staff> findStaffAvailable();
-
-	public List<Staff> findStaffAvailable(Date fromDate);
+	public List<Staff> findStaffByActivityTypesInDate(List<ActivityType> activityTypes, Date fromDate);
 	
-	public List<Staff> findStaffNotAvailable();
+	public List<Staff> findStaffAvailable(Date fromDate);
 
 	public List<Staff> findStaffNotAvailable(Date fromDate);
 	

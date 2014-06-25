@@ -44,6 +44,8 @@ public interface AbstractDao {
 			String lowerName, Object lowerValue, String upperName,
 			Object upperValue);
 
+	public <E, O> List<E> findByPropertyAnyOf(Class<E> entityClass, String propertyName, List<O> properties);
+	
 	public <E> List<E> findByDuration(Class<E> entityClass, Date startDate,
 			Date endDate);
 	

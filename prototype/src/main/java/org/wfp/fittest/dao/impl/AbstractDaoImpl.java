@@ -107,6 +107,14 @@ public abstract class AbstractDaoImpl implements AbstractDao {
 		return findByCriteria(criteria);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public <E, O> List<E> findByPropertyAnyOf(Class<E> entityClass, String propertyName, List<O> properties) {
+		Criteria criteria = createCriteria(entityClass);
+		criteria.add(Restrictions.in(propertyName, properties.toArray()));
+		return criteria.list();
+	}
+	
 	@Override
 	public <E> List<E> findByStartDateAfter(Class<E> entityClass, Date startDate) {
 		return findByPropertyGreaterThanOrEqual(entityClass, "startDate",

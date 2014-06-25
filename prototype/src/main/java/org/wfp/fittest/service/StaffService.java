@@ -12,17 +12,13 @@ import org.wfp.fittest.entity.StaffRole;
 public interface StaffService {
 	public Map<String, List<Staff>> findStaffByActivityType();
 	
-	public List<Staff> findStaffByActivityType(ActivityType activityType);
+	public Map<String, List<Staff>> findStaffByActivityType(Date fromDate);
 	
-	public List<Staff> findStaffAvailable();
+	public List<Staff> findStaffByActivityType(ActivityType activityType);
 	
 	public List<Staff> findStaffAvailable(Date fromDate);
 	
 	public List<Staff> findStaffBreakInService(Date fromDate);
-
-	public List<Staff> findStaffNotAvailable();
-
-	public List<Staff> findStaffBreakInService();
 
 	public List<Staff> findStaffNotAvailable(Date fromDate);
 	

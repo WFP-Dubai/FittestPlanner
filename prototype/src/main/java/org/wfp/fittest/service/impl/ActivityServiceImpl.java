@@ -2,7 +2,9 @@ package org.wfp.fittest.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,5 +77,14 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	public Deployment findDeployment(DeploymentCriteria criteria) {
 		return null;
+	}
+	
+	@Override
+	public Map<String, Integer> findActivityTypesWithId() {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for (ActivityType activityType : findAllActivityTypes()) {
+			map.put(activityType.getActivityType(), activityType.getID());
+		}
+		return map;
 	}
 }

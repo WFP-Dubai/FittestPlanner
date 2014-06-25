@@ -2,6 +2,7 @@ package org.wfp.fittest.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.wfp.fittest.beans.Activities;
 import org.wfp.fittest.beans.ActivitySummary;
@@ -23,4 +24,6 @@ public interface ActivityService {
 	public List<ActivityType> findAllActivityTypes();
 	
 	public List<ActivitySummary> findActivitySummary(Date date);
+	
+	public Map<String, Integer> findActivityTypesWithId();
 }

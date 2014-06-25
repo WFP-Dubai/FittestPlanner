@@ -38,4 +38,6 @@ public class ActivityTypeController {
 		model.addAttribute("activityType", activityType);
 		return "activityTypeId";
 	}
+	
+
 }

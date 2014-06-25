@@ -1,6 +1,7 @@
 package org.wfp.fittest.web;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -31,12 +32,22 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		Map<String, List<Staff>> staffByActivityType = staffService.findStaffByActivityType();
+		Date fromDate = new GregorianCalendar(2014,0,1).getTime();
+		
+		Map<String, Integer> activityTypesWithId = activityService.findActivityTypesWithId();
+		model.addAttribute("activityTypesWithId", activityTypesWithId);
+		
+		Map<String, List<Staff>> staffByActivityType = staffService.findStaffByActivityType(fromDate);
 		model.addAttribute("staffByActivityType", staffByActivityType);
 		
-		Date fromDate = new Date();
 		List<Staff> breakInService = staffService.findStaffBreakInService(fromDate);
 		model.addAttribute("breakInService", breakInService);
+		
+		List<Staff> availableStaff = staffService.findStaffAvailable(fromDate);
+		model.addAttribute("availableStaff", availableStaff);
+		
+		List<Staff> notAvailableStaff = staffService.findStaffNotAvailable(fromDate);
+		model.addAttribute("notAvailableStaff", notAvailableStaff);
 		
 		List<StaffRole> staffRoles = staffService.findStaffRolesActiveInDate(fromDate);
 		model.addAttribute("staffRoles", staffRoles);

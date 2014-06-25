@@ -123,6 +123,10 @@ public class Staff {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String getName() {
+		return this.firstName + " " + this.lastName;
+	}
 
 	public Date getDateOfBirth() {
 		return dateOfBirth;

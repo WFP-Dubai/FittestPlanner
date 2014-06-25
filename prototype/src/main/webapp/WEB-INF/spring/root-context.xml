@@ -36,7 +36,6 @@
 	<bean id="jpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="database" value="${jdbc.database}" />
-		<property name="showSql" value="true" />
 		<property name="generateDdl" value="true" />
 	</bean>
 
@@ -59,7 +58,6 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
 	</bean>

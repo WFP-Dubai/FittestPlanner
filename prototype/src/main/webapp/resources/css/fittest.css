@@ -7,3 +7,8 @@ body {
 .navbar {
 	margin-bottom: 0px;
 }
+
+.info-panel {
+	height: 400px;
+    overflow: auto;
+}
