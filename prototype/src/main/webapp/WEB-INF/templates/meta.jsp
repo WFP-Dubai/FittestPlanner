@@ -17,6 +17,8 @@
     rel="stylesheet" />
 <link href="<c:url value="/css/fittest.css" />"
     rel="stylesheet" />
+<link href="<c:url value="/css/jquery.datetimepicker.css" />"
+    rel="stylesheet" />
 
 <!--[if lt IE 9]>
     <script src="<c:url value="/js/html5shiv.js" />" ></script>

@@ -23,7 +23,9 @@
 					<div class="col-md-4">
 						<a
 							href="<c:url value="/activitytype/${activityTypesWithId['Leave']}"/>">
-							<button type="button" class="btn btn-primary btn-block">
+							<button type="button" class="btn btn-primary btn-block"
+								data-toggle="tooltip" data-placement="bottom"
+								title="Staff On Leave" rel="tooltip">
 								<b>Leave</b> <span class="badge">${staffByActivityType['Leave'].size()}</span>
 							</button>
 						</a>
@@ -31,7 +33,8 @@
 					<div class="col-md-4">
 						<a
 							href="<c:url value="/activitytype/${activityTypesWithId['Field mission']}"/>">
-							<button type="button" class="btn btn-success btn-block text-center">
+							<button type="button"
+								class="btn btn-success btn-block text-center">
 								<b>Field Mission</b> <span class="badge">${staffByActivityType['Field mission'].size()}</span>
 							</button>
 						</a>
@@ -96,7 +99,7 @@
 							</div>
 						</div>
 						<div class="info-panel">
-                            <!--  <div class="panel-body"></div> -->
+							<!--  <div class="panel-body"></div> -->
 							<table
 								class="table table-bordered table-responsive table-striped table-condensed">
 								<thead>
@@ -134,7 +137,7 @@
 							</div>
 						</div>
 						<div class="info-panel">
-                            <!--  <div class="panel-body"></div> -->
+							<!--  <div class="panel-body"></div> -->
 							<table
 								class="table table-bordered table-responsive table-striped table-condensed">
 								<thead>
@@ -170,8 +173,9 @@
 							</div>
 						</div>
 						<div class="info-panel">
-                            <!--  <div class="panel-body"></div> -->
-							<table class="table table-bordered table-striped table-condensed table-fixed-header">
+							<!--  <div class="panel-body"></div> -->
+							<table
+								class="table table-bordered table-striped table-condensed table-fixed-header">
 								<thead class="header">
 									<tr>
 										<th>ID</th>
@@ -224,7 +228,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<jsp:include page="/WEB-INF/templates/jsload.jsp"></jsp:include>
 </body>
