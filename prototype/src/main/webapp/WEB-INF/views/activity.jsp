@@ -17,9 +17,19 @@
 			<div class="content-header"></div>
 
 			<div class="page-content inset">
+				<div class="row" style="margin-bottom: 25px">
+					<div class="col-lg-12">
+						<div class="btn-toolbar btn-group-md" role="toolbar">
+							<button type="button" class="btn btn-success">
+								<span class="glyphicon glyphicon-plus"></span> New Activity
+							</button>
+						</div>
+					</div>
+				</div>
+
 				<div class="row">
 					<div class="col-lg-12">
-						<table class="table table-striped table-bordered table-responsive">
+						<table class="display table-bordered" rel="dataTable">
 							<thead>
 								<tr>
 									<th>ID</th>
@@ -27,14 +37,22 @@
 									<th>EtcServiceMap</th>
 									<th>Countries</th>
 									<th>Mission Name</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="activity" items="${activities}">
 									<tr>
-										<td><c:out value="${activity.ID}" /></td>
+										<td><p class="text-center">
+												<c:out value="${activity.ID}" />
+											</p></td>
 										<td><c:out value="${activity.description}" /></td>
-										<td><a href="<c:url value="${activity.etcServiceMap}"/>">Link</a></td>
+										<td class="text-center"><a
+											href="<c:url value="${activity.etcServiceMap}"/>"> <label
+												class="label label-primary" data-toggle="tooltip"
+												data-placement="bottom" title="${activity.etcServiceMap}"
+												rel="tooltip">Link</label>
+										</a></td>
 										<td>
 											<ul class="list-group">
 												<c:forEach var="country" items="${activity.countries}">
@@ -49,9 +67,23 @@
 										<td>
 											<ul class="list-group">
 												<c:forEach var="mission" items="${activity.missions}">
-													<li class="list-group-item"><c:out value="${mission.missionName}"/></li>
+													<li class="list-group-item"><c:out
+															value="${mission.missionName}" /></li>
 												</c:forEach>
 											</ul>
+										</td>
+										<td>
+
+											<div class="btn-toolbar btn-group-sm text-center"
+												role="toolbar">
+												<button type="button" class="btn btn-danger">
+													<span class="glyphicon glyphicon-remove"></span> Delete
+												</button>
+												<button type="button" class="btn btn-primary">
+													<span class="glyphicon glyphicon-edit"></span> Edit
+												</button>
+											</div>
+
 										</td>
 									</tr>
 								</c:forEach>

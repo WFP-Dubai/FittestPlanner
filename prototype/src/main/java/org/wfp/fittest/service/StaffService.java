@@ -5,11 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.wfp.fittest.entity.ActivityType;
+import org.wfp.fittest.entity.ProfileType;
 import org.wfp.fittest.entity.Staff;
 import org.wfp.fittest.entity.StaffRole;
+import org.wfp.fittest.entity.StaffType;
 
 
 public interface StaffService {
+	
+	public List<Staff> findAllStaff();
+	
 	public Map<String, List<Staff>> findStaffByActivityType();
 	
 	public Map<String, List<Staff>> findStaffByActivityType(Date fromDate);
@@ -25,4 +30,8 @@ public interface StaffService {
 	public List<StaffRole> findAllStaffRoles();
 	
 	public List<StaffRole> findStaffRolesActiveInDate(Date activeDate);
+	
+	public List<StaffType> findAllStaffTypes();
+	
+	public List<ProfileType> findAllProfileTypes();
 }

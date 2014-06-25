@@ -13,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.wfp.fittest.dao.ActivityDao;
 import org.wfp.fittest.dao.StaffDao;
 import org.wfp.fittest.entity.ActivityType;
+import org.wfp.fittest.entity.ProfileType;
 import org.wfp.fittest.entity.Staff;
 import org.wfp.fittest.entity.StaffRole;
+import org.wfp.fittest.entity.StaffType;
 import org.wfp.fittest.service.StaffService;
 
 @Service
@@ -26,6 +28,11 @@ public class StaffServiceImpl implements StaffService {
 	
 	@Autowired
 	private ActivityDao activityDao;
+	
+	@Override
+	public List<Staff> findAllStaff() {
+		return staffDao.findAllStaff();
+	}
 	
 	@Override
 	public Map<String, List<Staff>> findStaffByActivityType() {
@@ -79,5 +86,15 @@ public class StaffServiceImpl implements StaffService {
 	@Override
 	public List<StaffRole> findStaffRolesActiveInDate(Date activeDate) {
 		return staffDao.findStaffRolesActiveInDate(activeDate);
+	}
+	
+	@Override
+	public List<StaffType> findAllStaffTypes() {
+		return staffDao.findAllStaffTypes();
+	}
+
+	@Override
+	public List<ProfileType> findAllProfileTypes() {
+		return staffDao.findAllProfileTypes();
 	}
 }

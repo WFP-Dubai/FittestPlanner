@@ -91,9 +91,9 @@
 									<div class="form-horizontal">
 										<fieldset>
 											<legend>Activities</legend>
-											<form:select size="15" multiple="true" path="activities">
-												<form:options items="${requirementCriteria.activities}" itemLabel="description"
-													itemValue="ID" />
+											<form:select size="10" multiple="true" path="activities">
+												<form:options items="${requirementCriteria.activities}"
+													itemLabel="description" itemValue="ID" />
 											</form:select>
 										</fieldset>
 									</div>
@@ -136,7 +136,7 @@
 										<div class="well bs-component">
 											<div class="form-horizontal">
 												<fieldset>
-													<legend>Weekly</legend>
+													<legend>Options</legend>
 													<div class="form-group">
 														<label for="showBarDates" class="col-md-4 control-label">Show
 															Dates on Bars?</label>
@@ -159,26 +159,31 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
 
-									<div class="btn-toolbar" role="toolbar">
-										<button type="button" class="btn btn-danger">
-											<span class="glyphicon glyphicon-remove"></span> Clear
-										</button>
-										<button type="button" class="btn btn-success">
-											<span class="glyphicon glyphicon-ok"></span> Display
-											Requirements
-										</button>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
-
+					<div class="row">
+						<div class="col-md-4 col-md-offset-5">
+							<div class="btn-toolbar" role="toolbar">
+								<button type="button" class="btn btn-danger">
+									<span class="glyphicon glyphicon-remove"></span> Clear
+								</button>
+								<button type="button" class="btn btn-success">
+									<span class="glyphicon glyphicon-ok"></span> Display
+									Requirements
+								</button>
+							</div>
+						</div>
+					</div>
 				</form:form>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/templates/jsload.jsp"></jsp:include>
+	<script type="text/javascript">
+		function clearForm() {
+		}
+	</script>
 </body>
 </html>

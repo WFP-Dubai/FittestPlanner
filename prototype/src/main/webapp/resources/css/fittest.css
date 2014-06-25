@@ -10,5 +10,22 @@ body {
 
 .info-panel {
 	height: 400px;
-    overflow: auto;
+	overflow: auto;
+}
+
+.form-horizontal .control-label {
+	text-align: left;
+}
+
+.center {
+	width: 100%;
+	margin: 0px auto;
+}
+
+select {
+	width: 100%;
+}
+
+table {
+	border-spacing: 0px;
 }

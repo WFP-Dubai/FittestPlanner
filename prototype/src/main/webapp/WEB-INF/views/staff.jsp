@@ -17,10 +17,20 @@
 			<div class="content-header"></div>
 
 			<div class="page-content inset">
+				<div class="row" style="margin-bottom: 25px">
+					<div class="col-lg-12">
+						<div class="btn-toolbar btn-group-md" role="toolbar">
+							<button type="button" class="btn btn-success">
+								<span class="glyphicon glyphicon-plus"></span> New Staff
+							</button>
+						</div>
+					</div>
+				</div>
+
 				<div class="row">
 					<div class="col-lg-12">
-						<table
-							class="table table-bordered table-responsive table-condensed">
+						<table class="display table-bordered table-responsive"
+							rel="dataTable">
 							<thead>
 								<tr>
 									<th>Index</th>
@@ -31,10 +41,11 @@
 									<th>Profile Type</th>
 									<th>Nationality</th>
 									<th>Color Code</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-                                <c:forEach var="staff" items="${allStaff}">
+								<c:forEach var="staff" items="${allStaff}">
 									<tr>
 										<td><c:out value="${staff.index}" /></td>
 										<td><c:out value="${staff.firstName}" /></td>
@@ -66,7 +77,18 @@
 										<td
 											style="<c:out value="background-color: #${staff.staffColorCode};"/> ">
 											<div>
-												<br />
+												<c:out value="${staff.staffColorCode}" />
+											</div>
+										</td>
+										<td>
+											<div class="btn-toolbar btn-group-sm text-center"
+												role="toolbar">
+												<button type="button" class="btn btn-danger">
+													<span class="glyphicon glyphicon-remove"></span> Delete
+												</button>
+												<button type="button" class="btn btn-primary">
+													<span class="glyphicon glyphicon-edit"></span> Edit
+												</button>
 											</div>
 										</td>
 									</tr>
