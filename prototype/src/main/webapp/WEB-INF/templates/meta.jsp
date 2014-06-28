@@ -11,23 +11,13 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 
-<!--
-<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet" />
-<link href="<c:url value="/css/fittest-simple-sidebar.css" />"
-	rel="stylesheet" />
-
-<link href="<c:url value="/css/jquery.datetimepicker.css" />"
-	rel="stylesheet" />
-<link href="<c:url value="/css/jquery.dataTables.css" />"
-	rel="stylesheet" />
--->
 
 <!-- The styles -->
-<link id="bs-css" href="<c:url value="css/bootstrap-cerulean.css"/>"
+<link id="bs-css" href="<c:url value="/css/bootstrap-journal.css"/>"
 	rel="stylesheet">
 <style type="text/css">
 body {
-	padding-bottom: 40px;
+	padding-bottom: 20px;
 }
 
 .sidebar-nav {

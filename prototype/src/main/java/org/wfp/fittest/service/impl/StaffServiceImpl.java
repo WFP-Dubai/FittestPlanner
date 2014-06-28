@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,16 @@ public class StaffServiceImpl implements StaffService {
 			mapStaff.put(activityType.getActivityType(), staff);
 		}
 		return mapStaff;
+	}
+	
+	@Override
+	public Map<String, Integer> findStaffCountByActivityType(Date fromDate) {
+		Map<String, Integer> activityPercentage = new HashMap<String, Integer>();
+		Map<String, List<Staff>> mapStaff = findStaffByActivityType(fromDate);
+		for (Entry<String, List<Staff>> entry : mapStaff.entrySet()) {
+			activityPercentage.put((String) entry.getKey(), ((List<Staff>) entry.getValue()).size());
+		}
+		return activityPercentage;
 	}
 	
 	@Override

@@ -9,8 +9,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
-	<div id="container-fluid">
-		<div id="row-fluid">
+	<div class="container-fluid">
+		<div class="row-fluid">
 			<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
 
 			<div id="content" class="span10"></div>

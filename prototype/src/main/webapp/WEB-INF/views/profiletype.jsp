@@ -9,8 +9,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
-	<div id="container-fluid">
-		<div id="row-fluid">
+	<div class="container-fluid">
+		<div class="row-fluid">
 			<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
 
 
@@ -43,10 +43,10 @@
 										<div class="btn-toolbar btn-group-sm text-center"
 											role="toolbar">
 											<button type="button" class="btn btn-danger">
-												<span class="glyphicon glyphicon-remove"></span> Delete
+												<span class="icon-remove"></span> Delete
 											</button>
 											<button type="button" class="btn btn-primary">
-												<span class="glyphicon glyphicon-edit"></span> Edit
+												<span class="icon-edit"></span> Edit
 											</button>
 										</div>
 									</td>

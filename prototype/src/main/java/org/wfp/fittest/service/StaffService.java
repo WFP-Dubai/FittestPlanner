@@ -19,6 +19,8 @@ public interface StaffService {
 	
 	public Map<String, List<Staff>> findStaffByActivityType(Date fromDate);
 	
+	public Map<String, Integer> findStaffCountByActivityType(Date fromDate);
+	
 	public List<Staff> findStaffByActivityType(ActivityType activityType);
 	
 	public List<Staff> findStaffAvailable(Date fromDate);

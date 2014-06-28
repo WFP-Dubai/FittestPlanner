@@ -70,15 +70,12 @@
 	<script src="<c:url value="/js/jquery.history.js"/>"></script>
 	<!-- application script for Charisma demo -->
 	<script src="<c:url value="/js/charisma.js"/>"></script>
+	<!-- Parsley form validation -->
+    <script src="<c:url value="/js/parsley.min.js"/>"></script>
+    <script src="<c:url value="/js/fittest-validators.js"/>"></script>
+    
+    <script src="<c:url value="/js/fittest.js" />"></script>
 
-
-	<!--
-	<script src="<c:url value="/js/jquery.min.js" />"></script>
-	<script src="<c:url value="/js/bootstrap.min.js" />"></script>
-	<script src="<c:url value="/js/jquery.datetimepicker.js" />"></script>
-	<script src="<c:url value="/js/jquery.dataTables.js" />"></script>
-	<script src="<c:url value="/js/fittest.js" />"></script>
-	-->
 	<script>
 		$("[rel='datetime']").datetimepicker();
 	</script>

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
-	<div id="container-fluid">
+	<div class="container-fluid">
 		<div class="row-fluid">
 			<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
 			<div id="content" class="span10">
@@ -27,8 +27,7 @@
 													Date</label>
 												<div class="controls">
 													<input rel="datetime" type="text" class="form-control"
-														id="startDate" placeholder="Start Date" /> <span
-														class="input-group-addon glyphicon glyphicon-calendar"></span>
+														id="startDate" placeholder="Start Date" required />
 
 												</div>
 											</div>
@@ -37,8 +36,7 @@
 													Date</label>
 												<div class="controls">
 													<input rel="datetime" type="text" class="form-control"
-														id="endDate" placeholder="End Date" /> <span
-														class="input-group-addon glyphicon glyphicon-calendar"></span>
+														id="endDate" placeholder="End Date" required />
 												</div>
 											</div>
 										</fieldset>
@@ -63,8 +61,7 @@
 													is</label>
 												<div class="controls">
 													<input rel="datetime" type="text" class="form-control"
-														id="todayDate" placeholder="Today's Date" /> <span
-														class="input-group-addon glyphicon glyphicon-calendar"></span>
+														id="todayDate" placeholder="Today's Date" required/>
 												</div>
 											</div>
 										</fieldset>
@@ -79,7 +76,7 @@
 									<div class="form-horizontal">
 										<fieldset>
 											<legend>Activities</legend>
-											<form:select size="10" multiple="true" path="activities">
+											<form:select size="10" multiple="true" path="activities" required="true">
 												<form:options items="${requirementCriteria.activities}"
 													itemLabel="description" itemValue="ID" />
 											</form:select>
@@ -153,10 +150,10 @@
 							<div class="span5"></div>
 							<div class="span4">
 								<div class="btn-toolbar" role="toolbar">
-									<button type="button" class="btn btn-danger">
+									<button type="reset" class="btn btn-danger">
 										<span class="icon-remove"></span> Clear
 									</button>
-									<button type="button" class="btn btn-success">
+									<button type="submit" class="btn btn-success">
 										<span class="icon-ok"></span> Display Requirements
 									</button>
 								</div>

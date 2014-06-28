@@ -28,16 +28,14 @@
 													<div class="controls">
 
 														<input rel="datetime" type="text" class="form-control"
-															id="startDate" placeholder="Start Date" /> <span
-															class="input-group-addon glyphicon glyphicon-calendar"></span>
+															id="startDate" placeholder="Start Date" required/>
 													</div>
 												</div>
 												<div class="control-group">
 													<label for="endDate" class="control-label">End Date</label>
 													<div class="controls">
 														<input rel="datetime" type="text" class="form-control"
-															id="endDate" placeholder="End Date" /> <span
-															class="input-group-addon glyphicon glyphicon-calendar"></span>
+															id="endDate" placeholder="End Date"/>
 													</div>
 												</div>
 
@@ -63,8 +61,7 @@
 													<label for="endDate" class="control-label">Today is</label>
 													<div class="controls">
 														<input rel="datetime" type="text" class="form-control"
-															id="todayDate" placeholder="Today's Date" /> <span
-															class="input-group-addon glyphicon glyphicon-calendar"></span>
+															id="todayDate" placeholder="Today's Date" required/>
 													</div>
 												</div>
 											</fieldset>
@@ -164,10 +161,10 @@
 							<div class="span5"></div>
 							<div class="span4">
 								<div class="btn-toolbar" role="toolbar">
-									<button type="button" class="btn btn-danger">
+									<button type="reset" class="btn btn-danger">
 										<span class="icon-remove"></span> Clear
 									</button>
-									<button type="button" class="btn btn-success">
+									<button type="submit" class="btn btn-success">
 										<span class="icon-ok"></span> Display
 										Requirements
 									</button>

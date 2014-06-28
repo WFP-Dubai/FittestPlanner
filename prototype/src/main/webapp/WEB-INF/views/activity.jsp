@@ -9,82 +9,27 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
-	<div id="container-fluid">
-		<div id="row-fluid">
+	<div class="container-fluid">
+		<div class="row-fluid">
 			<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
 
 			<div id="content" class="span10">
-				<div class="row-fluid" style="margin-bottom: 25px">
-					<div class="btn-toolbar btn-group-md" role="toolbar">
-						<button type="button" class="btn btn-success" data-rel="tooltip"
-							title="Add a new activity">
-							<span class="icon-plus"></span> New Activity
-						</button>
+				<ul class="nav nav-tabs" id="myTab">
+					<li class="active"><a href="#activity">Activity</a></li>
+					<li><a href="#activitytype">Activity Type</a></li>
+					<li><a href="#activityrole">Activity Role</a></li>
+				</ul>
+				<div id="activityTabContent" class="tab-content"
+					style="padding: 10px">
+					<div class="tab-pane active" id="activity">
+						<jsp:include page="/WEB-INF/widgets/activity-table.jsp"></jsp:include>
 					</div>
-				</div>
-
-				<div class="row-fluid">
-					<table
-						class="table table-striped table-bordered bootstrap-datatable datatable">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Description</th>
-								<th>EtcServiceMap</th>
-								<th>Countries</th>
-								<th>Mission Name</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="activity" items="${activities}">
-								<tr>
-									<td><p class="text-center">
-											<c:out value="${activity.ID}" />
-										</p></td>
-									<td><c:out value="${activity.description}" /></td>
-									<td class="text-center"><a
-										href="<c:url value="${activity.etcServiceMap}"/>"> <label
-											class="label label-primary" data-toggle="tooltip"
-											data-placement="bottom" title="${activity.etcServiceMap}"
-											data-rel="tooltip">Link</label>
-									</a></td>
-									<td>
-										<ul class="list-group">
-											<c:forEach var="country" items="${activity.countries}">
-												<li class="list-group-item">
-													<p>
-														<c:out value="${country.fullName}" />
-													</p>
-												</li>
-											</c:forEach>
-										</ul>
-									</td>
-									<td>
-										<ul class="list-group">
-											<c:forEach var="mission" items="${activity.missions}">
-												<li class="list-group-item"><c:out
-														value="${mission.missionName}" /></li>
-											</c:forEach>
-										</ul>
-									</td>
-									<td>
-
-										<div class="btn-toolbar btn-group-sm text-center"
-											role="toolbar">
-											<button type="button" class="btn btn-danger">
-												<span class="icon-remove"></span> Delete
-											</button>
-											<button type="button" class="btn btn-primary">
-												<span class="icon-edit"></span> Edit
-											</button>
-										</div>
-
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+					<div class="tab-pane" id="activitytype">
+                        <jsp:include page="/WEB-INF/widgets/activitytype-table.jsp"></jsp:include>
+					</div>
+					<div class="tab-pane" id="activityrole">
+						<jsp:include page="/WEB-INF/widgets/activityrole-table.jsp"></jsp:include>
+					</div>
 				</div>
 			</div>
 		</div>

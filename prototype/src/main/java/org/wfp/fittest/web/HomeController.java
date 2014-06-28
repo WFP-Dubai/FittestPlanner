@@ -52,6 +52,9 @@ public class HomeController {
 		List<StaffRole> staffRoles = staffService.findStaffRolesActiveInDate(fromDate);
 		model.addAttribute("staffRoles", staffRoles);
 		
+		Map<String, Integer> activityTypeChartData = staffService.findStaffCountByActivityType(fromDate);
+		model.addAttribute("activityTypeChartData", activityTypeChartData);
+		
 		return "home";
 	}
 	

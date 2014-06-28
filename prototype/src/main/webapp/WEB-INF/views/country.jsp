@@ -9,8 +9,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
-	<div id="container-fluid">
-		<div id="row-fluid">
+	<div class="container-fluid">
+		<div class="row-fluid">
 			<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
 
 			<div id="content" class="span10">
@@ -18,7 +18,7 @@
 					<div class="btn-toolbar btn-group-md" role="toolbar">
 						<button type="button" class="btn btn-success" data-rel="tooltip"
 							title="Add a new country">
-							<span class="icon-plus"></span> Country
+							<span class="icon-plus"></span> New Country
 						</button>
 					</div>
 				</div>
