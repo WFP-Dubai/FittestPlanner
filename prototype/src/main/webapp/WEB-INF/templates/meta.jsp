@@ -11,14 +11,56 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 
+<!--
 <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet" />
 <link href="<c:url value="/css/fittest-simple-sidebar.css" />"
 	rel="stylesheet" />
-<link href="<c:url value="/css/fittest.css" />" rel="stylesheet" />
+
 <link href="<c:url value="/css/jquery.datetimepicker.css" />"
 	rel="stylesheet" />
 <link href="<c:url value="/css/jquery.dataTables.css" />"
-    rel="stylesheet" />
+	rel="stylesheet" />
+-->
+
+<!-- The styles -->
+<link id="bs-css" href="<c:url value="css/bootstrap-cerulean.css"/>"
+	rel="stylesheet">
+<style type="text/css">
+body {
+	padding-bottom: 40px;
+}
+
+.sidebar-nav {
+	padding: 9px 0;
+}
+</style>
+
+<link href="<c:url value="/css/bootstrap-responsive.css"/>"
+	rel="stylesheet">
+<link href="<c:url value="/css/charisma-app.css"/>" rel="stylesheet">
+<link href="<c:url value="/css/jquery-ui-1.8.21.custom.css"/>"
+	rel="stylesheet">
+<link href="<c:url value="/css/fullcalendar.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/fullcalendar.print.css"/>"
+	rel='stylesheet' media='print'>
+<link href="<c:url value="/css/chosen.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/uniform.default.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/colorbox.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/jquery.cleditor.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/jquery.noty.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/noty_theme_default.css"/>"
+	rel='stylesheet'>
+<link href="<c:url value="/css/elfinder.min.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/elfinder.theme.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/jquery.iphone.toggle.css"/>"
+	rel='stylesheet'>
+<link href="<c:url value="/css/opa-icons.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/uploadify.css"/>" rel='stylesheet'>
+<link href="<c:url value="/css/jquery.datetimepicker.css" />"
+	rel="stylesheet" />
+<link href="<c:url value="/css/jquery.dataTables.css" />"
+	rel="stylesheet" />
+<link href="<c:url value="/css/fittest.css" />" rel="stylesheet" />
 
 <!--[if lt IE 9]>
     <script src="<c:url value="/js/html5shiv.js" />" ></script>

@@ -9,181 +9,173 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
-	<div id="wrapper">
-		<jsp:include page="/WEB-INF/templates/sidebar-button.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
+	<div id="container-fluid">
+		<div class="row-fluid">
+			<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
 
-		<div id="page-content-wrapper">
-			<div class="content-header"></div>
-
-			<div class="page-content inset">
-
-				<div class="row">
-					<div class="col-md-12">
-						<div class="col-md-4">
-							<a
-								href="<c:url value="/activitytype/${activityTypesWithId['Leave']}"/>">
-								<button type="button" class="btn btn-primary btn-block"
-									data-toggle="tooltip" data-placement="bottom"
-									title="Staff on leave/BIS" rel="tooltip">
-									<b>Leave</b> <span class="badge">${staffByActivityType['Leave'].size()}</span>
-								</button>
-							</a>
-						</div>
-						<div class="col-md-4">
-							<a
-								href="<c:url value="/activitytype/${activityTypesWithId['Field mission']}"/>">
-								<button type="button"
-									class="btn btn-success btn-block text-center"
-									data-toggle="tooltip" data-placement="bottom"
-									title="Staff not assigned to any mission and not on leave/BIS"
-									rel="tooltip">
-									<b>Field Mission</b> <span class="badge">${staffByActivityType['Field mission'].size()}</span>
-								</button>
-							</a>
-						</div>
-						<div class="col-md-4">
-							<a
-								href="<c:url value="/activitytype/${activityTypesWithId['Other']}"/>">
-								<button type="button"
-									class="btn btn-md btn-info btn-block text-center"
-									data-toggle="tooltip" data-placement="bottom"
-									title="Staff currently assigned to a mission" rel="tooltip">
-									<b>Other</b> <span class="badge">${staffByActivityType['Other'].size()}</span>
-								</button>
-							</a>
-						</div>
-					</div>
+			<div id="content" class="span10">
+				<div class="sortable row-fluid">
+					<a class="span4 well top-block "
+						href="<c:url value="/activitytype/${activityTypesWithId['Leave']}"/>"
+						data-placement="bottom" title="Staff on leave/BIS"
+						data-rel="tooltip"> <span class="icon32 icon-red icon-user"></span>
+						<span class="notification">4</span>
+						<h3>Leave</h3> <span class="badge">${staffByActivityType['Leave'].size()}</span>
+					</a> <a
+						href="<c:url value="/activitytype/${activityTypesWithId['Field mission']}"/>"
+						class="span4 well top-block" data-placement="bottom"
+						title="Staff not assigned to any mission and not on leave/BIS"
+						data-rel="tooltip"> <span class="icon32 icon-red icon-user"></span>
+						<h3>Field Mission</h3> <span class="notification">0</span> <span
+						class="badge">${staffByActivityType['Field mission'].size()}</span>
+					</a> <a
+						href="<c:url value="/activitytype/${activityTypesWithId['Other']}"/>"
+						class="span4 well top-block" data-placement="bottom"
+						title="Staff currently assigned to a mission" data-rel="tooltip">
+						<span class="icon32 icon-red icon-user"></span>
+						<h3>Other</h3> <span class="notification">5</span> <span
+						class="badge">${staffByActivityType['Other'].size()}</span>
+					</a>
 				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-12">
-					<div class="col-sm-4">
-						<div class="panel panel-default">
-
-							<div class="panel-heading clearfix">
-								Break In Service
-								<div class="btn-group btn-group-sm pull-right">
-									<button type="button" class="btn btn-primary">${breakInService.size()}</button>
-									<button type="button" class="btn btn-default">View</button>
-								</div>
-							</div>
-							<div class="info-panel">
-								<!--  <div class="panel-body"></div> -->
-								<table
-									class="table table-bordered table-responsive table-striped table-condensed">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Break Start</th>
-											<th>Break End</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="staff" items="${breakInService}">
-											<tr>
-												<td>${staff.name}</td>
-												<td></td>
-												<td></td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+				<div class="sortable row-fluid">
+					<div class="box span4">
+						<div class="box-header well">
+							<h2>Break In Service</h2>
+							<div class="box-icon">
+								<a href="#" class="btn btn-setting btn-round"><i
+									class="icon-cog"></i></a> <a href="#"
+									class="btn btn-minimize btn-round"><i
+									class="icon-chevron-up"></i></a> <a href="#"
+									class="btn btn-close btn-round"><i class="icon-remove"></i></a>
 							</div>
 						</div>
-					</div>
-
-
-					<div class="col-sm-4">
-						<div class="panel panel-default">
-							<div class="panel-heading clearfix">
-								Available
-								<div class="btn-group btn-group-sm pull-right">
-									<button type="button" class="btn btn-primary">${availableStaff.size()}</button>
-									<button type="button" class="btn btn-default">View</button>
-								</div>
-							</div>
-							<div class="info-panel">
-								<!--  <div class="panel-body"></div> -->
-								<table
-									class="table table-bordered table-responsive table-striped table-condensed">
-									<thead>
+						<div class="box-content">
+							<table
+								class="table table-striped table-bordered bootstrap-datatable datatable">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Break Start</th>
+										<th>Break End</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="staff" items="${breakInService}">
 										<tr>
-											<th>Name</th>
-											<th>Profile Type</th>
+											<td>${staff.name}</td>
+											<td></td>
+											<td></td>
 										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="staff" items="${availableStaff}">
-											<tr>
-												<td>${staff.name}</td>
-												<td>
-													<ul class="list-group">
-														<c:forEach var="profileType" items="${staff.profileTypes}">
-															<li class="list-group-item">${profileType.profileType}</li>
-														</c:forEach>
-													</ul>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-4">
-						<div class="panel panel-default">
-							<div class="panel-heading clearfix">
-								Not Available
-								<div class="btn-group btn-group-sm pull-right">
-									<button type="button" class="btn btn-primary">${notAvailableStaff.size()}</button>
-									<button type="button" class="btn btn-default">View</button>
-								</div>
-							</div>
-							<div class="info-panel">
-								<!--  <div class="panel-body"></div> -->
-								<table
-									class="table table-bordered table-responsive table-striped table-condensed">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Current Activity</th>
-											<th>Activity End Date</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="staff" items="${notAvailableStaff}">
-											<tr>
-												<td>${staff.name}</td>
-												<td></td>
-												<td></td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-heading clearfix">
-							Staff Roles
+									</c:forEach>
+								</tbody>
+							</table>
 							<div class="btn-group btn-group-sm pull-right">
-								<button type="button" class="btn btn-primary">${staffRoles.size()}</button>
+								<button type="button" class="btn btn-primary">${breakInService.size()}</button>
 								<button type="button" class="btn btn-default">View</button>
 							</div>
+							<div class="clearfix"></div>
 						</div>
-						<div class="">
-							<!--  <div class="panel-body"></div> -->
+					</div>
+
+					<div class="box span4">
+						<div class="box-header well">
+							<h2>Available</h2>
+							<div class="box-icon">
+								<a href="#" class="btn btn-setting btn-round"><i
+									class="icon-cog"></i></a> <a href="#"
+									class="btn btn-minimize btn-round"><i
+									class="icon-chevron-up"></i></a> <a href="#"
+									class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+							</div>
+						</div>
+						<div class="box-content info-panel">
 							<table
-								class="table table-bordered table-striped table-condensed table-fixed-header"
-								rel="datatable">
+								class="table table-striped table-bordered bootstrap-datatable datatable">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Profile Type</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="staff" items="${availableStaff}">
+										<tr>
+											<td>${staff.name}</td>
+											<td>
+												<ul class="list-group">
+													<c:forEach var="profileType" items="${staff.profileTypes}">
+														<li class="list-group-item">${profileType.profileType}</li>
+													</c:forEach>
+												</ul>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+
+							<div class="btn-group btn-group-sm pull-right">
+								<button type="button" class="btn btn-primary">${availableStaff.size()}</button>
+								<button type="button" class="btn btn-default">View</button>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+
+					<div class="box span4">
+						<div class="box-header well">
+							<h2>Not Available</h2>
+							<div class="box-icon">
+								<a href="#" class="btn btn-setting btn-round"><i
+									class="icon-cog"></i></a> <a href="#"
+									class="btn btn-minimize btn-round"><i
+									class="icon-chevron-up"></i></a> <a href="#"
+									class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+							</div>
+						</div>
+						<div class="box-content">
+							<table
+								class="table table-striped table-bordered bootstrap-datatable datatable">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Break Start</th>
+										<th>Break End</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="staff" items="${breakInService}">
+										<tr>
+											<td>${staff.name}</td>
+											<td></td>
+											<td></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<div class="btn-group btn-group-sm pull-right">
+								<button type="button" class="btn btn-primary">${notAvailableStaff.size()}</button>
+								<button type="button" class="btn btn-default">View</button>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class="box span12">
+						<div class="box-header well">
+							<h2>Staff Roles</h2>
+							<div class="box-icon">
+								<a href="#" class="btn btn-setting btn-round"><i
+									class="icon-cog"></i></a> <a href="#"
+									class="btn btn-minimize btn-round"><i
+									class="icon-chevron-up"></i></a> <a href="#"
+									class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+							</div>
+						</div>
+						<div class="box-content">
+							<table
+								class="table table-striped table-bordered bootstrap-datatable datatable">
 								<thead class="header">
 									<tr>
 										<th>ID</th>
@@ -231,6 +223,11 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							<div class="btn-group btn-group-sm pull-right">
+								<button type="button" class="btn btn-primary">${staffRoles.size()}</button>
+								<button type="button" class="btn btn-default">View</button>
+							</div>
+							<div class="clearfix"></div>
 						</div>
 					</div>
 				</div>
@@ -238,10 +235,5 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/templates/jsload.jsp"></jsp:include>
-	<script type="text/javascript">
-		$(function() {
-		    
-		});
-	</script>
 </body>
 </html>

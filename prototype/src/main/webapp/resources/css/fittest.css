@@ -1,13 +1,5 @@
 @CHARSET "UTF-8";
 
-body {
-	padding-bottom: 0px;
-}
-
-.navbar {
-	margin-bottom: 0px;
-}
-
 .info-panel {
 	height: 400px;
 	overflow: auto;
@@ -28,4 +20,9 @@ select {
 
 table {
 	border-spacing: 0px;
+}
+
+body {
+	width: 95%;
+	margin: 0 auto;
 }

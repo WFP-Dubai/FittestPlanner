@@ -10,43 +10,34 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
-	<div id="wrapper">
-		<jsp:include page="/WEB-INF/templates/sidebar-button.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
-
-		<div id="page-content-wrapper">
-			<div class="content-header"></div>
-
-			<div class="page-content inset">
-				<form:form modelAttribute="deploymentCriteria" method="POST">
-					<div class="row">
-						<div class="col-sm-4">
-							<div class="col-sm-12">
-								<div class="row">
-									<div class="well bs-component">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
+			<div id="content" class="span10">
+				<div class="row-fluid">
+					<form:form modelAttribute="deploymentCriteria" method="POST">
+						<div class="row-fluid">
+							<div class="span4">
+								<div class="row-fluid">
+									<div class="well">
 										<div class="form-horizontal">
 											<fieldset>
 												<legend>Date</legend>
-												<div class="form-group">
-													<label for="startDate" class="col-md-5 control-label">
-														Date</label>
-													<div class="col-md-7">
-														<div class="input-group">
-															<input rel="datetime" type="text" class="form-control"
-																id="startDate" placeholder="Start Date" /> <span
-																class="input-group-addon glyphicon glyphicon-calendar"></span>
-														</div>
+												<div class="control-group">
+													<label for="startDate" class="control-label"> Date</label>
+													<div class="controls">
+
+														<input rel="datetime" type="text" class="form-control"
+															id="startDate" placeholder="Start Date" /> <span
+															class="input-group-addon glyphicon glyphicon-calendar"></span>
 													</div>
 												</div>
-												<div class="form-group">
-													<label for="endDate" class="col-md-5 control-label">End
-														Date</label>
-													<div class="col-md-7">
-														<div class="input-group">
-															<input rel="datetime" type="text" class="form-control"
-																id="endDate" placeholder="End Date" /> <span
-																class="input-group-addon glyphicon glyphicon-calendar"></span>
-														</div>
+												<div class="control-group">
+													<label for="endDate" class="control-label">End Date</label>
+													<div class="controls">
+														<input rel="datetime" type="text" class="form-control"
+															id="endDate" placeholder="End Date" /> <span
+															class="input-group-addon glyphicon glyphicon-calendar"></span>
 													</div>
 												</div>
 
@@ -54,57 +45,56 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="well bs-component">
+
+								<div class="row-fluid">
+									<div class="well">
 										<div class="form-horizontal">
 											<fieldset>
 												<legend>Today</legend>
-												<div class="form-group">
-													<label for="showToday" class="col-md-5 control-label">Show
+												<div class="control-group">
+													<label for="showToday" class="control-label">Show
 														Today?</label>
-													<div class="col-md-3">
+													<div class="controls">
 														<input type="checkbox" class="form-control" id="showToday"
 															placeholder="Show Today" />
 													</div>
 												</div>
-												<div class="form-group">
-													<label for="endDate" class="col-md-5 control-label">Today
-														is</label>
-													<div class="col-md-7">
-														<div class="input-group">
-															<input rel="datetime" type="text" class="form-control"
-																id="todayDate" placeholder="Today's Date" /> <span
-																class="input-group-addon glyphicon glyphicon-calendar"></span>
-														</div>
+												<div class="control-group">
+													<label for="endDate" class="control-label">Today is</label>
+													<div class="controls">
+														<input rel="datetime" type="text" class="form-control"
+															id="todayDate" placeholder="Today's Date" /> <span
+															class="input-group-addon glyphicon glyphicon-calendar"></span>
 													</div>
 												</div>
 											</fieldset>
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="well bs-component">
+
+								<div class="row-fluid">
+									<div class="well">
 										<div class="form-horizontal">
 											<fieldset>
 												<legend>Weekly</legend>
-												<div class="form-group">
+												<div class="control-group">
 													<label for="showWeeklyGrid" class="col-md-5 control-label">Show
 														Weekly Grid?</label>
-													<div class="col-md-3">
+													<div class="controls">
 														<input type="checkbox" class="form-control"
 															id="showWeeklyGrid" placeholder="Show Weekly Grid" />
 													</div>
 												</div>
-												<div class="form-group">
+												<div class="control-group">
 													<label for="weekStart" class="col-md-5 control-label">Starts
 														On</label>
-													<div class="col-md-7">
-														<div class="input-group">
-															<select class="form-control">
-																<option>Sunday</option>
-																<option>Monday</option>
-															</select>
-														</div>
+
+													<div class="controls">
+														<select class="form-control">
+															<option>Sunday</option>
+															<option>Monday</option>
+														</select>
+
 													</div>
 												</div>
 											</fieldset>
@@ -112,28 +102,26 @@
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="col-sm-4">
-							<div class="col-sm-12">
-								<div class="row">
-									<div class="well bs-component">
+
+							<div class="span4">
+								<div class="row-fluid">
+									<div class="well">
 										<div class="form-horizontal">
 											<fieldset>
 												<legend>Options</legend>
-												<div class="form-group">
-													<label for="showBarDates" class="col-md-5 control-label">Show
+												<div class="control-group">
+													<label for="showBarDates" class="control-label">Show
 														Dates on Bars?</label>
-													<div class="col-md-3">
+													<div class="controls">
 														<input type="checkbox" class="form-control"
 															id="showBarDates" placeholder="Show Bar Dates" />
 													</div>
 												</div>
-												<div class="form-group">
-													<label for="showConfirmedOnly"
-														class="col-md-5 control-label">Show Confirmed
-														Only?</label>
-													<div class="col-md-3">
+												<div class="control-group">
+													<label for="showConfirmedOnly" class="control-label">Show
+														Confirmed Only?</label>
+													<div class="controls">
 														<input type="checkbox" class="form-control"
 															id="showConfirmedOnly" placeholder="Show Confirmed Only" />
 													</div>
@@ -142,8 +130,8 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="well bs-component">
+								<div class="row-fluid">
+									<div class="well">
 										<div class="form-horizontal">
 											<fieldset>
 												<legend>Staff Types</legend>
@@ -155,8 +143,8 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="well bs-component">
+								<div class="row-fluid">
+									<div class="well">
 										<div class="form-horizontal">
 											<fieldset>
 												<legend>Activities</legend>
@@ -171,22 +159,23 @@
 
 							</div>
 						</div>
-					</div>
 
-					<div class="row">
-						<div class="col-md-4 col-md-offset-5">
-							<div class="btn-toolbar" role="toolbar">
-								<button type="button" class="btn btn-danger">
-									<span class="glyphicon glyphicon-remove"></span> Clear
-								</button>
-								<button type="button" class="btn btn-success">
-									<span class="glyphicon glyphicon-ok"></span> Display
-									Requirements
-								</button>
+						<div class="row-fluid">
+							<div class="span5"></div>
+							<div class="span4">
+								<div class="btn-toolbar" role="toolbar">
+									<button type="button" class="btn btn-danger">
+										<span class="icon-remove"></span> Clear
+									</button>
+									<button type="button" class="btn btn-success">
+										<span class="icon-ok"></span> Display
+										Requirements
+									</button>
+								</div>
 							</div>
 						</div>
-					</div>
-				</form:form>
+					</form:form>
+				</div>
 
 			</div>
 		</div>

@@ -12,8 +12,7 @@ public class UtilityDaoImpl extends AbstractDaoImpl implements UtilityDao {
 
 	@Override
 	public List<Country> findAllCountries() {
-		// TODO Auto-generated method stub
-		return null;
+		return findAll(Country.class);
 	}
 
 	@Override
@@ -23,8 +22,7 @@ public class UtilityDaoImpl extends AbstractDaoImpl implements UtilityDao {
 
 	@Override
 	public List<Language> findAllLanguages() {
-		// TODO Auto-generated method stub
-		return null;
+		return findAll(Language.class);
 	}
 
 }

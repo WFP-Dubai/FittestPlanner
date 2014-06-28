@@ -9,35 +9,53 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
-	<div id="wrapper">
-		<jsp:include page="/WEB-INF/templates/sidebar-button.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
+	<div id="container-fluid">
+		<div id="row-fluid">
+			<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
 
-		<div id="page-content-wrapper">
-			<div class="content-header"></div>
-
-			<div class="page-content inset">
-				<div class="row">
-					<div class="col-lg-12">
-						<table class="table table-bordered table-responsive">
-							<thead>
-								<tr>
-									<th>Code</th>
-									<th>Country</th>
-									<th>Region</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="country" items="${countries}">
-									<tr>
-										<td><c:out value="${country.ISOCode}" /></td>
-										<td><c:out value="${country.fullName}" /></td>
-										<td><c:out value="${country.region}" /></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+			<div id="content" class="span10">
+				<div class="row-fluid" style="margin-bottom: 25px">
+					<div class="btn-toolbar btn-group-md" role="toolbar">
+						<button type="button" class="btn btn-success" data-rel="tooltip"
+							title="Add a new country">
+							<span class="icon-plus"></span> Country
+						</button>
 					</div>
+				</div>
+
+				<div class="row-fluid">
+					<table
+						class="table table-striped table-bordered bootstrap-datatable datatable">
+						<thead>
+							<tr>
+								<th>ISO Code</th>
+								<th>Full Name</th>
+								<th>Region</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="country" items="${countries}">
+								<tr>
+									<td><c:out value="${country.ISOCode}" /></td>
+									<td><c:out value="${country.fullName}" /></td>
+									<td><c:out value="${country.region}" /></td>
+									<td>
+										<div class="btn-toolbar btn-group-sm text-center"
+											role="toolbar">
+											<button type="button" class="btn btn-danger">
+												<span class="icon-remove"></span> Delete
+											</button>
+											<button type="button" class="btn btn-primary">
+												<span class="icon-edit"></span> Edit
+											</button>
+										</div>
+
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
