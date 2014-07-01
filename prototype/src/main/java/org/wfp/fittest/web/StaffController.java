@@ -28,4 +28,12 @@ public class StaffController {
 		model.addAttribute("allStaff", allStaff);
 		return "staff";
 	}
+	
+	@RequestMapping(value = "/staff/new", method = RequestMethod.GET)
+	public String staffNew(Locale locale, Model model) {
+		logger.info("new staff page!", locale);
+		Staff staffDetails = new Staff();
+		model.addAttribute("staffDetails", staffDetails);
+		return "staff-form";
+	}
 }

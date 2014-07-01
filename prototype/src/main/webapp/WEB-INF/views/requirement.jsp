@@ -17,13 +17,13 @@
 				<div class="row-fluid">
 					<form:form modelAttribute="requirementCriteria" method="POST">
 						<div class="row-fluid">
-							<div class="box span4">
+							<div class="span4">
 								<div class="well">
 									<div class="form-horizontal">
 										<fieldset>
 											<legend>Date</legend>
 											<div class="control-group">
-												<label for="startDate" class="span4 control-label">Start
+												<label for="startDate" class="control-label">Start
 													Date</label>
 												<div class="controls">
 													<input rel="datetime" type="text" class="form-control"
@@ -32,7 +32,7 @@
 												</div>
 											</div>
 											<div class="control-group">
-												<label for="endDate" class="span4 control-label">End
+												<label for="endDate" class="control-label">End
 													Date</label>
 												<div class="controls">
 													<input rel="datetime" type="text" class="form-control"
@@ -43,13 +43,13 @@
 									</div>
 								</div>
 							</div>
-							<div class="box span4">
+							<div class="span4">
 								<div class="well">
 									<div class="form-horizontal">
 										<fieldset>
 											<legend>Today</legend>
 											<div class="control-group">
-												<label for="showToday" class="col-md-4 control-label">Show
+												<label for="showToday" class="control-label">Show
 													Today?</label>
 												<div class="controls">
 													<input type="checkbox" class="form-control" id="showToday"
@@ -57,7 +57,7 @@
 												</div>
 											</div>
 											<div class="control-group">
-												<label for="endDate" class="col-md-4 control-label">Today
+												<label for="endDate" class="control-label">Today
 													is</label>
 												<div class="controls">
 													<input rel="datetime" type="text" class="form-control"
@@ -71,7 +71,7 @@
 						</div>
 
 						<div class="row-fluid">
-							<div class="box span4">
+							<div class="span4">
 								<div class="well">
 									<div class="form-horizontal">
 										<fieldset>
@@ -84,7 +84,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="box span4">
+							<div class="span4">
 								<div class="row-fluid">
 									<div class="span12">
 										<div class="well">

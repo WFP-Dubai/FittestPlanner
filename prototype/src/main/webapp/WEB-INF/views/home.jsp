@@ -21,8 +21,28 @@
 				<div id="homeTabContent" class="tab-content" style="padding: 10px">
 					<div class="tab-pane active" id="info">
 						<jsp:include page="/WEB-INF/widgets/staff-notification.jsp"></jsp:include>
-						<jsp:include page="/WEB-INF/widgets/staff-summary.jsp"></jsp:include>
-						<jsp:include page="/WEB-INF/widgets/activitytype-chart.jsp"></jsp:include>
+						<div class="row-fluid">
+							<div class="span4">
+								<jsp:include
+									page="/WEB-INF/widgets/staffbreakinservice-table.jsp"></jsp:include>
+							</div>
+							<div class="span4">
+								<jsp:include page="/WEB-INF/widgets/staffnotavailable-table.jsp"></jsp:include>
+							</div>
+							<div class="span4">
+								<jsp:include page="/WEB-INF/widgets/activitytype-chart.jsp"></jsp:include>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span8">
+								<jsp:include page="/WEB-INF/widgets/staffavailable-table.jsp"></jsp:include>
+							</div>
+														<div class="span4">
+								<jsp:include page="/WEB-INF/widgets/activitytype-chart.jsp"></jsp:include>
+							</div>
+						</div>
+						<!-- 						<jsp:include page="/WEB-INF/widgets/staff-summary.jsp"></jsp:include>
+-->
 					</div>
 					<div class="tab-pane" id="roles">
 						<div class="row-fluid">
@@ -34,6 +54,6 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/templates/jsload.jsp"></jsp:include>
-    <jsp:include page="/WEB-INF/widgets/activitytype-chart-jsload.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/widgets/activitytype-chart-jsload.jsp"></jsp:include>
 </body>
 </html>

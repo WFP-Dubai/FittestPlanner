@@ -23,7 +23,7 @@
 				<th>Activity</th>
 				<th>Start Date</th>
 				<th>End Date</th>
-				<th>Confirmed Type</th>
+				<th>Confirm Type</th>
 			</tr>
 		</thead>
 		<tbody>

@@ -4,10 +4,12 @@
 <div class="row-fluid" style="margin-bottom: 25px">
 	<div class="span12">
 		<div class="btn-toolbar btn-group-md" role="toolbar">
-			<button type="button" class="btn btn-success" data-rel="tooltip"
-				title="Add a staff member">
-				<span class="icon-plus"></span> New Staff
-			</button>
+			<a href="<c:url value="/staff/new"/>">
+				<button type="button" class="btn btn-success" data-rel="tooltip"
+					title="Add a staff member">
+					<span class="icon-plus"></span> New Staff
+				</button>
+			</a>
 		</div>
 	</div>
 </div>
