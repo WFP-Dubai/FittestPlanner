@@ -1,5 +1,6 @@
 package org.wfp.fittest.web;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.wfp.fittest.beans.RequirementCriteria;
+import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.service.ActivityService;
 
 @Controller
@@ -24,9 +26,9 @@ public class RequirementController {
 	@RequestMapping(value = "/requirement", method = RequestMethod.GET)
 	public String requirement(Locale locale, Model model) {
 		logger.info("Requirement Page!", locale);
+		model.addAttribute("allActivities", activityService.findAllActivities().getActivities());
 		RequirementCriteria requirementCriteria = new RequirementCriteria();
-		requirementCriteria.setActivities(activityService.findAllActivities()
-				.getActivities());
+		requirementCriteria.setActivities(new ArrayList<Activity>());
 		model.addAttribute("requirementCriteria", requirementCriteria);
 		return "requirement";
 	}

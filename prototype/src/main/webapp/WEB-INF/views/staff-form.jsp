@@ -14,7 +14,9 @@
 			<jsp:include page="/WEB-INF/templates/sidebar.jsp"></jsp:include>
 
 			<div id="content" class="span10">
-				<jsp:include page="/WEB-INF/widgets/staff-form.jsp"></jsp:include>
+				<div class="span 6">
+					<jsp:include page="/WEB-INF/widgets/staff-form.jsp"></jsp:include>
+				</div>
 			</div>
 		</div>
 	</div>

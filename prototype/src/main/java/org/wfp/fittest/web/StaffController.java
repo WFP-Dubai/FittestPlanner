@@ -11,16 +11,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.wfp.fittest.entity.Staff;
+import org.wfp.fittest.entity.StaffType;
 import org.wfp.fittest.service.StaffService;
 
 @Controller
 public class StaffController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(StaffController.class);
-	
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(StaffController.class);
+
 	@Autowired
 	private StaffService staffService;
-	
+
 	@RequestMapping(value = "/staff", method = RequestMethod.GET)
 	public String staff(Locale locale, Model model) {
 		logger.info("staff Page!", locale);
@@ -28,11 +30,13 @@ public class StaffController {
 		model.addAttribute("allStaff", allStaff);
 		return "staff";
 	}
-	
+
 	@RequestMapping(value = "/staff/new", method = RequestMethod.GET)
 	public String staffNew(Locale locale, Model model) {
 		logger.info("new staff page!", locale);
+		model.addAttribute("allStaffTypes", staffService.findAllStaffTypes());
 		Staff staffDetails = new Staff();
+		staffDetails.setStaffType(new StaffType());
 		model.addAttribute("staffDetails", staffDetails);
 		return "staff-form";
 	}

@@ -5,6 +5,19 @@
 	overflow: auto;
 }
 
+.list-group {
+  padding-left: 0;
+  margin-bottom: 5px;
+  margin-left: 0px;
+}
+.list-group-item {
+  position: relative;
+  padding: 0px 5px;
+  display: block;
+
+  border: 1px solid #ddd;
+}
+
 .form-horizontal .control-label {
 	text-align: left;
 }
@@ -26,3 +39,4 @@ body {
 	width: 95%;
 	margin: 0 auto;
 }
+

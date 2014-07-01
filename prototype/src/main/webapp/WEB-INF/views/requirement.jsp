@@ -32,8 +32,7 @@
 												</div>
 											</div>
 											<div class="control-group">
-												<label for="endDate" class="control-label">End
-													Date</label>
+												<label for="endDate" class="control-label">End Date</label>
 												<div class="controls">
 													<input rel="datetime" type="text" class="form-control"
 														id="endDate" placeholder="End Date" required />
@@ -57,11 +56,10 @@
 												</div>
 											</div>
 											<div class="control-group">
-												<label for="endDate" class="control-label">Today
-													is</label>
+												<label for="endDate" class="control-label">Today is</label>
 												<div class="controls">
 													<input rel="datetime" type="text" class="form-control"
-														id="todayDate" placeholder="Today's Date" required/>
+														id="todayDate" placeholder="Today's Date" required />
 												</div>
 											</div>
 										</fieldset>
@@ -76,8 +74,10 @@
 									<div class="form-horizontal">
 										<fieldset>
 											<legend>Activities</legend>
-											<form:select size="10" multiple="true" path="activities" required="true">
-												<form:options items="${requirementCriteria.activities}"
+											<label for="activities" class="control-label">Activities</label>
+											<form:select id="activities" size="10" multiple="true"
+												path="activities" required="true" data-rel="chosen">
+												<form:options items="${allActivities}"
 													itemLabel="description" itemValue="ID" />
 											</form:select>
 										</fieldset>
@@ -146,19 +146,7 @@
 
 							</div>
 						</div>
-						<div class="row-fluid">
-							<div class="span5"></div>
-							<div class="span4">
-								<div class="btn-toolbar" role="toolbar">
-									<button type="reset" class="btn btn-danger">
-										<span class="icon-remove"></span> Clear
-									</button>
-									<button type="submit" class="btn btn-success">
-										<span class="icon-ok"></span> Display Requirements
-									</button>
-								</div>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/widgets/form-submit-buttons.jsp" />
 					</form:form>
 				</div>
 			</div>

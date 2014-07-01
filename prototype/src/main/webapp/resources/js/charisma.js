@@ -272,7 +272,7 @@ function docReady(){
 			"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
 			"sPaginationType": "bootstrap",
 			"oLanguage": {
-			"sLengthMenu": "_MENU_ items per page"
+			"sLengthMenu": "_MENU_  entries"
 			},
 			"aLengthMenu": [5, 10, 15, 25, 50, 100],
 			"iDisplayLength": 5,
