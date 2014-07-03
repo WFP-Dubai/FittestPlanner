@@ -7,6 +7,7 @@ import java.util.Map;
 import org.wfp.fittest.beans.Activities;
 import org.wfp.fittest.beans.ActivitySummary;
 import org.wfp.fittest.entity.Activity;
+import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
 
 public interface ActivityService {
@@ -26,4 +27,6 @@ public interface ActivityService {
 	public List<ActivitySummary> findActivitySummary(Date date);
 	
 	public Map<String, Integer> findActivityTypesWithId();
+	
+	public List<ActivityRole> findAllActivityRoles();
 }

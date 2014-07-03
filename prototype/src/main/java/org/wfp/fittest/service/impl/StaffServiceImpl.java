@@ -36,6 +36,11 @@ public class StaffServiceImpl implements StaffService {
 	}
 	
 	@Override
+	public Staff findStaffByIndex(Integer staffIndex) {
+		return staffDao.findStaffByIndex(staffIndex);
+	}
+	
+	@Override
 	public Map<String, List<Staff>> findStaffByActivityType() {
 		Map<String, List<Staff>> mapStaff = new HashMap<String, List<Staff>>();
 		List<ActivityType> activityTypes = activityDao.findAllActivityTypes();

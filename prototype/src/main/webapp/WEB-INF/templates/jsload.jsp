@@ -77,6 +77,8 @@
     <script src="${contextPath}/js/fittest.js"></script>
 
 	<script>
+	$(function() {
 		$("[rel='datetime']").datetimepicker();
+	});
 	</script>
 </div>

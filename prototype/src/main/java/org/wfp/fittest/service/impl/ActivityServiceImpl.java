@@ -18,6 +18,7 @@ import org.wfp.fittest.beans.Requirement;
 import org.wfp.fittest.beans.RequirementCriteria;
 import org.wfp.fittest.dao.ActivityDao;
 import org.wfp.fittest.entity.Activity;
+import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
 import org.wfp.fittest.service.ActivityService;
 
@@ -86,5 +87,10 @@ public class ActivityServiceImpl implements ActivityService {
 			map.put(activityType.getActivityType(), activityType.getID());
 		}
 		return map;
+	}
+	
+	@Override
+	public List<ActivityRole> findAllActivityRoles() {
+		return activityDao.findAllActivityRoles();
 	}
 }

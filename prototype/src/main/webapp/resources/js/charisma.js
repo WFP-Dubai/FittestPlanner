@@ -230,7 +230,7 @@ function docReady(){
 				$.noop).apply(document);
 		}
 	});
-
+	
 	//tour
 	if($('.tour').length && typeof(tour)=='undefined')
 	{
@@ -266,6 +266,7 @@ function docReady(){
 		
 		tour.restart();
 	}
+	
 
 	//datatable
 	$('.datatable').dataTable({
@@ -288,14 +289,8 @@ function docReady(){
 		else 					   $('i',$(this)).removeClass('icon-chevron-down').addClass('icon-chevron-up');
 		$target.slideToggle();
 	});
-	$('.btn-setting').click(function(e){
-		e.preventDefault();
-		$('#myModal').modal('show');
-	});
 
-
-
-		
+	/*
 	//initialize the external events for calender
 
 	$('#external-events div.external-event').each(function() {
@@ -317,8 +312,6 @@ function docReady(){
 		
 	});
 
-
-	/*
 	//initialize the calendar
 	$('#calendar').fullCalendar({
 		header: {

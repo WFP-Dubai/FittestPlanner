@@ -57,12 +57,21 @@ create table activitytypes (
     activitytypecolorcode varchar(100) default ''
 );
 
+create table confirmedtypes (
+    confirmedtypeid    bigserial    primary key,
+    confirmedtype      varchar(100) not null unique,
+    confirmedcolorcode varchar(100) default 'ffffff'
+);
+
 create table activities (
-    activityid            bigserial    primary key,
-    activitydescription   text         default '',
-    activitytypeid        bigserial,
-    activityetcservicemap varchar(256) default '',
+    activityid              bigserial    primary key,
+    activitydescription     text         default '',
+    activitytypeid          bigserial,
+    activityetcservicemap   varchar(256) default '',
+    activityconfirmedtypeid bigserial,
     foreign key (activitytypeid) references activitytypes(activitytypeid)
+        on delete restrict,
+    foreign key (activityconfirmedtypeid) references confirmedtypes(confirmedtypeid)
         on delete restrict
 );
 
@@ -100,11 +109,6 @@ create table staff_language_mapping (
         on delete restrict
 );
 
-create table staffconfirmedtypes (
-    staffconfirmedtypeid bigserial primary key,
-    staffconfirmedtype   varchar(100) not null unique
-);
-
 create table activityroles (
     activityroleid        bigserial     primary key,
     activityid            bigserial,
@@ -119,13 +123,13 @@ create table activityroles (
 );
 
 create table staffroles (
-    staffroleid        bigserial     primary key,
-    staffrolestartdate timestamp     default current_timestamp,
-    staffroleenddate   timestamp     default current_timestamp,
-    staffrolelocation  varchar(200),
-    staffrolecomments  text          default '',
+    staffroleid          bigserial     primary key,
+    staffrolestartdate   timestamp     default current_timestamp,
+    staffroleenddate     timestamp     default current_timestamp,
+    staffrolelocation    varchar(200),
+    staffrolecomments    text          default '',
     staffconfirmedtypeid bigserial,
-    foreign key (staffconfirmedtypeid) references staffconfirmedtypes(staffconfirmedtypeid)
+    foreign key (staffconfirmedtypeid) references confirmedtypes(confirmedtypeid)
         on delete restrict
 );
 
@@ -157,14 +161,17 @@ create table missiontypes (
 );
 
 create table missions (
-    missionid          bigserial    primary key,
-    missionname        varchar(256) not null,
-    missiontypeid      bigserial,
-    missionlocation    varchar(200) not null,
-    missiondescription text         default '',
-    missionstartdate   timestamp    default current_timestamp,
-    missionenddate     timestamp    default current_timestamp,
+    missionid              bigserial    primary key,
+    missionname            varchar(256) not null,
+    missiontypeid          bigserial,
+    missionlocation        varchar(200) not null,
+    missiondescription     text         default '',
+    missionstartdate       timestamp    default current_timestamp,
+    missionenddate         timestamp    default current_timestamp,
+    missionconfirmedtypeid bigserial,
     foreign key (missiontypeid) references missiontypes(missiontypeid)
+        on delete restrict,
+    foreign key (missionconfirmedtypeid) references confirmedtypes(confirmedtypeid)
         on delete restrict
 );
 
@@ -201,11 +208,30 @@ create table audittable (
 -- Views
 --------------------------------------------------------------------------------
 
-create view activitytype_staff
+create view activity_staff_view
 as
-    select * from activitytypes at
-    natural join activities a
-    natural join activityroles ar
-    natural join staffrole_activityrole_mapping sam
-    natural join staffroles sr
-    natural join staff s;
+    select a.activityid, s.staffindex from activities a
+    inner join activityroles ar
+        on a.activityid = ar.activityid
+    inner join staffrole_activityrole_mapping sam
+        on ar.activityroleid = sam.activityroleid
+    inner join staff_staffrole_mapping ssrm
+        on sam.staffroleid = ssrm.staffroleid
+    inner join staff s
+        on ssrm.staffindex = s.staffindex
+;
+
+create view activitytype_staff_view
+as
+    select at.activitytypeid, s.staffindex from activitytypes at
+    inner join activity_staff_view asv
+        on at.activitytypeid = asv.activitytypeid
+;
+
+
+create view activity_profiletype_view
+as
+    select acs.activityid, sptm.profiletypeid from activity_staff_view asv
+    inner join staff_profiletype_mapping sptm
+        on asv.staffindex = sptm.staffindex
+;

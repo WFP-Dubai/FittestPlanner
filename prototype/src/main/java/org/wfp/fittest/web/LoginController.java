@@ -19,7 +19,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
 		logger.info("Login Page!", locale);
-		return "login";
+		return "main/login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

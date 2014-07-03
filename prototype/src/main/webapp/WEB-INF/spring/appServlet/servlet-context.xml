@@ -10,8 +10,8 @@
                         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 
-    <context:component-scan base-package="org.wfp.fittest.web" />
-    <context:component-scan base-package="org.wfp.fittest.rest" />
+	<context:component-scan base-package="org.wfp.fittest.web" />
+	<context:component-scan base-package="org.wfp.fittest.rest" />
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
@@ -30,4 +30,38 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+<!--
+	<beans:bean id="templateResolver"
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".html" />
+		<beans:property name="templateMode" value="HTML5" />
+	</beans:bean>
+
+	<beans:bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<beans:property name="templateResolver" ref="templateResolver" />
+	</beans:bean>
+
+	<beans:bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<beans:property name="templateEngine" ref="templateEngine" />
+	</beans:bean>
+-->
+	
+	<!-- <beans:bean id="jaxbAnnotationInspector" class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector" 
+		/> <beans:bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"> 
+		<beans:property name="annotationIntrospector" ref="jaxbAnnotationInspector" 
+		/> </beans:bean> <beans:bean id="xmlConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter"> 
+		<beans:property name="supportedMediaTypes"> <beans:list> <beans:bean class="org.springframework.http.MediaType"> 
+		<beans:constructor-arg index="0" value="application" /> <beans:constructor-arg 
+		index="1" value="xml" /> <beans:constructor-arg index="2" value="UTF-8" /> 
+		</beans:bean> </beans:list> </beans:property> </beans:bean> <beans:bean id="jsonConverter" 
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
+		<beans:property name="objectMapper"> <beans:list> <beans:ref bean="jacksonObjectMapper" 
+		/> </beans:list> </beans:property> <beans:property name="supportedMediaTypes"> 
+		<beans:list> <beans:bean class="org.springframework.http.MediaType"> <beans:constructor-arg 
+		index="0" value="application" /> <beans:constructor-arg index="1" value="json" 
+		/> <beans:constructor-arg index="2" value="UTF-8" /> </beans:bean> </beans:list> 
+		</beans:property> </beans:bean> <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"> 
+		<beans:property name="messageConverters"> <beans:list> <beans:ref bean="xmlConverter" 
+		/> <beans:ref bean="jsonConverter" /> </beans:list> </beans:property> </beans:bean> -->
 </beans:beans>

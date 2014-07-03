@@ -16,7 +16,7 @@ import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.entity.Language;
 import org.wfp.fittest.entity.ProfileType;
 import org.wfp.fittest.entity.Staff;
-import org.wfp.fittest.entity.StaffConfirmedType;
+import org.wfp.fittest.entity.ConfirmedType;
 import org.wfp.fittest.entity.StaffRole;
 import org.wfp.fittest.entity.StaffType;
 
@@ -31,6 +31,11 @@ public class StaffDaoImpl extends AbstractDaoImpl implements StaffDao {
 		return findAll(Staff.class);
 	}
 
+	@Override
+	public Staff findStaffByIndex(Integer staffIndex) {
+		return findById(Staff.class, staffIndex);
+	}
+	
 	@Override
 	public List<Staff> findStaffByFirstName(String firstName) {
 		return findByPropertyEqual(Staff.class, "firstName", firstName);
@@ -110,8 +115,8 @@ public class StaffDaoImpl extends AbstractDaoImpl implements StaffDao {
 	}
 
 	@Override
-	public List<StaffConfirmedType> findAllStaffConfirmedTypes() {
-		return findAll(StaffConfirmedType.class);
+	public List<ConfirmedType> findAllStaffConfirmedTypes() {
+		return findAll(ConfirmedType.class);
 	}
 
 	@Override

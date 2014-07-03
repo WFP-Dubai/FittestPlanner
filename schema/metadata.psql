@@ -14,7 +14,7 @@
 
 \copy languages (language) from 'metadata/languages.csv'
 
-\copy staffconfirmedtypes (staffconfirmedtype) from 'metadata/staffconfirmedtypes.csv'
+\copy confirmedtypes (confirmedtype, confirmedcolorcode) from 'metadata/confirmedtypes.csv' delimiter as ','
 
 \copy missiontypes (missiontype) from 'metadata/missiontypes.csv'
 

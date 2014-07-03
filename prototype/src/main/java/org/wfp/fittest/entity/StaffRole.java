@@ -61,7 +61,7 @@ public class StaffRole {
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "staffconfirmedtypeid")
-	private StaffConfirmedType staffConfirmedType;
+	private ConfirmedType confirmedType;
 	
 	@ManyToMany(mappedBy="staffRoles", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Staff> staff = new HashSet<Staff>();
@@ -126,14 +126,14 @@ public class StaffRole {
 		this.comments = comments;
 	}
 
-	@XmlElement(name = "staffConfirmedType")
+	@XmlElement(name = "confirmedType")
 	@XmlIDREF
-	public StaffConfirmedType getStaffConfirmedType() {
-		return staffConfirmedType;
+	public ConfirmedType getStaffConfirmedType() {
+		return confirmedType;
 	}
 
-	public void setStaffConfirmedType(StaffConfirmedType staffConfirmedType) {
-		this.staffConfirmedType = staffConfirmedType;
+	public void setStaffConfirmedType(ConfirmedType staffConfirmedType) {
+		this.confirmedType = staffConfirmedType;
 	}
 
 	@XmlElementWrapper(name = "staffList")

@@ -67,7 +67,11 @@ public class Activity {
 	@OneToMany(mappedBy="activity", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@OrderBy
 	private Set<ActivityRole> activityRoles = new HashSet<ActivityRole>();
-		
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name = "activityconfirmedtypeid")
+	private ConfirmedType confirmedType;
+	
 	public Activity() {}
 
 	@XmlTransient
@@ -139,6 +143,16 @@ public class Activity {
 
 	public void setActivityRoles(Set<ActivityRole> activityRoles) {
 		this.activityRoles = activityRoles;
+	}
+
+	@XmlElement(name = "confirmedType")
+	@XmlIDREF
+	public ConfirmedType getConfirmedType() {
+		return confirmedType;
+	}
+
+	public void setConfirmedType(ConfirmedType confirmedType) {
+		this.confirmedType = confirmedType;
 	}
 
 	@Override

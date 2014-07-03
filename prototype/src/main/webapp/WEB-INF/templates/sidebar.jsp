@@ -19,8 +19,6 @@
 					class="icon-asterisk"></i> <span class="hidden-tablet">Activity</span></a></li>
 			<li><a href="<c:url value="/staff"/>"><i class="icon-user"></i>
 					<span class="hidden-tablet">Staff</span></a></li>
-			<li><a href="<c:url value="/profiletype"/>"><i class="icon-briefcase"></i> <span
-					class="hidden-tablet">Profile Type</span></a></li>
 			<li><a href="<c:url value="/country"/>"><i
 					class="icon-globe"></i>
 					<span class="hidden-tablet">Country</span></a></li>

@@ -13,6 +13,8 @@ import org.wfp.fittest.entity.StaffType;
 
 public interface StaffService {
 	
+	public Staff findStaffByIndex(Integer staffIndex);
+	
 	public List<Staff> findAllStaff();
 	
 	public Map<String, List<Staff>> findStaffByActivityType();

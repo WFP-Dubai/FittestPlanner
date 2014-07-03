@@ -37,6 +37,6 @@ public class DeploymentController {
 		deploymentCriteria.setStaffTypes(new ArrayList<StaffType>());
 		model.addAttribute("allStaffTypes", staffService.findAllStaffTypes());
 		model.addAttribute("deploymentCriteria", deploymentCriteria);
-		return "deployment";
+		return "main/deployment";
 	}
 }

@@ -17,6 +17,6 @@ public class PlanningController {
 	@RequestMapping(value = "/planning", method = RequestMethod.GET)
 	public String planningEntry(Locale locale, Model model) {
 		logger.info("Planning entry Page!", locale);		
-		return "planning";
+		return "main/planning";
 	}
 }

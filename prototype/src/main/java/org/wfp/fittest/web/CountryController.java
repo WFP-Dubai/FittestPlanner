@@ -26,6 +26,6 @@ public class CountryController {
 		logger.info("country Page!", locale);
 		List<Country> countries = utilityService.findAllCountries();
 		model.addAttribute("countries", countries);
-		return "country";
+		return "main/country";
 	}
 }

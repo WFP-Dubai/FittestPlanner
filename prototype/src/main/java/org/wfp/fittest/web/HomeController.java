@@ -55,7 +55,7 @@ public class HomeController {
 		Map<String, Integer> activityTypeChartData = staffService.findStaffCountByActivityType(fromDate);
 		model.addAttribute("activityTypeChartData", activityTypeChartData);
 		
-		return "home";
+		return "main/home";
 	}
 	
 }

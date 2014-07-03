@@ -8,7 +8,7 @@ import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.entity.Language;
 import org.wfp.fittest.entity.ProfileType;
 import org.wfp.fittest.entity.Staff;
-import org.wfp.fittest.entity.StaffConfirmedType;
+import org.wfp.fittest.entity.ConfirmedType;
 import org.wfp.fittest.entity.StaffRole;
 import org.wfp.fittest.entity.StaffType;
 
@@ -19,6 +19,8 @@ public interface StaffDao {
 	/* ====================================================================== */
 
 	public List<Staff> findAllStaff();
+	
+	public Staff findStaffByIndex(Integer staffIndex);
 
 	public List<Staff> findStaffByFirstName(String firstName);
 
@@ -75,7 +77,7 @@ public interface StaffDao {
 	// Staff Confirmed Type
 	/* ====================================================================== */
 	
-	public List<StaffConfirmedType> findAllStaffConfirmedTypes();
+	public List<ConfirmedType> findAllStaffConfirmedTypes();
 	
 	/* ====================================================================== */
 	// Staff Role

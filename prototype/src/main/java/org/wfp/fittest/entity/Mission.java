@@ -66,6 +66,10 @@ public class Mission {
 	@Column(name = "missionenddate")
 	private Date endDate;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name = "missionconfirmedtypeid")
+	private ConfirmedType confirmedType;
+	
 	public Mission() {}
 	
 	@XmlTransient
@@ -141,6 +145,20 @@ public class Mission {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	
+	@XmlElement(name = "confirmedType")
+	@XmlIDREF
+	public ConfirmedType getConfirmedType() {
+		return confirmedType;
+	}
+
+	public void setConfirmedType(ConfirmedType confirmedType) {
+		this.confirmedType = confirmedType;
+	}
+
+	public void setMissionLocation(String missionLocation) {
+		this.missionLocation = missionLocation;
 	}
 
 	@Override

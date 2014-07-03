@@ -30,6 +30,6 @@ public class RequirementController {
 		RequirementCriteria requirementCriteria = new RequirementCriteria();
 		requirementCriteria.setActivities(new ArrayList<Activity>());
 		model.addAttribute("requirementCriteria", requirementCriteria);
-		return "requirement";
+		return "main/requirement";
 	}
 }

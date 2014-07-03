@@ -10,11 +10,11 @@
 
 \copy staff (staffindex, firstname, lastname, dateofbirth, title, thuraya, mobile, stafftypeid, staffcolorcode) from 'data/staff.csv' delimiter as ',' null as 'null'
 
-\copy activities (activitydescription, activitytypeid, activityetcservicemap) from 'data/activities.csv' delimiter as ','
+\copy activities (activitydescription, activitytypeid, activityetcservicemap, activityconfirmedtypeid) from 'data/activities.csv' delimiter as ','
 
 \copy events (event, eventstartdate, eventenddate, eventcolorcode) from 'data/events.csv' delimiter as ','
 
-\copy missions (missionname, missiontypeid, missionlocation, missiondescription, missionstartdate, missionenddate) from 'data/missions.csv' delimiter as ','
+\copy missions (missionname, missiontypeid, missionlocation, missiondescription, missionstartdate, missionenddate, missionconfirmedtypeid) from 'data/missions.csv' delimiter as ','
 
 \copy audittable (changedtime, userid, tablename, operationtypeid, oldvalue, newvalue, ipaddress) from 'data/audittable.csv' delimiter as ','
 
