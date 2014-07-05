@@ -128,12 +128,12 @@ public class StaffRole {
 
 	@XmlElement(name = "confirmedType")
 	@XmlIDREF
-	public ConfirmedType getStaffConfirmedType() {
+	public ConfirmedType getConfirmedType() {
 		return confirmedType;
 	}
 
-	public void setStaffConfirmedType(ConfirmedType staffConfirmedType) {
-		this.confirmedType = staffConfirmedType;
+	public void setConfirmedType(ConfirmedType confirmedType) {
+		this.confirmedType = confirmedType;
 	}
 
 	@XmlElementWrapper(name = "staffList")
@@ -170,6 +170,11 @@ public class StaffRole {
 		} else if (!ID.equals(other.ID))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("StaffRole[ID=%d]", getID());
 	}
 	
 }

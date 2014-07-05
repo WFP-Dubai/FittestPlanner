@@ -31,30 +31,33 @@ public class ActivityRole {
 
 	@Id
 	@Column(name = "activityroleid")
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="activityroles_activityroleid_seq", name="activityroles_activityroleid_seq")
-	@GeneratedValue(generator="activityroles_activityroleid_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "activityroles_activityroleid_seq", name = "activityroles_activityroleid_seq")
+	@GeneratedValue(generator = "activityroles_activityroleid_seq", strategy = GenerationType.SEQUENCE)
 	private Integer ID;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
+			CascadeType.MERGE })
 	@JoinColumn(name = "activityid")
 	private Activity activity;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
+			CascadeType.MERGE })
 	@JoinColumn(name = "profiletypeid")
 	private ProfileType profileType;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "activityrolestartdate")
 	private Date startDate;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "activityroleenddate")
 	private Date endDate;
-	
+
 	@Column(name = "activityrolelocation")
 	private String location;
-	
-	@ManyToMany(mappedBy="activityRoles", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@ManyToMany(mappedBy = "activityRoles", fetch = FetchType.EAGER, cascade = {
+			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<StaffRole> staffRoles;
 
 	@XmlTransient
@@ -71,7 +74,7 @@ public class ActivityRole {
 	public String getStringID() {
 		return Integer.toString(getID());
 	}
-	
+
 	@XmlIDREF
 	public Activity getActivity() {
 		return activity;
@@ -124,5 +127,35 @@ public class ActivityRole {
 	public void setStaffRoles(Set<StaffRole> staffRoles) {
 		this.staffRoles = staffRoles;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ActivityRole other = (ActivityRole) obj;
+		if (ID == null) {
+			if (other.ID != null)
+				return false;
+		} else if (!ID.equals(other.ID))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s | %s | %s", getActivity().getDescription(),
+				getProfileType().getProfileType(), getLocation());
+	}
 }

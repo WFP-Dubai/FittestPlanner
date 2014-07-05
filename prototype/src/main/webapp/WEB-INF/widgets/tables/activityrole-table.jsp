@@ -17,33 +17,56 @@
 		class="table table-striped table-bordered bootstrap-datatable datatable">
 		<thead>
 			<tr>
-				<th>Activity Type</th>
-				<th>Color Code</th>
+				<th>Activity</th>
+				<th>Profile Type</th>
+				<th>Start Date</th>
+				<th>End Date</th>
 				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="activityType" items="${activityTypes}">
+			<c:forEach var="activityRole" items="${allActivityRoles}">
 				<tr>
-					<td>${activityType.activityType}</td>
-					<td>${activityType.colorCode}</td>
+					<td>${activityRole.activity}</td>
+					<td>${activityRole.profileType}</td>
+					<td>${activityRole.startDate}</td>
+					<td>${activityRole.endDate}</td>
 					<td>
-
 						<div class="btn-toolbar btn-group-sm text-center" role="toolbar">
-							<button type="button" class="btn btn-danger">
-								<span class="icon-remove"></span> Delete
-							</button>
-							<button type="button" class="btn btn-primary">
-								<span class="icon-edit"></span> Edit
-							</button>
-							<button type="button" class="btn btn-success">
-								<span class="icon-ok"></span> View
-							</button>
+							<a href="#" data-toggle="modal"
+								data-target="#deleteActivityRoleModal">
+								<button type="button" class="btn btn-danger">
+									<span class="icon-remove"></span> Delete
+								</button>
+							</a> <a
+								href="<c:url value="/activity/role/${activityRole.ID}/edit"/>">
+								<button type="button" class="btn btn-primary">
+									<span class="icon-edit"></span> Edit
+								</button>
+							</a> <a href="<c:url value="/activity/role/${activityRole.ID}"/>">
+								<button type="button" class="btn btn-success">
+									<span class="icon-ok"></span> View
+								</button>
+							</a>
 						</div>
-
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+</div>
+
+<div class="modal hide" id="deleteActivityRoleModal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Delete Activity Role</h3>
+	</div>
+	<div class="modal-body">
+		<p>Are you sure you want to delete this activity role?</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Cancel</a> <a
+			href="<c:url value="/activity/role/${activityRole.ID}/delete"/>"
+			class="btn btn-danger">Delete</a>
+	</div>
 </div>

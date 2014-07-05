@@ -26,18 +26,20 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="activity" items="${activities}">
+			<c:forEach var="activity" items="${allActivities}">
 				<tr>
 					<td><p class="text-center">
 							<c:out value="${activity.ID}" />
 						</p></td>
 					<td><c:out value="${activity.description}" /></td>
-					<td class="text-center"><a
-						href="<c:url value="${activity.etcServiceMap}"/>"> <label
-							class="label label-primary" data-toggle="tooltip"
-							data-placement="bottom" title="${activity.etcServiceMap}"
-							data-rel="tooltip">Link</label>
-					</a></td>
+					<td class="text-center">
+					<c:if test="${not empty activity.etcServiceMap}">
+							<a href="<c:url value="${activity.etcServiceMap}"/>"> <label
+								class="label label-primary" data-toggle="tooltip"
+								data-placement="bottom" title="${activity.etcServiceMap}"
+								data-rel="tooltip">Link</label>
+							</a>
+						</c:if></td>
 					<td>
 						<ul class="list-group">
 							<c:forEach var="country" items="${activity.countries}">
@@ -60,12 +62,12 @@
 					<td>
 
 						<div class="btn-toolbar btn-group-sm text-center" role="toolbar">
-							<a href="#" data-toggle="modal" data-target="#deleteActivityModal">
+							<a href="#" data-toggle="modal"
+								data-target="#deleteActivityModal">
 								<button type="button" class="btn btn-danger">
 									<span class="icon-remove"></span> Delete
 								</button>
-							</a>
-							<a href="<c:url value="/activity/${activity.ID}/edit"/>">
+							</a> <a href="<c:url value="/activity/${activity.ID}/edit"/>">
 								<button type="button" class="btn btn-primary">
 									<span class="icon-edit"></span> Edit
 								</button>
@@ -84,15 +86,16 @@
 </div>
 
 <div class="modal hide" id="deleteActivityModal">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
-        <h3>Settings</h3>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure you want to delete this activity?</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-        <a href="<c:url value="/staff/${staff.index}/delete"/>" class="btn btn-danger">Delete</a>
-    </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Delete Activity</h3>
+	</div>
+	<div class="modal-body">
+		<p>Are you sure you want to delete this activity?</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Cancel</a> <a
+			href="<c:url value="/staff/${staff.index}/delete"/>"
+			class="btn btn-danger">Delete</a>
+	</div>
 </div>

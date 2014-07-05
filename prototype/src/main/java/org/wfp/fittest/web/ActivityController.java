@@ -1,11 +1,9 @@
 package org.wfp.fittest.web;
 
-import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,30 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
-import org.wfp.fittest.service.ActivityService;
-import org.wfp.fittest.service.StaffService;
 
 @Controller
-public class ActivityController {
+public class ActivityController extends AbstractController {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(ActivityController.class);
-
-	@Autowired
-	private ActivityService activityService;
-
-	@Autowired
-	private StaffService staffService;
-
+	
 	@RequestMapping(value = "/activity", method = RequestMethod.GET)
 	public String activity(Locale locale, Model model) {
 		logger.info("activity Page!", locale);
-		model.addAttribute("activities", activityService.findAllActivities()
-				.getActivities());
-		model.addAttribute("activityTypes",
-				activityService.findAllActivityTypes());
-		model.addAttribute("activityRoles",
-				activityService.findAllActivityRoles());
 		return "main/activity";
 	}
 
@@ -48,8 +32,6 @@ public class ActivityController {
 			@ModelAttribute("activityDetails") Activity activityDetails,
 			Locale locale, Model model) {
 		logger.info("activity new Page!", locale);
-		model.addAttribute("allActivityTypes",
-				activityService.findAllActivityTypes());
 		return "edit/activity";
 	}
 
@@ -62,8 +44,6 @@ public class ActivityController {
 		logger.info("activity edit Page!", locale);
 		activityDetails = activityService.findActivityById(activityID);
 		model.addAttribute("activityDetails", activityDetails);
-		model.addAttribute("allActivityTypes",
-				activityService.findAllActivityTypes());
 		return "edit/activity";
 	}
 
@@ -78,9 +58,8 @@ public class ActivityController {
 
 	@RequestMapping(value = "/activity/type", method = RequestMethod.GET)
 	public String activityType(Locale locale, Model model) {
-		List<ActivityType> activityTypes = activityService
-				.findAllActivityTypes();
-		model.addAttribute("activityTypes", activityTypes);
+		logger.info("activity types Page!", locale);
+		logger.info("activity types Page!", locale);
 		return "main/activityType";
 	}
 
@@ -88,6 +67,7 @@ public class ActivityController {
 	public String activityTypeRead(
 			@PathVariable("activityTypeID") Integer activityTypeID,
 			Locale locale, Model model) {
+		logger.info("activity type view Page!", locale);
 		ActivityType activityType = activityService
 				.findActivityTypeById(activityTypeID);
 		model.addAttribute("activityType", activityType);
@@ -99,7 +79,9 @@ public class ActivityController {
 			@ModelAttribute("activityTypeDetails") ActivityType activityTypeDetails,
 			@PathVariable("activityTypeID") Integer activityTypeID,
 			Locale locale, Model model) {
-		activityTypeDetails = activityService.findActivityTypeById(activityTypeID);
+		logger.info("activity type edit Page!", locale);
+		activityTypeDetails = activityService
+				.findActivityTypeById(activityTypeID);
 		model.addAttribute("activityTypeDetails", activityTypeDetails);
 		return "edit/activityType";
 	}
@@ -109,10 +91,20 @@ public class ActivityController {
 	public String activityTypeNew(
 			@ModelAttribute("activityTypeDetails") ActivityType activityTypeDetails,
 			Locale locale, Model model) {
-		List<ActivityType> activityTypes = activityService
-				.findAllActivityTypes();
-		model.addAttribute("activityTypes", activityTypes);
+		logger.info("activity type new Page!", locale);
 		return "edit/activityType";
+	}
+
+	@RequestMapping(value = "/activity/role/{activityRoleID}/edit", method = {
+			RequestMethod.GET, RequestMethod.POST })
+	public String activityRoleEdit(
+			@ModelAttribute("activityRoleDetails") ActivityRole activityRoleDetails,
+			@PathVariable("activityRoleID") Integer activityRoleID,
+			Locale locale, Model model) {
+		logger.info("activity role edit Page!", locale);
+		activityRoleDetails = activityService.findActivityRoleById(activityRoleID);
+		model.addAttribute("activityRoleDetails", activityRoleDetails);
+		return "edit/activityRole";
 	}
 
 	@RequestMapping(value = "/activity/role/new", method = { RequestMethod.GET,
@@ -121,10 +113,6 @@ public class ActivityController {
 			@ModelAttribute("activityRoleDetails") ActivityRole activityRoleDetails,
 			Locale locale, Model model) {
 		logger.info("activity role new Page!", locale);
-		model.addAttribute("allActivities", activityService.findAllActivities()
-				.getActivities());
-		model.addAttribute("allProfileTypes",
-				staffService.findAllProfileTypes());
 		return "edit/activityRole";
 	}
 

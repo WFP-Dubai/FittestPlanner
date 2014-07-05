@@ -5,7 +5,7 @@
 
 <form:form modelAttribute="staffDetails" method="POST">
 	<div class="row-fluid">
-		<div class="well">
+		<div class="well span4">
 			<div class="form-horizontal">
 				<fieldset>
 					<legend>Date</legend>

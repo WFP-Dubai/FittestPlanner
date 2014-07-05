@@ -23,7 +23,7 @@
 				<tr>
 					<td>
 						<ul class="dashboard-list">
-							<li><a href="#"> <img class="dashboard-avatar"
+							<li><a href="<c:url value="${staff.index}"/>"> <img class="dashboard-avatar"
 									alt="${staff.firstName}" src="${contextPath}/img/profile.png" />
 							</a> <strong>Name:</strong> <a
 								href="<c:url value="/staff/${staff.index}"/>">${staff.name}

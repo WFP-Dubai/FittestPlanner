@@ -90,6 +90,11 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	
 	@Override
+	public ActivityRole findActivityRoleById(Integer activityRoleID) {
+		return activityDao.findActivityRoleById(activityRoleID);
+	}
+	
+	@Override
 	public List<ActivityRole> findAllActivityRoles() {
 		return activityDao.findAllActivityRoles();
 	}

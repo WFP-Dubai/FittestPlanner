@@ -60,11 +60,10 @@
 							</c:forEach>
 						</ul>
 					</td>
-					<td
-						style="<c:out value="background-color: #${staff.staffColorCode};"/> ">
-						<div>
+					<td>
+						<p style="<c:out value="background-color: #${staff.staffColorCode};"/> ">
 							<c:out value="${staff.staffColorCode}" />
-						</div>
+						</p>
 					</td>
 					<td>
 						<div class="btn-toolbar btn-group-sm text-center" role="toolbar">
@@ -92,7 +91,7 @@
 <div class="modal hide" id="deleteStaffModal">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
-        <h3>Settings</h3>
+        <h3>Delete Staff</h3>
     </div>
     <div class="modal-body">
         <p>Are you sure you want to delete this staff member?</p>

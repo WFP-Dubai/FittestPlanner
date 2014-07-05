@@ -111,4 +111,8 @@ public class ProfileType {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return getProfileType();
+	}
 }

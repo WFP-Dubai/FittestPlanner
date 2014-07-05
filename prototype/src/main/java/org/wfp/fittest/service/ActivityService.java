@@ -28,5 +28,7 @@ public interface ActivityService {
 	
 	public Map<String, Integer> findActivityTypesWithId();
 	
+	public ActivityRole findActivityRoleById(Integer activityRoleID);
+	
 	public List<ActivityRole> findAllActivityRoles();
 }

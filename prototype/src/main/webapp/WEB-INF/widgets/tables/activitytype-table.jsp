@@ -23,7 +23,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="activityType" items="${activityTypes}">
+			<c:forEach var="activityType" items="${allActivityTypes}">
 				<tr>
 					<td>${activityType.activityType}</td>
 					<td>${activityType.colorCode}</td>
@@ -56,7 +56,7 @@
 <div class="modal hide" id="deleteActivityTypeModal">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Settings</h3>
+		<h3>Delete Activity Type</h3>
 	</div>
 	<div class="modal-body">
 		<p>Are you sure you want to delete this activity type?</p>

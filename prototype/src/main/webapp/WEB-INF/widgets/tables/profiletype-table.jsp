@@ -22,21 +22,44 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="profileType" items="${profileTypes}">
+			<c:forEach var="profileType" items="${allProfileTypes}">
 				<tr>
 					<td>${profileType.profileType}</td>
 					<td>
-						<div class="btn-toolbar btn-group-sm text-center" role="toolbar">
-							<button type="button" class="btn btn-danger">
-								<span class="icon-remove"></span> Delete
-							</button>
-							<button type="button" class="btn btn-primary">
-								<span class="icon-edit"></span> Edit
-							</button>
-						</div>
+                        <div class="btn-toolbar btn-group-sm text-center" role="toolbar">
+                            <a href="#" data-toggle="modal" data-target="#deleteProfileTypeModal">
+                                <button type="button" class="btn btn-danger">
+                                    <span class="icon-remove"></span> Delete
+                                </button>
+                            </a> <a
+                                href="<c:url value="/staff/profiletype/${profileType.ID}/edit"/>">
+                                <button type="button" class="btn btn-primary">
+                                    <span class="icon-edit"></span> Edit
+                                </button>
+                            </a> <a href="<c:url value="/staff/profiletype/${profileType.ID}"/>">
+                                <button type="button" class="btn btn-success">
+                                    <span class="icon-ok"></span> View
+                                </button>
+                            </a>
+                        </div>
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+</div>
+
+<div class="modal hide" id="deleteProfileTypeModal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Delete Profile Type</h3>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete this profile type?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Cancel</a> <a
+            href="<c:url value="/staff/${staff.index}/delete"/>"
+            class="btn btn-danger">Delete</a>
+    </div>
 </div>

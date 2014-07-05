@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.wfp.fittest.dao.ActivityDao;
 import org.wfp.fittest.dao.StaffDao;
 import org.wfp.fittest.entity.ActivityType;
+import org.wfp.fittest.entity.ConfirmedType;
 import org.wfp.fittest.entity.ProfileType;
 import org.wfp.fittest.entity.Staff;
 import org.wfp.fittest.entity.StaffRole;
@@ -95,6 +96,11 @@ public class StaffServiceImpl implements StaffService {
 	}
 	
 	@Override
+	public StaffRole findStaffRoleById(Integer staffRoleID) {
+		return staffDao.findStaffRoleById(staffRoleID);
+	}
+	
+	@Override
 	public List<StaffRole> findAllStaffRoles() {
 		return staffDao.findAllStaffRoles();
 	}
@@ -112,5 +118,10 @@ public class StaffServiceImpl implements StaffService {
 	@Override
 	public List<ProfileType> findAllProfileTypes() {
 		return staffDao.findAllProfileTypes();
+	}
+	
+	@Override
+	public List<ConfirmedType> findAllConfirmedTypes() {
+		return staffDao.findAllConfirmedTypes();
 	}
 }

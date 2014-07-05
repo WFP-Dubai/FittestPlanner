@@ -77,12 +77,14 @@ public interface StaffDao {
 	// Staff Confirmed Type
 	/* ====================================================================== */
 	
-	public List<ConfirmedType> findAllStaffConfirmedTypes();
+	public List<ConfirmedType> findAllConfirmedTypes();
 	
 	/* ====================================================================== */
 	// Staff Role
 	/* ====================================================================== */
 
+	public StaffRole findStaffRoleById(Integer staffRoleID);
+	
 	public List<StaffRole> findAllStaffRoles();
 	
 	public List<StaffRole> findStaffRolesActiveInDate(Date activeDate);

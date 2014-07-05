@@ -19,9 +19,9 @@
 					<li><a href="#profiletype">Profile Type</a></li>
 					<li><a href="#staffconfirmtype">Staff Confirm Type</a></li>
 				</ul>
-				<div id="activityTabContent" class="tab-content"
+				<div id="staffTabContent" class="tab-content"
 					style="padding: 10px">
-					<div class="tab-pane" id="staff">
+					<div class="tab-pane active" id="staff">
 						<jsp:include page="/WEB-INF/widgets/tables/staff-table.jsp"></jsp:include>
 					</div>
 					<div class="tab-pane" id="staffrole">

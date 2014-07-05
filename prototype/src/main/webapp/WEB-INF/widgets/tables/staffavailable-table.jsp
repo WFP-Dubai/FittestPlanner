@@ -23,15 +23,14 @@
 				<tr>
 					<td>
 						<ul class="dashboard-list">
-                            <li><a href="#"> <img class="dashboard-avatar"
-                                    alt="${staff.firstName}" src="${contextPath}/img/profile.png" />
-                            </a> <strong>Name:</strong>
-                            <a href="<c:url value="/staff/${staff.index}"/>">${staff.name} </a><br />
-                            <strong>Profile Type:</strong>
-                            <c:forEach var="profileType" items="${staff.profileTypes}">
-                                <c:out value="${profileType.profileType}"/>
-                            </c:forEach>
-                            </li>
+							<li><a href="<c:url value="${staff.index}"/>"> <img
+									class="dashboard-avatar" alt="${staff.firstName}"
+									src="${contextPath}/img/profile.png" /> <strong>Name:</strong>
+									${staff.name} <br /> <strong>Profile Type:</strong> <c:forEach
+										var="profileType" items="${staff.profileTypes}">
+										<c:out value="${profileType.profileType}" />
+									</c:forEach>
+							</a></li>
 						</ul>
 					</td>
 				</tr>

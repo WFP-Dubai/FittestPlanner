@@ -9,7 +9,7 @@
 		<div class="well">
 			<div class="form-horizontal">
 				<fieldset>
-					<legend>Activity Type</legend>
+					<legend>Activity Role</legend>
 
 					<div class="control-group">
 						<label for="activity" class="control-label">Activity</label>
@@ -37,24 +37,24 @@
 					<div class="control-group">
 						<label for="startDate" class="control-label">Start Date</label>
 						<div class="controls">
-							<input rel="datetime" type="text" class="form-control"
-								id="startDate" placeholder="Start Date" required />
+							<form:input path="startDate" rel="datetime" type="text" class="form-control"
+								id="startDate" placeholder="Start Date" required="true" />
 						</div>
 					</div>
 
 					<div class="control-group">
 						<label for="endDate" class="control-label">End Date</label>
 						<div class="controls">
-							<input rel="datetime" type="text" class="form-control"
-								id="endDate" placeholder="End Date" required />
+							<form:input path="endDate" rel="datetime" type="text" class="form-control"
+								id="endDate" placeholder="End Date" required="true" />
 						</div>
 					</div>
 
                     <div class="control-group">
                         <label for="activityRoleLocation" class="control-label">Location</label>
                         <div class="controls">
-                            <input type="text" class="form-control" id="activityRoleLocation"
-                                placeholder="Location" required />
+                            <form:input path="location" type="text" class="form-control" id="activityRoleLocation"
+                                placeholder="Location" required="true" />
                         </div>
                     </div>
 				</fieldset>

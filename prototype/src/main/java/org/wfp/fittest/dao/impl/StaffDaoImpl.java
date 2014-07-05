@@ -12,11 +12,11 @@ import org.springframework.stereotype.Repository;
 import org.wfp.fittest.dao.ActivityDao;
 import org.wfp.fittest.dao.StaffDao;
 import org.wfp.fittest.entity.ActivityType;
+import org.wfp.fittest.entity.ConfirmedType;
 import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.entity.Language;
 import org.wfp.fittest.entity.ProfileType;
 import org.wfp.fittest.entity.Staff;
-import org.wfp.fittest.entity.ConfirmedType;
 import org.wfp.fittest.entity.StaffRole;
 import org.wfp.fittest.entity.StaffType;
 
@@ -115,7 +115,7 @@ public class StaffDaoImpl extends AbstractDaoImpl implements StaffDao {
 	}
 
 	@Override
-	public List<ConfirmedType> findAllStaffConfirmedTypes() {
+	public List<ConfirmedType> findAllConfirmedTypes() {
 		return findAll(ConfirmedType.class);
 	}
 
@@ -219,6 +219,11 @@ public class StaffDaoImpl extends AbstractDaoImpl implements StaffDao {
 				activityDao.findActivityTypeByActivityType("Break in Service"),
 				activityDao.findActivityTypeByActivityType("Leave"));
 		return findStaffByActivityTypesInDate(activityTypes, fromDate);
+	}
+	
+	@Override
+	public StaffRole findStaffRoleById(Integer staffRoleID) {
+		return findById(StaffRole.class, staffRoleID);
 	}
 
 	@Override

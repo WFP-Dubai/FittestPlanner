@@ -5,7 +5,7 @@
 <html>
 <head>
 <jsp:include page="/WEB-INF/templates/meta.jsp"></jsp:include>
-<title>Activity Form</title>
+<title>Activity Role Form</title>
 </head>
 <body>
     <jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
