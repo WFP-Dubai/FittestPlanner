@@ -6,7 +6,7 @@
 <form:form modelAttribute="activityRoleDetails" method="POST"
 	action="new">
 	<div class="row-fluid">
-		<div class="well">
+		<div class="well span6">
 			<div class="form-horizontal">
 				<fieldset>
 					<legend>Activity Role</legend>

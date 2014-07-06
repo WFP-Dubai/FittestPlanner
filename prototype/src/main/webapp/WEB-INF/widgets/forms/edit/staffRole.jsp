@@ -14,8 +14,7 @@
 							Roles</label>
 						<div class="controls">
 							<form:select id="activityRoles" multiple="true"
-								placeholder="Select activity roles" path="activityRoles"
-								data-rel="chosen" required="true">
+								path="activityRoles" data-rel="chosen" required="true">
 								<form:options items="${allActivityRoles}" itemValue="ID" />
 							</form:select>
 						</div>

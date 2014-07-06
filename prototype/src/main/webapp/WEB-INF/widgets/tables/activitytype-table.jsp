@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <div class="row-fluid" style="margin-bottom: 25px">
 	<div class="btn-toolbar btn-group-md" role="toolbar">
 		<a href="<c:url value="/activity/type/new"/>">
@@ -30,7 +32,9 @@
 					<td>
 
 						<div class="btn-toolbar btn-group-sm text-center" role="toolbar">
-							<a href="#" data-toggle="modal" data-target="#deleteActivityTypeModal">
+							<a href="#" data-toggle="modal"
+								data-id="<c:out value="${activityType.ID}"/>"
+								data-target="#deleteActivityTypeModal">
 								<button type="button" class="btn btn-danger">
 									<span class="icon-remove"></span> Delete
 								</button>
@@ -62,8 +66,10 @@
 		<p>Are you sure you want to delete this activity type?</p>
 	</div>
 	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Cancel</a> <a
-			href="<c:url value="/staff/${staff.index}/delete"/>"
-			class="btn btn-danger">Delete</a>
+        <c:url var="deleteURL" value="/activity/type/#ID/delete" />
+        <form method="POST" action="${deleteURL}">
+		<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+			<input type="submit" id="modalLink" value="Delete" class="btn btn-danger" />
+		</form>
 	</div>
 </div>

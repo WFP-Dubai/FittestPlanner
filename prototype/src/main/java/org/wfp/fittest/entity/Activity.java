@@ -55,15 +55,6 @@ public class Activity {
 	)
 	private Set<Country> countries = new HashSet<Country>();
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@OrderBy
-	@JoinTable(
-		name = "mission_activity_mapping",
-		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
-		inverseJoinColumns = {@JoinColumn(name = "missionid", referencedColumnName = "missionid")}
-	)
-	private Set<Mission> missions = new HashSet<Mission>();
-	
 	@OneToMany(mappedBy="activity", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@OrderBy
 	private Set<ActivityRole> activityRoles = new HashSet<ActivityRole>();
@@ -121,17 +112,6 @@ public class Activity {
 
 	public void setCountries(Set<Country> countries) {
 		this.countries = countries;
-	}
-
-	@XmlElementWrapper(name = "missions")
-	@XmlElement(name = "mission")
-	@XmlIDREF
-	public Set<Mission> getMissions() {
-		return missions;
-	}
-
-	public void setMissions(Set<Mission> missions) {
-		this.missions = missions;
 	}
 
 	@XmlElementWrapper(name = "activityRoles")

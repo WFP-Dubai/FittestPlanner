@@ -61,14 +61,17 @@
 						</ul>
 					</td>
 					<td>
-						<p style="<c:out value="background-color: #${staff.staffColorCode};"/> ">
+						<p
+							style="<c:out value="background-color: #${staff.staffColorCode};"/> ">
 							<c:out value="${staff.staffColorCode}" />
 						</p>
 					</td>
 					<td>
 						<div class="btn-toolbar btn-group-sm text-center" role="toolbar">
-							<a href="#" data-toggle="modal" data-target="#deleteStaffModal">
-								<button type="button" class="btn btn-danger" rel="deleteButton">
+							<a href="#" data-toggle="modal"
+								data-id="<c:out value="${staff.index}"/>"
+								data-target="#deleteStaffModal">
+								<button type="button" class="btn btn-danger">
 									<span class="icon-remove"></span> Delete
 								</button>
 							</a> <a href="<c:url value="/staff/${staff.index}/edit"/>">
@@ -89,15 +92,18 @@
 </div>
 
 <div class="modal hide" id="deleteStaffModal">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
-        <h3>Delete Staff</h3>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure you want to delete this staff member?</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-        <a href="<c:url value="/staff/${staff.index}/delete"/>" class="btn btn-danger">Delete</a>
-    </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Delete Staff</h3>
+	</div>
+	<div class="modal-body">
+		<p>Are you sure you want to delete this staff member?</p>
+	</div>
+	<div class="modal-footer">
+		<c:url var="deleteURL" value="/staff/#ID/delete" />
+		<form method="POST" action="${deleteURL}">
+			<a href="#" class="btn" data-dismiss="modal">Cancel</a> <input
+				type="submit" id="modalLink" value="Delete" class="btn btn-danger" />
+		</form>
+	</div>
 </div>

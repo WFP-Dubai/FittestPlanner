@@ -10,8 +10,6 @@ import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
 import org.wfp.fittest.entity.Event;
-import org.wfp.fittest.entity.Mission;
-import org.wfp.fittest.entity.MissionType;
 
 @Repository
 public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
@@ -125,8 +123,8 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 	}
 
 	@Override
-	public void saveActivityType(ActivityType activity) {
-		saveOrUpdate(activity);
+	public void saveActivityType(ActivityType activityType) {
+		saveOrUpdate(activityType);
 	}
 
 	@Override
@@ -186,111 +184,6 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 	@Override
 	public void saveActivityRole(ActivityRole activityRole) {
 		saveOrUpdate(activityRole);
-	}
-
-	@Override
-	public Mission findMissionById(Integer id) {
-		return findById(Mission.class, id);
-	}
-
-	@Override
-	public List<Mission> findAllMissions() {
-		return findAll(Mission.class);
-	}
-
-	@Override
-	public List<Mission> findMissionsAfterStartDate(Date startDate) {
-		return findByStartDateAfter(Mission.class, startDate);
-	}
-
-	@Override
-	public List<Mission> findMissionsBeforeEndDate(Date endDate) {
-		return findByEndDateBefore(Mission.class, endDate);
-	}
-
-	@Override
-	public List<Mission> findMissionsByDuration(Date startDate, Date endDate) {
-		return findByDuration(Mission.class, startDate, endDate);
-	}
-
-	@Override
-	public List<Mission> findMissionsByLocation(String missionLocation) {
-		return findByPropertyEqual(Mission.class, "missionLocation", missionLocation);
-	}
-
-	@Override
-	public List<Mission> findMissionsByName(String missionName) {
-		return findByPropertyEqual(Mission.class, "missionName", missionName);
-	}
-
-	@Override
-	public List<Mission> findMissionsByMissionType(MissionType missionType) {
-		return findByPropertyEqual(Mission.class, "missionType", missionType);
-	}
-
-	@Override
-	public void deleteMission(Mission mission) {
-		delete(mission);
-	}
-
-	@Override
-	public void deleteMissionById(Integer id) {
-		deleteById(Mission.class, id);
-	}
-
-	@Override
-	public void deleteAllMissions() {
-		deleteAll(Mission.class);
-	}
-
-	@Override
-	public void deleteMissionsByLocation(String missionLocation) {
-		deleteByPropertyEqual(Mission.class, "missionLocation", missionLocation);
-	}
-
-	@Override
-	public void deleteMissionsByName(String missionName) {
-		deleteByPropertyEqual(Mission.class, "missionName", missionName);
-	}
-
-	@Override
-	public void deleteMissionsByMissionType(MissionType missionType) {
-		deleteByPropertyEqual(Mission.class, "missionType", missionType);
-	}
-
-	@Override
-	public void saveMission(Mission mission) {
-		saveOrUpdate(mission);
-	}
-
-	@Override
-	public MissionType findMissionTypeById(Integer id) {
-		return findById(MissionType.class, id);
-	}
-	
-	@Override
-	public List<MissionType> findMissionTypesByMissionType(String missionType) {
-		return findByPropertyEqual(MissionType.class, "missionType", missionType);
-	}
-
-	@Override
-	public List<MissionType> findAllMissionTypes() {
-		return findAll(MissionType.class);
-	}
-
-	@Override
-	public void deleteMissionType(MissionType missionType) {
-		delete(missionType);
-	}
-
-	@Override
-	public void deleteMissionTypeById(Integer id) {
-		deleteById(MissionType.class, id);
-	}
-
-	@Override
-	public void saveMissionType(MissionType missionType) {
-		saveOrUpdate(missionType);
 	}
 
 	@Override

@@ -101,7 +101,7 @@ $(document).ready(function(){
 	docReady();
 });
 		
-		
+
 function docReady(){
 	//prevent # links from moving to top
 	$('a[href="#"][data-top!=true]').click(function(e){
@@ -110,9 +110,6 @@ function docReady(){
 	
 	//rich text editor
 	$('.cleditor').cleditor();
-	
-	//datepicker
-	$('.datepicker').datepicker();
 	
 	//notifications
 	$('.noty').click(function(e){
@@ -161,9 +158,6 @@ function docReady(){
 	var elf = $('.file-manager').elfinder({
 		url : 'misc/elfinder-connector/connector.php'  // connector URL (REQUIRED)
 	}).elfinder('instance');
-
-	//iOS / iPhone style toggle switch
-	$('.iphone-toggle').iphoneStyle();
 
 	//star rating
 	$('.raty').raty({
@@ -266,7 +260,6 @@ function docReady(){
 		
 		tour.restart();
 	}
-	
 
 	//datatable
 	$('.datatable').dataTable({

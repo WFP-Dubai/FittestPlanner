@@ -16,16 +16,16 @@
 			<div id="content" class="span10">
 				<ul class="nav nav-tabs" id="myTab">
 					<li class="active"><a href="#activity">Activity</a></li>
-					<li><a href="#activitytype">Activity Type</a></li>
 					<li><a href="#activityrole">Activity Role</a></li>
+                    <li><a href="#activitytype">Activity Type</a></li>
 				</ul>
 				<div id="activityTabContent" class="tab-content"
 					style="padding: 10px">
+					<div class="tab-pane" id="activitytype">
+						<jsp:include page="/WEB-INF/widgets/tables/activitytype-table.jsp"></jsp:include>
+					</div>
 					<div class="tab-pane active" id="activity">
 						<jsp:include page="/WEB-INF/widgets/tables/activity-table.jsp"></jsp:include>
-					</div>
-					<div class="tab-pane" id="activitytype">
-                        <jsp:include page="/WEB-INF/widgets/tables/activitytype-table.jsp"></jsp:include>
 					</div>
 					<div class="tab-pane" id="activityrole">
 						<jsp:include page="/WEB-INF/widgets/tables/activityrole-table.jsp"></jsp:include>

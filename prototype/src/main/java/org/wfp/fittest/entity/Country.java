@@ -47,6 +47,10 @@ public class Country {
 	
 	public Country() {}
 
+	public Integer getID() {
+		return ID;
+	}
+	
 	@XmlID
 	public String getISOCode() {
 		return ISOCode;

@@ -35,7 +35,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="country" items="${countries}">
+							<c:forEach var="country" items="${allCountries}">
 								<tr>
 									<td><c:out value="${country.ISOCode}" /></td>
 									<td><c:out value="${country.fullName}" /></td>

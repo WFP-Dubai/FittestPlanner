@@ -61,12 +61,12 @@
 					<td>
 						<p class="label"
 							style="<c:out value="background-color: #${staffRole.confirmedType.confirmedColorCode};"/>">
-							${staffRole.confirmedType.confirmedType}
-						</p>
+							${staffRole.confirmedType.confirmedType}</p>
 					</td>
 					<td>
 						<div class="btn-toolbar btn-group-sm text-center" role="toolbar">
 							<a href="#" data-toggle="modal"
+								data-id="<c:out value="${staffRole.ID}"/>"
 								data-target="#deleteStaffRoleModal">
 								<button type="button" class="btn btn-danger">
 									<span class="icon-remove"></span> Delete
@@ -98,7 +98,7 @@
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Cancel</a> <a
-			href="<c:url value="/staff/role/${staffRole.ID}/delete"/>"
+			id="modalLink" href="<c:url value="/staff/role/#ID/delete"/>"
 			class="btn btn-danger">Delete</a>
 	</div>
 </div>

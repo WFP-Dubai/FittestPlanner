@@ -34,6 +34,7 @@
 					<td>
 						<div class="btn-toolbar btn-group-sm text-center" role="toolbar">
 							<a href="#" data-toggle="modal"
+								data-id="<c:out value="${activityRole.ID}"/>"
 								data-target="#deleteActivityRoleModal">
 								<button type="button" class="btn btn-danger">
 									<span class="icon-remove"></span> Delete
@@ -66,7 +67,7 @@
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Cancel</a> <a
-			href="<c:url value="/activity/role/${activityRole.ID}/delete"/>"
+			id="modalLink" href="<c:url value="/activity/role/#ID/delete"/>"
 			class="btn btn-danger">Delete</a>
 	</div>
 </div>

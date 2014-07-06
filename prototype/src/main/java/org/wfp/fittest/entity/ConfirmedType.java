@@ -45,10 +45,6 @@ public class ConfirmedType {
 			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<Activity> activities = new HashSet<Activity>();
 
-	@OneToMany(mappedBy = "confirmedType", fetch = FetchType.EAGER, cascade = {
-			CascadeType.PERSIST, CascadeType.MERGE })
-	private Set<Mission> missions = new HashSet<Mission>();
-
 	public ConfirmedType() {
 	}
 
@@ -90,17 +86,6 @@ public class ConfirmedType {
 
 	public void setActivities(Set<Activity> activities) {
 		this.activities = activities;
-	}
-
-	@XmlElementWrapper(name = "missions")
-	@XmlElement(name = "mission")
-	@XmlIDREF
-	public Set<Mission> getMissions() {
-		return missions;
-	}
-
-	public void setMissions(Set<Mission> missions) {
-		this.missions = missions;
 	}
 
 	@Override

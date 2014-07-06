@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<form:form modelAttribute="staffDetails" method="POST">
+<c:url var="saveURL" value="/staff/save"/>
+<form:form modelAttribute="staffDetails" method="POST" action="${saveURL}">
 	<div class="row-fluid">
 		<div class="well span4">
 			<div class="form-horizontal">
@@ -37,7 +38,7 @@
 						<div class="controls">
 							<form:input rel="datetime" type="text" path="dateOfBirth"
 								class="form-control" id="dateOfBirth"
-								placeholder="Date of Birth" required="true" />
+								placeholder="Date of Birth" />
 						</div>
 					</div>
 					<div class="control-group">

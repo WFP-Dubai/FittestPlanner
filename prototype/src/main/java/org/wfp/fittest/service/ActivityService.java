@@ -20,9 +20,15 @@ public interface ActivityService {
 
 	public Activities findActivitiesByDescription(String description);
 	
+	public void saveActivity(Activity activity);
+	
 	public ActivityType findActivityTypeById(Integer id);
 	
 	public List<ActivityType> findAllActivityTypes();
+	
+	public void saveActivityType(ActivityType activity);
+	
+	public void deleteActivityTypeById(Integer id);
 	
 	public List<ActivitySummary> findActivitySummary(Date date);
 	

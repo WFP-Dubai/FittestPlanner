@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<form:form modelAttribute="activityTypeDetails" method="POST">
+<c:url var="saveURL" value="/activity/type/save"/>
+<form:form modelAttribute="activityTypeDetails" method="POST" action="${saveURL}">
 	<div class="row-fluid">
 		<div class="well">
 			<div class="form-horizontal">

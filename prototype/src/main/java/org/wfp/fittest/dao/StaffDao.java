@@ -55,6 +55,10 @@ public interface StaffDao {
 
 	public List<Staff> findStaffNotAvailable(Date fromDate);
 	
+	public void saveStaff(Staff staff);
+	
+	public void deleteStaffByIndex(Integer staffIndex);
+	
 	/* ====================================================================== */
 	// Country
 	/* ====================================================================== */

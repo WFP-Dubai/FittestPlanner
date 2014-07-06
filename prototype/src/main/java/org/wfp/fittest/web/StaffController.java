@@ -25,8 +25,7 @@ public class StaffController extends AbstractController {
 		return "main/staff";
 	}
 
-	@RequestMapping(value = "/staff/new", method = { RequestMethod.GET,
-			RequestMethod.POST })
+	@RequestMapping(value = "/staff/new", method = RequestMethod.GET)
 	public String staffNew(@ModelAttribute("staffDetails") Staff staffDetails,
 			Locale locale, Model model) {
 		logger.info("new staff page!", locale);
@@ -42,8 +41,7 @@ public class StaffController extends AbstractController {
 		return "edit/staff";
 	}
 
-	@RequestMapping(value = "/staff/{staffIndex}/edit", method = {
-			RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/staff/{staffIndex}/edit", method = RequestMethod.GET)
 	public String staffEdit(@ModelAttribute("staffDetails") Staff staffDetails,
 			@PathVariable("staffIndex") Integer staffIndex, Locale locale,
 			Model model) {
@@ -53,6 +51,22 @@ public class StaffController extends AbstractController {
 		return "edit/staff";
 	}
 
+	@RequestMapping(value = "/staff/save", method = RequestMethod.POST)
+	public String staffSave(@ModelAttribute("staffDetails") Staff staffDetails,
+			Locale locale, Model model) {
+		logger.info("new staff page!", locale);
+		staffService.saveStaff(staffDetails);
+		return "redirect:/staff";
+	}
+
+	@RequestMapping(value = "/staff/{staffIndex}/delete", method = RequestMethod.POST)
+	public String staffDelete(@PathVariable("staffIndex") Integer staffIndex,
+			Locale locale, Model model) {
+		logger.info("delete staff page!", locale);
+		staffService.deleteStaffByIndex(staffIndex);
+		return "redirect:/staff";
+	}
+	
 	@RequestMapping(value = "/staff/role/new", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public String staffNew(

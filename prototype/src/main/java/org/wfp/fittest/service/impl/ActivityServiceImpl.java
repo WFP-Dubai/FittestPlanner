@@ -48,6 +48,12 @@ public class ActivityServiceImpl implements ActivityService {
 	public Activities findActivitiesByDescription(String description) {
 		return new Activities(activityDao.findActivitiesByDescription(description));
 	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void saveActivity(Activity activity) {
+		activityDao.saveActivity(activity);
+	}
 
 	@Override
 	public ActivityType findActivityTypeById(Integer id) {
@@ -57,6 +63,18 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public List<ActivityType> findAllActivityTypes() {
 		return activityDao.findAllActivityTypes();
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void saveActivityType(ActivityType activityType) {
+		activityDao.saveActivityType(activityType);
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void deleteActivityTypeById(Integer id) {
+		activityDao.deleteActivityTypeById(id);
 	}
 	
 	@Override

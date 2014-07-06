@@ -35,9 +35,9 @@ create table staff_nationality_mapping (
     countryid   bigserial,
     primary key (staffindex, countryid),
     foreign key (staffindex) references staff(staffindex)
-        on delete restrict,
+        on delete cascade,
     foreign key (countryid) references countries(countryid)
-        on delete restrict
+        on delete cascade
 );
 
 -- Join with staff table to get staff's profiles
@@ -46,9 +46,9 @@ create table staff_profiletype_mapping (
     profiletypeid bigserial,
     primary key (staffindex, profiletypeid),
     foreign key (staffindex) references staff(staffindex)
-        on delete restrict,
+        on delete cascade,
     foreign key (profiletypeid) references profiletypes(profiletypeid)
-        on delete restrict
+        on delete cascade
 );
 
 create table activitytypes (
@@ -59,8 +59,8 @@ create table activitytypes (
 
 create table confirmedtypes (
     confirmedtypeid    bigserial    primary key,
-    confirmedtype      varchar(100) not null unique,
-    confirmedcolorcode varchar(100) default 'ffffff'
+    confirmedtype      varchar(100) default 'Not Confirmed',
+    confirmedcolorcode varchar(100) default 'C20000'
 );
 
 create table activities (
@@ -80,9 +80,9 @@ create table activity_country_mapping (
     countryid   bigserial,
     primary key (activityid, countryid),
     foreign key (activityid) references activities(activityid)
-        on delete restrict,
+        on delete cascade,
     foreign key (countryid) references countries(countryid)
-        on delete restrict
+        on delete cascade
 );
 
 create table events (
@@ -104,9 +104,9 @@ create table staff_language_mapping (
     languageid  bigserial,
     primary key (staffindex, languageid),
     foreign key (staffindex) references staff(staffindex)
-        on delete restrict,
+        on delete cascade,
     foreign key (languageid) references languages(languageid)
-        on delete restrict
+        on delete cascade
 );
 
 create table activityroles (
@@ -117,7 +117,7 @@ create table activityroles (
     activityroleenddate   timestamp     default current_timestamp,
     activityrolelocation  varchar(200)  default '',
     foreign key (activityid) references activities(activityid)
-        on delete restrict,
+        on delete cascade,
     foreign key (profiletypeid) references profiletypes(profiletypeid)
         on delete restrict
 );
@@ -139,9 +139,9 @@ create table staffrole_activityrole_mapping (
     activityroleid bigserial,
     primary key (staffroleid, activityroleid),
     foreign key (staffroleid) references staffroles(staffroleid)
-        on delete restrict,
+        on delete cascade,
     foreign key (activityroleid) references activityroles(activityroleid)
-        on delete restrict
+        on delete cascade
 );
 
 -- Join with staff to get staff roles
@@ -150,40 +150,9 @@ create table staff_staffrole_mapping (
     staffroleid bigserial,
     primary key (staffindex, staffroleid),
     foreign key (staffindex) references staff(staffindex)
-        on delete restrict,
+        on delete cascade,
     foreign key (staffroleid) references staffroles(staffroleid)
-        on delete restrict
-);
-
-create table missiontypes (
-    missiontypeid bigserial    primary key,
-    missiontype   varchar(100) not null unique
-);
-
-create table missions (
-    missionid              bigserial    primary key,
-    missionname            varchar(256) not null,
-    missiontypeid          bigserial,
-    missionlocation        varchar(200) not null,
-    missiondescription     text         default '',
-    missionstartdate       timestamp    default current_timestamp,
-    missionenddate         timestamp    default current_timestamp,
-    missionconfirmedtypeid bigserial,
-    foreign key (missiontypeid) references missiontypes(missiontypeid)
-        on delete restrict,
-    foreign key (missionconfirmedtypeid) references confirmedtypes(confirmedtypeid)
-        on delete restrict
-);
-
--- Join with mission table to get a mission's activities
-create table mission_activity_mapping (
-    missionid bigserial,
-    activityid  bigserial,
-    primary key (missionid, activityid),
-    foreign key (missionid) references missions(missionid)
-        on delete restrict,
-    foreign key (activityid) references activities(activityid)
-        on delete restrict
+        on delete cascade
 );
 
 create table operationtypes (
@@ -210,7 +179,7 @@ create table audittable (
 
 create view activity_staff_view
 as
-    select a.activityid, s.staffindex from activities a
+    select a.activityid, s.staffindex, a.activitytypeid from activities a
     inner join activityroles ar
         on a.activityid = ar.activityid
     inner join staffrole_activityrole_mapping sam
@@ -219,19 +188,4 @@ as
         on sam.staffroleid = ssrm.staffroleid
     inner join staff s
         on ssrm.staffindex = s.staffindex
-;
-
-create view activitytype_staff_view
-as
-    select at.activitytypeid, s.staffindex from activitytypes at
-    inner join activity_staff_view asv
-        on at.activitytypeid = asv.activitytypeid
-;
-
-
-create view activity_profiletype_view
-as
-    select acs.activityid, sptm.profiletypeid from activity_staff_view asv
-    inner join staff_profiletype_mapping sptm
-        on asv.staffindex = sptm.staffindex
 ;

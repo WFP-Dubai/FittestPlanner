@@ -230,4 +230,14 @@ public class StaffDaoImpl extends AbstractDaoImpl implements StaffDao {
 	public List<StaffRole> findStaffRolesActiveInDate(Date activeDate) {
 		return findByDurationAround(StaffRole.class, activeDate);
 	}
+	
+	@Override
+	public void saveStaff(Staff staff) {
+		saveOrUpdate(staff);
+	}
+	
+	@Override
+	public void deleteStaffByIndex(Integer staffIndex) {
+		deleteByPropertyEqual(Staff.class, "index", staffIndex);
+	}
 }

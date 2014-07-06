@@ -19,7 +19,7 @@ public class ActivityController extends AbstractController {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(ActivityController.class);
-	
+
 	@RequestMapping(value = "/activity", method = RequestMethod.GET)
 	public String activity(Locale locale, Model model) {
 		logger.info("activity Page!", locale);
@@ -35,19 +35,26 @@ public class ActivityController extends AbstractController {
 		return "edit/activity";
 	}
 
-	@RequestMapping(value = "/activity/{activityID}/edit", method = {
-			RequestMethod.GET, RequestMethod.POST })
-	public String activityEdit(
-			@ModelAttribute("activityDetails") Activity activityDetails,
-			@PathVariable("activityID") Integer activityID, Locale locale,
-			Model model) {
+	@RequestMapping(value = "/activity/{activityID}/edit", method = RequestMethod.GET)
+	public String activityEdit(@PathVariable("activityID") Integer activityID,
+			Locale locale, Model model) {
 		logger.info("activity edit Page!", locale);
-		activityDetails = activityService.findActivityById(activityID);
+		Activity activityDetails = activityService.findActivityById(activityID);
 		model.addAttribute("activityDetails", activityDetails);
 		return "edit/activity";
 	}
 
-	@RequestMapping(value = "/activity/{activityID}", method = { RequestMethod.GET })
+	@RequestMapping(value = "/activity/save", method = RequestMethod.POST)
+	public String activitySave(
+			@ModelAttribute("activityDetails") Activity activityDetails,
+			@PathVariable("activityID") Integer activityID, Locale locale,
+			Model model) {
+		logger.info("activity edit submit Page!", locale);
+		activityService.saveActivity(activityDetails);
+		return "redirect:/activity";
+	}
+
+	@RequestMapping(value = "/activity/{activityID}", method = RequestMethod.GET)
 	public String activityRead(@PathVariable("activityID") Integer activityID,
 			Locale locale, Model model) {
 		logger.info("activity edit Page!", locale);
@@ -58,7 +65,6 @@ public class ActivityController extends AbstractController {
 
 	@RequestMapping(value = "/activity/type", method = RequestMethod.GET)
 	public String activityType(Locale locale, Model model) {
-		logger.info("activity types Page!", locale);
 		logger.info("activity types Page!", locale);
 		return "main/activityType";
 	}
@@ -86,13 +92,30 @@ public class ActivityController extends AbstractController {
 		return "edit/activityType";
 	}
 
-	@RequestMapping(value = "/activity/type/new", method = { RequestMethod.GET,
-			RequestMethod.POST })
+	@RequestMapping(value = "/activity/type/new", method = RequestMethod.GET)
 	public String activityTypeNew(
 			@ModelAttribute("activityTypeDetails") ActivityType activityTypeDetails,
 			Locale locale, Model model) {
 		logger.info("activity type new Page!", locale);
 		return "edit/activityType";
+	}
+
+	@RequestMapping(value = "/activity/type/save", method = RequestMethod.POST)
+	public String activityTypeSave(
+			@ModelAttribute("activityTypeDetails") ActivityType activityTypeDetails,
+			Locale locale, Model model) {
+		logger.info("activity type new Page!", locale);
+		activityService.saveActivityType(activityTypeDetails);
+		return "redirect:/activity/type";
+	}
+
+	@RequestMapping(value = "/activity/type/{activityTypeID}/delete", method = RequestMethod.POST)
+	public String activityTypeSave(
+			@PathVariable("activityTypeID") Integer activityTypeID,
+			Locale locale, Model model) {
+		logger.info("activity type new Page!", locale);
+		activityService.deleteActivityTypeById(activityTypeID);
+		return "redirect:/activity/type";
 	}
 
 	@RequestMapping(value = "/activity/role/{activityRoleID}/edit", method = {
@@ -102,7 +125,8 @@ public class ActivityController extends AbstractController {
 			@PathVariable("activityRoleID") Integer activityRoleID,
 			Locale locale, Model model) {
 		logger.info("activity role edit Page!", locale);
-		activityRoleDetails = activityService.findActivityRoleById(activityRoleID);
+		activityRoleDetails = activityService
+				.findActivityRoleById(activityRoleID);
 		model.addAttribute("activityRoleDetails", activityRoleDetails);
 		return "edit/activityRole";
 	}

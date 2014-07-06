@@ -43,4 +43,8 @@ public interface StaffService {
 	public List<ProfileType> findAllProfileTypes();
 
 	public List<ConfirmedType> findAllConfirmedTypes();
+	
+	public void saveStaff(Staff staff);
+	
+	public void deleteStaffByIndex(Integer staffIndex);
 }

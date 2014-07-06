@@ -9,6 +9,7 @@ import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
 import org.wfp.fittest.entity.ConfirmedType;
+import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.entity.ProfileType;
 import org.wfp.fittest.entity.Staff;
 import org.wfp.fittest.entity.StaffRole;
@@ -68,5 +69,9 @@ public abstract class AbstractController {
 	public List<ConfirmedType> populateConfirmedTypes() {
 		return staffService.findAllConfirmedTypes();
 	}
-
+	
+	@ModelAttribute("allCountries")
+	public List<Country> populateCountries() {
+		return utilityService.findAllCountries();
+	}
 }

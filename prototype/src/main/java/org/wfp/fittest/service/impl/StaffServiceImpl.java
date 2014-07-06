@@ -124,4 +124,14 @@ public class StaffServiceImpl implements StaffService {
 	public List<ConfirmedType> findAllConfirmedTypes() {
 		return staffDao.findAllConfirmedTypes();
 	}
+	
+	@Override
+	public void saveStaff(Staff staff) {
+		staffDao.saveStaff(staff);
+	}
+	
+	@Override
+	public void deleteStaffByIndex(Integer staffIndex) {
+		staffDao.deleteStaffByIndex(staffIndex);
+	}
 }

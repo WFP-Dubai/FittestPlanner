@@ -21,7 +21,7 @@
 				<th>Description</th>
 				<th>EtcServiceMap</th>
 				<th>Countries</th>
-				<th>Mission Name</th>
+				<th>Confirmed Type</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -32,8 +32,8 @@
 							<c:out value="${activity.ID}" />
 						</p></td>
 					<td><c:out value="${activity.description}" /></td>
-					<td class="text-center">
-					<c:if test="${not empty activity.etcServiceMap}">
+					<td class="text-center"><c:if
+							test="${not empty activity.etcServiceMap}">
 							<a href="<c:url value="${activity.etcServiceMap}"/>"> <label
 								class="label label-primary" data-toggle="tooltip"
 								data-placement="bottom" title="${activity.etcServiceMap}"
@@ -52,17 +52,15 @@
 						</ul>
 					</td>
 					<td>
-						<ul class="list-group">
-							<c:forEach var="mission" items="${activity.missions}">
-								<li class="list-group-item"><c:out
-										value="${mission.missionName}" /></li>
-							</c:forEach>
-						</ul>
+						<p class="label"
+							style="<c:out value="background-color: #${activity.confirmedType.confirmedColorCode};"/>">
+							${activity.confirmedType.confirmedType}</p>
 					</td>
 					<td>
 
 						<div class="btn-toolbar btn-group-sm text-center" role="toolbar">
 							<a href="#" data-toggle="modal"
+								data-id="<c:out value="${activity.ID}"/>"
 								data-target="#deleteActivityModal">
 								<button type="button" class="btn btn-danger">
 									<span class="icon-remove"></span> Delete
@@ -95,7 +93,7 @@
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Cancel</a> <a
-			href="<c:url value="/staff/${staff.index}/delete"/>"
+			id="modalLink" href="<c:url value="/activity/#ID/delete"/>"
 			class="btn btn-danger">Delete</a>
 	</div>
 </div>

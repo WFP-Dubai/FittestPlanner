@@ -1,4 +1,5 @@
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
 	<!-- jQuery -->
 	<script src="${contextPath}/js/jquery-1.7.2.min.js"></script>
@@ -37,7 +38,7 @@
 	<!-- data table plugin -->
 	<script src="${contextPath}/js/jquery.dataTables.min.js"></script>
 	<script src="${contextPath}/js/jquery.datetimepicker.js"></script>
-	
+
 	<!-- chart libraries start -->
 	<script src="${contextPath}/js/excanvas.js"></script>
 	<script src="${contextPath}/js/jquery.flot.min.js"></script>
@@ -71,14 +72,8 @@
 	<!-- application script for Charisma demo -->
 	<script src="${contextPath}/js/charisma.js"></script>
 	<!-- Parsley form validation -->
-    <script src="${contextPath}/js/parsley.min.js"></script>
-    <script src="${contextPath}/js/fittest-validators.js"></script>
-    
-    <script src="${contextPath}/js/fittest.js"></script>
+	<script src="${contextPath}/js/parsley.min.js"></script>
+	<script src="${contextPath}/js/fittest-validators.js"></script>
 
-	<script>
-	$(function() {
-		$("[rel='datetime']").datetimepicker();
-	});
-	</script>
+	<script src="${contextPath}/js/fittest.js"></script>
 </div>

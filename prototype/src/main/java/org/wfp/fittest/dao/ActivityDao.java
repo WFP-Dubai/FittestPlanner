@@ -7,8 +7,6 @@ import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
 import org.wfp.fittest.entity.Event;
-import org.wfp.fittest.entity.Mission;
-import org.wfp.fittest.entity.MissionType;
 
 public interface ActivityDao {
 
@@ -61,7 +59,7 @@ public interface ActivityDao {
 
 	public void deleteActivityTypesByColorCode(String colorCode);
 
-	public void saveActivityType(ActivityType activity);
+	public void saveActivityType(ActivityType activityType);
 
 	/* ====================================================================== */
 	// Activity Role
@@ -90,56 +88,6 @@ public interface ActivityDao {
 	public void deleteActivityRolesByLocation(String activityRoleLocation);
 
 	public void saveActivityRole(ActivityRole activityRole);
-
-	/* ====================================================================== */
-	// Mission
-	/* ====================================================================== */
-
-	public Mission findMissionById(Integer id);
-
-	public List<Mission> findAllMissions();
-
-	public List<Mission> findMissionsAfterStartDate(Date startDate);
-
-	public List<Mission> findMissionsBeforeEndDate(Date endDate);
-
-	public List<Mission> findMissionsByDuration(Date startDate, Date endDate);
-
-	public List<Mission> findMissionsByLocation(String missionLocation);
-
-	public List<Mission> findMissionsByName(String missionName);
-
-	public List<Mission> findMissionsByMissionType(MissionType missionType);
-
-	public void deleteMission(Mission mission);
-
-	public void deleteMissionById(Integer id);
-
-	public void deleteAllMissions();
-
-	public void deleteMissionsByLocation(String missionLocation);
-
-	public void deleteMissionsByName(String missionName);
-
-	public void deleteMissionsByMissionType(MissionType missionType);
-
-	public void saveMission(Mission mission);
-
-	/* ====================================================================== */
-	// Mission Type
-	/* ====================================================================== */
-
-	public MissionType findMissionTypeById(Integer id);
-	
-	public List<MissionType> findMissionTypesByMissionType(String missionType);
-
-	public List<MissionType> findAllMissionTypes();
-
-	public void deleteMissionType(MissionType missionType);
-
-	public void deleteMissionTypeById(Integer id);
-
-	public void saveMissionType(MissionType missionType);
 
 	/* ====================================================================== */
 	// Event

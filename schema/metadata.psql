@@ -16,6 +16,6 @@
 
 \copy confirmedtypes (confirmedtype, confirmedcolorcode) from 'metadata/confirmedtypes.csv' delimiter as ','
 
-\copy missiontypes (missiontype) from 'metadata/missiontypes.csv'
+-- \copy missiontypes (missiontype) from 'metadata/missiontypes.csv'
 
 \copy operationtypes (operationname) from 'metadata/operationtypes.csv'
