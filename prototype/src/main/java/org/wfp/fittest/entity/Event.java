@@ -16,9 +16,13 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "events")
 @XmlRootElement
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Event {
 
 	@Id

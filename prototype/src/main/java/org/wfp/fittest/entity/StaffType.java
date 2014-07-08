@@ -20,9 +20,13 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "stafftypes")
 @XmlRootElement
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class StaffType {
 
 	@Id

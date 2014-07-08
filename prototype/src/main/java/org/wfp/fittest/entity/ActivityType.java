@@ -19,9 +19,13 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "activitytypes")
 @XmlRootElement
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ActivityType {
 
 	@Id
@@ -39,8 +43,6 @@ public class ActivityType {
 	@OneToMany(mappedBy = "activityType", fetch = FetchType.EAGER, cascade = {
 			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<Activity> activities = new HashSet<Activity>();
-	
-	
 
 	public Integer getID() {
 		return ID;
@@ -55,7 +57,7 @@ public class ActivityType {
 	public String getStringID() {
 		return Integer.toString(getID());
 	}
-	
+
 	public String getActivityType() {
 		return activityType;
 	}

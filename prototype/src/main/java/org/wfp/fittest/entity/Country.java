@@ -19,9 +19,13 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "countries")
 @XmlRootElement
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Country {
 	
 	@Id
