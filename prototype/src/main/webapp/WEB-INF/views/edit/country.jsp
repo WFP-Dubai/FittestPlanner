@@ -5,7 +5,7 @@
 <html>
 <head>
 <jsp:include page="/WEB-INF/templates/meta.jsp"></jsp:include>
-<title>Activity Form</title>
+<title>Country Form</title>
 </head>
 <body>
     <jsp:include page="/WEB-INF/templates/navbar.jsp"></jsp:include>
@@ -15,7 +15,7 @@
 
             <div id="content" class="span10">
                 <div class="span 6">
-                    <jsp:include page="/WEB-INF/widgets/forms/edit/activity.jsp"></jsp:include>
+                    <jsp:include page="/WEB-INF/widgets/forms/edit/country.jsp"></jsp:include>
                 </div>
             </div>
         </div>

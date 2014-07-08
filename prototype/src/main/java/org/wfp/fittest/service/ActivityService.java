@@ -9,12 +9,19 @@ import org.wfp.fittest.beans.ActivitySummary;
 import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
+import org.wfp.fittest.entity.ConfirmedType;
 
 public interface ActivityService {
 
 	public Activity findActivityById(Integer activityId);
 	
 	public Activities findAllActivities();
+	
+	public Activities findActivitiesByConfirmedType(ConfirmedType confirmedType);
+	
+	public Activities findAllConfirmedActivities();
+
+	public Activities findAllNotConfirmedActivities();
 	
 	public Activities findActivitiesByActivityType(ActivityType activityType);
 

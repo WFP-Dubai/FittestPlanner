@@ -16,7 +16,7 @@ import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
 
 public class ActivityDaoTest extends AbstractDaoTest {
-
+/*
 	@Autowired
 	private ActivityDao activityDao;
 
@@ -274,7 +274,7 @@ public class ActivityDaoTest extends AbstractDaoTest {
 		List<ActivityRole> activityRoles = activityDao.findActivityRolesByLocation("Test123");
 		assertListSize(activityRoles, 1);
 	}
-
+*/
 	@Test
 	public void testFindEventById() {
 

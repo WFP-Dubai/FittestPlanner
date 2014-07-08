@@ -9,6 +9,7 @@ import org.wfp.fittest.dao.ActivityDao;
 import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
+import org.wfp.fittest.entity.ConfirmedType;
 import org.wfp.fittest.entity.Event;
 
 @Repository
@@ -22,6 +23,11 @@ public class ActivityDaoImpl extends AbstractDaoImpl implements ActivityDao {
 	@Override
 	public List<Activity> findAllActivities() {
 		return findAll(Activity.class);
+	}
+	
+	@Override
+	public List<Activity> findActivitiesByConfirmedType(ConfirmedType confirmedType) {
+		return findByPropertyEqual(Activity.class, "confirmedType", confirmedType);
 	}
 
 	@Override

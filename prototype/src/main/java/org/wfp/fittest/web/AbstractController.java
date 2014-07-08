@@ -40,6 +40,16 @@ public abstract class AbstractController {
 		return activityService.findAllActivities().getActivities();
 	}
 
+	@ModelAttribute("allConfirmedActivities")
+	public List<Activity> populateConfirmedActivities() {
+		return activityService.findAllConfirmedActivities().getActivities();
+	}
+	
+	@ModelAttribute("allNotConfirmedActivities")
+	public List<Activity> populateNotConfirmedActivities() {
+		return activityService.findAllNotConfirmedActivities().getActivities();
+	}
+	
 	@ModelAttribute("allActivityRoles")
 	public List<ActivityRole> populateActivityRoles() {
 		return activityService.findAllActivityRoles();

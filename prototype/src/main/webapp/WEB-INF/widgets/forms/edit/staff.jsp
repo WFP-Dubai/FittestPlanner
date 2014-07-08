@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<c:url var="saveURL" value="/staff/save"/>
-<form:form modelAttribute="staffDetails" method="POST" action="${saveURL}">
+<c:url var="saveURL" value="/staff/save" />
+<form:form modelAttribute="staffDetails" method="POST"
+	action="${saveURL}">
 	<div class="row-fluid">
-		<div class="well span4">
+		<div class="well span6">
 			<div class="form-horizontal">
 				<fieldset>
 					<legend>Date</legend>
@@ -41,6 +42,19 @@
 								placeholder="Date of Birth" />
 						</div>
 					</div>
+					
+					<div class="control-group">
+						<label for="nationalities" class="control-label">Nationalities</label>
+						<div class="controls">
+							<form:select id="nationalities" size="10" multiple="true"
+								path="nationalities" data-rel="chosen" required="true">
+								<form:options items="${allCountries}" itemLabel="fullName"
+									itemValue="ID" />
+							</form:select>
+						</div>
+					</div>
+					
+					
 					<div class="control-group">
 						<label for="title" class="control-label">Title</label>
 						<div class="controls">
@@ -48,6 +62,18 @@
 								id="title" placeholder="Title" required="true" />
 						</div>
 					</div>
+
+					<div class="control-group">
+						<label for="profileTypes" class="control-label">Profile Types</label>
+						<div class="controls">
+							<form:select id="profileTypes" size="10" multiple="true"
+								path="profileTypes" data-rel="chosen" required="true">
+								<form:options items="${allProfileTypes}" itemLabel="profileType"
+									itemValue="ID" />
+							</form:select>
+						</div>
+					</div>
+
 					<div class="control-group">
 						<label for="thuraya" class="control-label">Thuraya</label>
 						<div class="controls">
@@ -77,8 +103,8 @@
 					<div class="control-group">
 						<label for="colorCode" class="control-label">Color Code</label>
 						<div class="controls">
-							<form:input type="text" class="form-control" path="staffColorCode" id="colorCode"
-								placeholder="Color Code" />
+							<form:input type="text" class="form-control"
+								path="staffColorCode" id="colorCode" placeholder="Color Code" />
 						</div>
 					</div>
 				</fieldset>

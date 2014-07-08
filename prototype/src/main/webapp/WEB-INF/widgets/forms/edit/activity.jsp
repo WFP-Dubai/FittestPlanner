@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<c:url var="saveURL" value="/activity/save"/>
-<a href="${saveURL}">Link</a>
-<form:form modelAttribute="activityDetails" method="POST" action="${saveURL}">
+<c:url var="saveURL" value="/activity/save" />
+<form:form modelAttribute="activityDetails" method="POST"
+	action="${saveURL}">
 	<div class="row-fluid">
 		<div class="well span6">
 			<div class="form-horizontal">
@@ -21,14 +21,13 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<label for="activityType" class="control-label">Activity
+						<label for="activityTypeID" class="control-label">Activity
 							Type</label>
 						<div class="controls">
-							<form:select id="activityType" multiple="false"
+							<form:select id="activityTypeID" size="10" multiple="false"
 								path="activityType" data-rel="chosen" required="true">
 								<form:options items="${allActivityTypes}"
-									value="${activityType.ID}" itemLabel="activityType"
-									itemValue="ID" />
+									itemLabel="activityType" itemValue="ID" />
 							</form:select>
 						</div>
 					</div>
@@ -43,8 +42,8 @@
 					<div class="control-group">
 						<label for="countries" class="control-label">Countries</label>
 						<div class="controls">
-							<form:select id="countries" multiple="true" path="countries"
-								data-rel="chosen" required="false">
+							<form:select id="countries" size="10" multiple="true"
+								path="countries" data-rel="chosen" required="false">
 								<form:options items="${allCountries}" itemLabel="fullName"
 									itemValue="ID" />
 							</form:select>

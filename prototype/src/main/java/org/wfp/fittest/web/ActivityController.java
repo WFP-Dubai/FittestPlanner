@@ -36,10 +36,12 @@ public class ActivityController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/activity/{activityID}/edit", method = RequestMethod.GET)
-	public String activityEdit(@PathVariable("activityID") Integer activityID,
-			Locale locale, Model model) {
+	public String activityEdit(
+			@ModelAttribute("activityDetails") Activity activityDetails,
+			@PathVariable("activityID") Integer activityID, Locale locale,
+			Model model) {
 		logger.info("activity edit Page!", locale);
-		Activity activityDetails = activityService.findActivityById(activityID);
+		activityDetails = activityService.findActivityById(activityID);
 		model.addAttribute("activityDetails", activityDetails);
 		return "edit/activity";
 	}

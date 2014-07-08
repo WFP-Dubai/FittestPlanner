@@ -6,6 +6,7 @@ import java.util.List;
 import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
+import org.wfp.fittest.entity.ConfirmedType;
 import org.wfp.fittest.entity.Event;
 
 public interface ActivityDao {
@@ -17,6 +18,8 @@ public interface ActivityDao {
 	public Activity findActivityById(Integer id);
 
 	public List<Activity> findAllActivities();
+	
+	public List<Activity> findActivitiesByConfirmedType(ConfirmedType confirmedType);
 
 	public List<Activity> findActivitiesByActivityType(ActivityType activityType);
 

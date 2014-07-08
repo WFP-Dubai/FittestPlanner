@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<c:url var="saveURL" value="/activity/role/save"/>
 <form:form modelAttribute="activityRoleDetails" method="POST"
-	action="new">
+	action="${saveURL}">
 	<div class="row-fluid">
 		<div class="well span6">
 			<div class="form-horizontal">

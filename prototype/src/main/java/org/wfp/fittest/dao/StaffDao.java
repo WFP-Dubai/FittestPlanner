@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.wfp.fittest.entity.ActivityType;
+import org.wfp.fittest.entity.ConfirmedType;
 import org.wfp.fittest.entity.Country;
 import org.wfp.fittest.entity.Language;
 import org.wfp.fittest.entity.ProfileType;
 import org.wfp.fittest.entity.Staff;
-import org.wfp.fittest.entity.ConfirmedType;
 import org.wfp.fittest.entity.StaffRole;
 import org.wfp.fittest.entity.StaffType;
 

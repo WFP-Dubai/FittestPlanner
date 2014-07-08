@@ -28,6 +28,11 @@ public class UtilityServiceImpl implements UtilityService {
 	}
 	
 	@Override
+	public Country findCountryById(Integer countryId) {
+		return utilityDao.findCountryById(countryId);
+	}
+	
+	@Override
 	public Country findCountryByISOCode(String ISOcode) {
 		return utilityDao.findCountryByISOCode(ISOcode);
 	}
@@ -35,5 +40,10 @@ public class UtilityServiceImpl implements UtilityService {
 	@Override
 	public List<Language> findAllLanguages() {
 		return utilityDao.findAllLanguages();
+	}
+	
+	@Override
+	public void saveCountry(Country country) {
+		utilityDao.saveCountry(country);
 	}
 }
