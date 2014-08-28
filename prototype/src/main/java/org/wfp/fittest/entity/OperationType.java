@@ -13,47 +13,45 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "operationtypes")
-@XmlRootElement
-public class OperationType {
+public class OperationType implements EntityId {
 
 	@Id
 	@Column(name = "operationtypeid")
 	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "operationtypes_operationtypeid_seq", name = "operationtypes_operationtypeid_seq")
 	@GeneratedValue(generator = "operationtypes_operationtypeid_seq", strategy = GenerationType.SEQUENCE)
-	private Integer ID;
+	private Long id;
 
 	@Column(name = "operationname")
 	private String operationName;
 
-	@OneToMany(mappedBy = "operationType", fetch = FetchType.EAGER, cascade = {
+	@OneToMany(mappedBy = "operationType", fetch = FetchType.LAZY, cascade = {
 			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<AuditRecord> auditRecords = new HashSet<AuditRecord>();
 
 	public OperationType() {
 	}
 
-	@XmlTransient
-	public Integer getID() {
-		return ID;
+	public OperationType(Long iD, String operationName,
+			Set<AuditRecord> auditRecords) {
+		super();
+		this.id = iD;
+		this.operationName = operationName;
+		this.auditRecords = auditRecords;
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public Long getId() {
+		return id;
 	}
 
-	@XmlID
-	@XmlElement(name = "ID")
-	public String getStringID() {
-		return Integer.toString(getID());
+	public void setId(Long iD) {
+		this.id = iD;
+	}
+
+	public String getStringId() {
+		return Long.toString(getId());
 	}
 
 	public String getOperationName() {
@@ -64,9 +62,6 @@ public class OperationType {
 		this.operationName = operationName;
 	}
 
-	@XmlElementWrapper(name = "audits")
-	@XmlElement(name = "audit")
-	@XmlIDREF
 	public Set<AuditRecord> getAuditRecords() {
 		return auditRecords;
 	}
@@ -79,7 +74,7 @@ public class OperationType {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -92,10 +87,10 @@ public class OperationType {
 		if (getClass() != obj.getClass())
 			return false;
 		OperationType other = (OperationType) obj;
-		if (ID == null) {
-			if (other.ID != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!ID.equals(other.ID))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

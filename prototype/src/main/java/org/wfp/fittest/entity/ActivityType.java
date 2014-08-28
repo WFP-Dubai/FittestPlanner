@@ -1,6 +1,7 @@
 package org.wfp.fittest.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,26 +14,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.wfp.fittest.converter.EntityConverter;
 
 @Entity
 @Table(name = "activitytypes")
-@XmlRootElement
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ActivityType {
+public class ActivityType implements EntityId {
 
 	@Id
 	@Column(name = "activitytypeid")
 	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "activitytypes_activitytypeid_seq", name = "activitytypes_activitytypeid_seq")
 	@GeneratedValue(generator = "activitytypes_activitytypeid_seq", strategy = GenerationType.SEQUENCE)
-	private Integer ID;
+	private Long id;
 
 	@Column(name = "activitytype")
 	private String activityType;
@@ -40,22 +33,28 @@ public class ActivityType {
 	@Column(name = "activitytypecolorcode")
 	private String colorCode;
 
-	@OneToMany(mappedBy = "activityType", fetch = FetchType.EAGER, cascade = {
+	@OneToMany(mappedBy = "activityType", fetch = FetchType.LAZY, cascade = {
 			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<Activity> activities = new HashSet<Activity>();
 
-	public Integer getID() {
-		return ID;
+	public ActivityType() {
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public ActivityType(Long iD, String activityType, String colorCode,
+			Set<Activity> activities) {
+		super();
+		this.id = iD;
+		this.activityType = activityType;
+		this.colorCode = colorCode;
+		this.activities = activities;
 	}
 
-	@XmlID
-	@XmlElement(name = "ID")
-	public String getStringID() {
-		return Integer.toString(getID());
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long iD) {
+		this.id = iD;
 	}
 
 	public String getActivityType() {
@@ -74,11 +73,12 @@ public class ActivityType {
 		this.colorCode = colorCode;
 	}
 
-	@XmlElementWrapper(name = "activities")
-	@XmlElement(name = "activity")
-	@XmlIDREF
 	public Set<Activity> getActivities() {
 		return activities;
+	}
+
+	public List<Long> getActivityIds() {
+		return EntityConverter.toIdList(getActivities());
 	}
 
 	public void setActivities(Set<Activity> activities) {

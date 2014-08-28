@@ -1,6 +1,7 @@
 package org.wfp.fittest.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,54 +15,50 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.wfp.fittest.converter.EntityConverter;
 
 @Entity
 @Table(name = "profiletypes")
-@XmlRootElement
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ProfileType {
+public class ProfileType implements EntityId {
 
 	@Id
 	@Column(name = "profiletypeid")
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="profiletypes_profiletypeid_seq", name="profiletypes_profiletypeid_seq")
-	@GeneratedValue(generator="profiletypes_profiletypeid_seq", strategy=GenerationType.SEQUENCE)
-	private Integer ID;
-	
+	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "profiletypes_profiletypeid_seq", name = "profiletypes_profiletypeid_seq")
+	@GeneratedValue(generator = "profiletypes_profiletypeid_seq", strategy = GenerationType.SEQUENCE)
+	private Long id;
+
 	@Column(name = "profiletype", nullable = false)
 	private String profileType;
-	
-	@ManyToMany(mappedBy = "profileTypes", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@ManyToMany(mappedBy = "profileTypes", fetch = FetchType.LAZY, cascade = {
+			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<Staff> staff = new HashSet<Staff>();
-	
-	@OneToMany(mappedBy = "profileType", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@OneToMany(mappedBy = "profileType", fetch = FetchType.LAZY, cascade = {
+			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<ActivityRole> activityRoles = new HashSet<ActivityRole>();
 
-	public ProfileType() {}
-	
-	@XmlTransient
-	public Integer getID() {
-		return ID;
+	public ProfileType() {
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public ProfileType(Long iD, String profileType, Set<Staff> staff,
+			Set<ActivityRole> activityRoles) {
+		super();
+		this.id = iD;
+		this.profileType = profileType;
+		this.staff = staff;
+		this.activityRoles = activityRoles;
 	}
 
-	@XmlID
-	@XmlElement(name = "ID")
-	public String getStringID() {
-		return Integer.toString(getID());
+	public Long getId() {
+		return id;
 	}
-	
+
+	public void setId(Long iD) {
+		this.id = iD;
+	}
+
 	public String getProfileType() {
 		return profileType;
 	}
@@ -70,20 +67,24 @@ public class ProfileType {
 		this.profileType = profileType;
 	}
 
-	@XmlIDREF
 	public Set<Staff> getStaff() {
 		return staff;
+	}
+
+	public List<Long> getStaffIds() {
+		return EntityConverter.toIdList(getStaff());
 	}
 
 	public void setStaff(Set<Staff> staff) {
 		this.staff = staff;
 	}
 
-	@XmlElementWrapper(name = "activityRoles")
-	@XmlElement(name = "activityRole")
-	@XmlIDREF
 	public Set<ActivityRole> getActivityRoles() {
 		return activityRoles;
+	}
+
+	public List<Long> getActivityRoleIds() {
+		return EntityConverter.toIdList(getActivityRoles());
 	}
 
 	public void setActivityRoles(Set<ActivityRole> activityRoles) {
@@ -94,7 +95,7 @@ public class ProfileType {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -107,14 +108,14 @@ public class ProfileType {
 		if (getClass() != obj.getClass())
 			return false;
 		ProfileType other = (ProfileType) obj;
-		if (ID == null) {
-			if (other.ID != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!ID.equals(other.ID))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return getProfileType();

@@ -2,7 +2,7 @@
 -- !  copy is a PostgreSQL specific function
 -- !! copy file paths must be absolute, change \cd parameter below
 
-\cd /home/public/FittestPlanner/schema
+\cd C:/Users/sami.zeinelabdin/Desktop/GIT/FittestPlanner_REST/schema
 
 -------------------------------------------------------------------------------
 -- Parent Tables
@@ -24,7 +24,7 @@
 
 \copy activityroles (activityid, profiletypeid, activityrolestartdate, activityroleenddate, activityrolelocation) from 'data/activityroles.csv' delimiter as ',' null as 'null'
 
-\copy staffroles (staffrolestartdate, staffroleenddate, staffrolelocation, staffrolecomments, staffconfirmedtypeid) from 'data/staffroles.csv' delimiter as ',' null as 'null'
+\copy staffroles (staffrolestartdate, staffroleenddate, staffrolelocation, staffrolecomments, staffconfirmedtypeid, staffroleactivityroleid, staffrolestaffindex) from 'data/staffroles.csv' delimiter as ',' null as 'null'
 
 -------------------------------------------------------------------------------
 -- Join Tables
@@ -37,9 +37,5 @@
 \copy activity_country_mapping (activityid, countryid) from 'data/activity_country.csv' delimiter as ','
 
 \copy staff_language_mapping (staffindex, languageid) from 'data/staff_language.csv' delimiter as ','
-
-\copy staffrole_activityrole_mapping (staffroleid, activityroleid) from 'data/staffrole_activityrole.csv' delimiter as ','
-
-\copy staff_staffrole_mapping (staffindex, staffroleid) from 'data/staff_staffrole.csv' delimiter as ','
 
 -- \copy mission_activity_mapping (missionid, activityid) from 'data/mission_activity.csv' delimiter as ','

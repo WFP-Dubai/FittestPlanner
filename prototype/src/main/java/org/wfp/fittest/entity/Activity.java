@@ -1,6 +1,8 @@
 package org.wfp.fittest.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,87 +20,76 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.wfp.fittest.converter.EntityConverter;
 
 @Entity
 @Table(name = "activities")
-@XmlRootElement(name = "activity")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Activity {
+public class Activity implements EntityId {
 
 	@Id
 	@Column(name = "activityid")
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="activities_activityid_seq", name="activities_activityid_seq")
-	@GeneratedValue(generator="activities_activityid_seq", strategy=GenerationType.SEQUENCE)
-	private Integer ID;
-	
+	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "activities_activityid_seq", name = "activities_activityid_seq")
+	@GeneratedValue(generator = "activities_activityid_seq", strategy = GenerationType.SEQUENCE)
+	private Long id;
+
 	@Column(name = "activitydescription")
 	private String description;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+			CascadeType.MERGE })
 	@JoinColumn(name = "activitytypeid")
 	private ActivityType activityType;
-	
+
 	@Column(name = "activityetcservicemap")
 	private String etcServiceMap;
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+			CascadeType.MERGE })
 	@OrderBy
-	@JoinTable(
-		name = "activity_country_mapping",
-		joinColumns = {@JoinColumn(name = "activityid", referencedColumnName = "activityid")},
-		inverseJoinColumns = {@JoinColumn(name = "countryid", referencedColumnName = "countryid")}
-	)
+	@JoinTable(name = "activity_country_mapping", joinColumns = { @JoinColumn(name = "activityid", referencedColumnName = "activityid") }, inverseJoinColumns = { @JoinColumn(name = "countryid", referencedColumnName = "countryid") })
 	private Set<Country> countries = new HashSet<Country>();
-	
-	@OneToMany(mappedBy="activity", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@OneToMany(mappedBy = "activity", fetch = FetchType.LAZY, cascade = {
+			CascadeType.PERSIST, CascadeType.MERGE })
 	@OrderBy
 	private Set<ActivityRole> activityRoles = new HashSet<ActivityRole>();
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+			CascadeType.MERGE })
 	@JoinColumn(name = "activityconfirmedtypeid")
 	private ConfirmedType confirmedType;
-	
-	public Activity() {}
 
-	@XmlTransient
-	public Integer getID() {
-		return ID;
+	public Activity() {
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public Activity(Long Id, String description, ActivityType activityType,
+			String etcServiceMap, Set<Country> countries,
+			Set<ActivityRole> activityRoles, ConfirmedType confirmedType) {
+		super();
+		this.id = Id;
+		this.description = description;
+		this.activityType = activityType;
+		this.etcServiceMap = etcServiceMap;
+		this.countries = countries;
+		this.activityRoles = activityRoles;
+		this.confirmedType = confirmedType;
 	}
 
-	@XmlID
-	@XmlElement(name = "ID")
-	public String getStringID() {
-		return Integer.toString(getID());
+	public Long getId() {
+		return id;
 	}
-	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	@XmlIDREF
-	public ActivityType getActivityType() {
-		return activityType;
-	}
-
-	public void setActivityType(ActivityType activityType) {
-		this.activityType = activityType;
 	}
 
 	public String getEtcServiceMap() {
@@ -109,7 +100,42 @@ public class Activity {
 		this.etcServiceMap = etcServiceMap;
 	}
 
-	@XmlIDREF
+	public ActivityType getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(ActivityType activityType) {
+		this.activityType = activityType;
+	}
+
+	public Long getActivityTypeId() {
+		return activityType.getId();
+	}
+	
+	public String getActivityTypeDescription() {
+		return getActivityType().getActivityType();
+	}
+
+	public ConfirmedType getConfirmedType() {
+		return confirmedType;
+	}
+
+	public void setConfirmedType(ConfirmedType confirmedType) {
+		this.confirmedType = confirmedType;
+	}
+	
+	public Long getConfirmedTypeId() {
+		return confirmedType.getId();
+	}
+	
+	public String getConfirmedTypeDescription() {
+		return getConfirmedType().getConfirmedType();
+	}
+	
+	public String getConfirmedTypeColorCode() {
+		return getConfirmedType().getConfirmedColorCode();
+	}
+	
 	public Set<Country> getCountries() {
 		return countries;
 	}
@@ -118,9 +144,17 @@ public class Activity {
 		this.countries = countries;
 	}
 
-	@XmlElementWrapper(name = "activityRoles")
-	@XmlElement(name = "activityRole")
-	@XmlIDREF
+	public List<Long> getCountryIds() {
+		return EntityConverter.toIdList(getCountries());
+	}
+	
+	public List<String> getCountryNames() {
+		List<String> names = new ArrayList<String>();
+		for (Country c : getCountries())
+			names.add(c.getFullName());
+		return names;
+	}
+
 	public Set<ActivityRole> getActivityRoles() {
 		return activityRoles;
 	}
@@ -128,22 +162,24 @@ public class Activity {
 	public void setActivityRoles(Set<ActivityRole> activityRoles) {
 		this.activityRoles = activityRoles;
 	}
-
-	@XmlElement(name = "confirmedType")
-	@XmlIDREF
-	public ConfirmedType getConfirmedType() {
-		return confirmedType;
+	
+	public List<Long> getActivityRoleIds() {
+		return EntityConverter.toIdList(getActivityRoles());
 	}
-
-	public void setConfirmedType(ConfirmedType confirmedType) {
-		this.confirmedType = confirmedType;
+	
+	public List<String> getActivityRoleProfileTypeDescriptions() {
+		List<String> descs = new ArrayList<String>();
+		for (ActivityRole ar : getActivityRoles()) {
+			descs.add(ar.getProfileTypeDescription());
+		}
+		return descs;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -156,16 +192,17 @@ public class Activity {
 		if (getClass() != obj.getClass())
 			return false;
 		Activity other = (Activity) obj;
-		if (ID == null) {
-			if (other.ID != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!ID.equals(other.ID))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return getDescription();
 	}
+
 }

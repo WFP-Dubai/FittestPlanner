@@ -1,90 +1,74 @@
 package org.wfp.fittest.web;
 
+import java.util.List;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.wfp.fittest.entity.Staff;
-import org.wfp.fittest.entity.StaffRole;
+import org.wfp.fittest.dto.StaffDto;
+import org.wfp.fittest.service.ActivityService;
+import org.wfp.fittest.service.StaffService;
+import org.wfp.fittest.service.UtilityService;
 
 @Controller
+@RequestMapping(value = "/staffList")
 public class StaffController extends AbstractController {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(StaffController.class);
+	@Autowired
+	private ActivityService activityService;
+	@Autowired
+	private StaffService staffService;
+	@Autowired
+	private UtilityService utilityService;
 
-	@RequestMapping(value = "/staff", method = RequestMethod.GET)
-	public String staff(Locale locale, Model model) {
-		logger.info("staff Page!", locale);
-		return "main/staff";
-	}
-
-	@RequestMapping(value = "/staff/new", method = RequestMethod.GET)
-	public String staffNew(@ModelAttribute("staffDetails") Staff staffDetails,
-			Locale locale, Model model) {
-		logger.info("new staff page!", locale);
-		return "edit/staff";
+	@RequestMapping(value = "")
+	public String staff(Model model, Locale locale) {
+		List<StaffDto> staff = staffService.findAllStaff();
+		model.addAttribute("allStaff", staff);
+		return "staff";
 	}
 
-	@RequestMapping(value = "/staff/{staffIndex}", method = RequestMethod.GET)
-	public String staffRead(@PathVariable("staffIndex") Integer staffIndex,
-			Locale locale, Model model) {
-		logger.info("staff read page!", locale);
-		Staff staffDetails = staffService.findStaffByIndex(staffIndex);
-		model.addAttribute("staffDetails", staffDetails);
-		return "edit/staff";
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String staffSave(@ModelAttribute StaffDto staffDto, Model model, Locale locale) {
+		staffService.saveOrUpdateStaff(staffDto);
+		return "redirect:/staffList#staff-list";
 	}
 
-	@RequestMapping(value = "/staff/{staffIndex}/edit", method = RequestMethod.GET)
-	public String staffEdit(@ModelAttribute("staffDetails") Staff staffDetails,
-			@PathVariable("staffIndex") Integer staffIndex, Locale locale,
-			Model model) {
-		logger.info("new staff page!", locale);
-		staffDetails = staffService.findStaffByIndex(staffIndex);
-		model.addAttribute("staffDetails", staffDetails);
-		return "edit/staff";
+	@RequestMapping(value = "/new")
+	public String staffView(Model model, Locale locale) {
+		model.addAttribute("staff", new StaffDto());
+		model.addAttribute("allStaffTypes", staffService.findAllStaffTypes());
+		model.addAttribute("allProfileTypes",
+				staffService.findAllProfileTypes());
+		model.addAttribute("allNationalities",
+				utilityService.findAllCountries());
+		model.addAttribute("allLanguages", utilityService.findAllLanguages());
+		return "forms/staff";
 	}
 
-	@RequestMapping(value = "/staff/save", method = RequestMethod.POST)
-	public String staffSave(@ModelAttribute("staffDetails") Staff staffDetails,
-			Locale locale, Model model) {
-		logger.info("new staff page!", locale);
-		staffService.saveStaff(staffDetails);
-		return "redirect:/staff";
+	@RequestMapping(value = "/{id}/view")
+	public String staffView(@PathVariable("id") Long staffId, Model model,
+			Locale locale) {
+		model.addAttribute("staff", staffService.findStaffNested(staffId));
+		model.addAttribute("allStaffTypes", staffService.findAllStaffTypes());
+		model.addAttribute("allProfileTypes",
+				staffService.findAllProfileTypes());
+		model.addAttribute("allNationalities",
+				utilityService.findAllCountries());
+		model.addAttribute("allLanguages", utilityService.findAllLanguages());
+		return "forms/staff";
 	}
 
-	@RequestMapping(value = "/staff/{staffIndex}/delete", method = RequestMethod.POST)
-	public String staffDelete(@PathVariable("staffIndex") Integer staffIndex,
-			Locale locale, Model model) {
-		logger.info("delete staff page!", locale);
-		staffService.deleteStaffByIndex(staffIndex);
-		return "redirect:/staff";
-	}
-	
-	@RequestMapping(value = "/staff/role/new", method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public String staffNew(
-			@ModelAttribute("staffRoleDetails") StaffRole staffRoleDetails,
-			Locale locale, Model model) {
-		logger.info("staff role edit page!", locale);
-		return "edit/staffRole";
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+	public String staffDelete(@PathVariable("id") Long staffId, Model model,
+			Locale locale) {
+		staffService.deleteStaffById(staffId);
+		return "redirect:/staffList#staff-list";
 	}
 
-	@RequestMapping(value = "/staff/role/{staffRoleID}/edit", method = {
-			RequestMethod.GET, RequestMethod.POST })
-	public String staffEdit(
-			@ModelAttribute("staffRoleDetails") StaffRole staffRoleDetails,
-			@PathVariable("staffRoleID") Integer staffRoleID, Locale locale,
-			Model model) {
-		logger.info("staff role edit page!", locale);
-		staffRoleDetails = staffService.findStaffRoleById(staffRoleID);
-		model.addAttribute("staffRoleDetails", staffRoleDetails);
-		return "edit/staffRole";
-	}
 }

@@ -15,26 +15,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "audittable")
-@XmlRootElement
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class AuditRecord {
+public class AuditRecord implements EntityId {
 
 	@Id
 	@Column(name = "auditid")
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="audittable_auditid_seq", name="audittable_auditid_seq")
 	@GeneratedValue(generator="audittable_auditid_seq", strategy=GenerationType.SEQUENCE)
-	private Integer auditID;
+	private Long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "changedtime")
@@ -46,7 +36,7 @@ public class AuditRecord {
 	@Column(name = "tablename")
 	private String tablename;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "operationtypeid")
 	private OperationType operationType;
 	
@@ -58,20 +48,33 @@ public class AuditRecord {
 	
 	@Column(name = "ipaddress")
 	private String IPAddress;
-
-	@XmlTransient
-	public Integer getAuditID() {
-		return auditID;
-	}
-
-	public void setAuditID(Integer auditID) {
-		this.auditID = auditID;
-	}
 	
-	@XmlID
-	@XmlElement(name = "auditID")
+	public AuditRecord() {}
+	
+	public AuditRecord(Long auditID, Date changedTime, String userID,
+			String tablename, OperationType operationType, String oldValue,
+			String newValue, String iPAddress) {
+		super();
+		this.id = auditID;
+		this.changedTime = changedTime;
+		this.userID = userID;
+		this.tablename = tablename;
+		this.operationType = operationType;
+		this.oldValue = oldValue;
+		this.newValue = newValue;
+		IPAddress = iPAddress;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getStringID() {
-		return Integer.toString(getAuditID());
+		return Long.toString(getId());
 	}
 
 	public Date getChangedTime() {
@@ -98,7 +101,6 @@ public class AuditRecord {
 		this.tablename = tablename;
 	}
 
-	@XmlIDREF
 	public OperationType getOperationType() {
 		return operationType;
 	}

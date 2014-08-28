@@ -1,6 +1,7 @@
 package org.wfp.fittest.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,51 +14,55 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
+import org.wfp.fittest.converter.EntityConverter;
 
 @Entity
 @Table(name = "confirmedtypes")
-@XmlRootElement
-public class ConfirmedType {
+public class ConfirmedType implements EntityId {
 
 	@Id
 	@Column(name = "confirmedtypeid")
 	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "confirmedtypes_confirmedtypeid_seq", name = "confirmedtypes_confirmedtypeid_seq")
 	@GeneratedValue(generator = "confirmedtypes_confirmedtypeid_seq", strategy = GenerationType.SEQUENCE)
-	private Integer ID;
+	private Long id;
 
 	@Column(name = "confirmedtype")
 	private String confirmedType;
 
 	@Column(name = "confirmedcolorcode")
 	private String confirmedColorCode;
-	
-	@OneToMany(mappedBy = "confirmedType", fetch = FetchType.EAGER, cascade = {
+
+	@OneToMany(mappedBy = "confirmedType", fetch = FetchType.LAZY, cascade = {
 			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<StaffRole> staffRoles = new HashSet<StaffRole>();
 
-	@OneToMany(mappedBy = "confirmedType", fetch = FetchType.EAGER, cascade = {
+	@OneToMany(mappedBy = "confirmedType", fetch = FetchType.LAZY, cascade = {
 			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<Activity> activities = new HashSet<Activity>();
 
 	public ConfirmedType() {
 	}
 
-	@XmlTransient
-	public Integer getID() {
-		return ID;
+	public ConfirmedType(Long iD, String confirmedType,
+			String confirmedColorCode, Set<StaffRole> staffRoles,
+			Set<Activity> activities) {
+		super();
+		this.id = iD;
+		this.confirmedType = confirmedType;
+		this.confirmedColorCode = confirmedColorCode;
+		this.staffRoles = staffRoles;
+		this.activities = activities;
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public Long getId() {
+		return id;
 	}
 
-	@XmlID
+	public void setId(Long iD) {
+		this.id = iD;
+	}
+
 	public String getConfirmedType() {
 		return confirmedType;
 	}
@@ -66,22 +71,24 @@ public class ConfirmedType {
 		this.confirmedType = confirmedType;
 	}
 
-	@XmlElementWrapper(name = "staffRoles")
-	@XmlElement(name = "staffRole")
-	@XmlIDREF
 	public Set<StaffRole> getStaffRoles() {
 		return staffRoles;
+	}
+	
+	public List<Long> getStaffRoleIds() {
+		return EntityConverter.toIdList(getStaffRoles());
 	}
 
 	public void setStaffRoles(Set<StaffRole> staffRoles) {
 		this.staffRoles = staffRoles;
 	}
 
-	@XmlElementWrapper(name = "activities")
-	@XmlElement(name = "activity")
-	@XmlIDREF
 	public Set<Activity> getActivities() {
 		return activities;
+	}
+	
+	public List<Long> getActivityRoleIds() {
+		return EntityConverter.toIdList(getActivities());
 	}
 
 	public void setActivities(Set<Activity> activities) {
@@ -92,7 +99,7 @@ public class ConfirmedType {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -113,10 +120,10 @@ public class ConfirmedType {
 		if (getClass() != obj.getClass())
 			return false;
 		ConfirmedType other = (ConfirmedType) obj;
-		if (ID == null) {
-			if (other.ID != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!ID.equals(other.ID))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

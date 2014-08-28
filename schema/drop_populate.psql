@@ -1,6 +1,6 @@
 -- ! For testing purposes only
 
-\cd /home/public/FittestPlanner/schema
+\cd C:/Users/sami.zeinelabdin/Desktop/GIT/FittestPlanner_REST/schema
 drop schema public cascade;
 create schema public;
 \i schema.sql

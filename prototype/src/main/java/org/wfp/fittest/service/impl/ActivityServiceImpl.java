@@ -1,148 +1,177 @@
 package org.wfp.fittest.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.wfp.fittest.beans.Activities;
-import org.wfp.fittest.beans.ActivitySummary;
-import org.wfp.fittest.beans.Deployment;
-import org.wfp.fittest.beans.DeploymentCriteria;
-import org.wfp.fittest.beans.Requirement;
-import org.wfp.fittest.beans.RequirementCriteria;
-import org.wfp.fittest.dao.ActivityDao;
-import org.wfp.fittest.dao.UtilityDao;
+import org.wfp.fittest.converter.DtoConverter;
+import org.wfp.fittest.dto.ActivityDto;
+import org.wfp.fittest.dto.ActivityRoleDto;
+import org.wfp.fittest.dto.ActivityTypeDto;
+import org.wfp.fittest.dto.EventDto;
 import org.wfp.fittest.entity.Activity;
 import org.wfp.fittest.entity.ActivityRole;
 import org.wfp.fittest.entity.ActivityType;
-import org.wfp.fittest.entity.ConfirmedType;
+import org.wfp.fittest.entity.Event;
+import org.wfp.fittest.repository.ActivityRepository;
+import org.wfp.fittest.repository.ActivityRoleRepository;
+import org.wfp.fittest.repository.ActivityTypeRepository;
+import org.wfp.fittest.repository.EventRepository;
 import org.wfp.fittest.service.ActivityService;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+@Transactional(readOnly = true)
 public class ActivityServiceImpl implements ActivityService {
 
 	@Autowired
-	ActivityDao activityDao;
+	private DtoConverter converter;
 
 	@Autowired
-	UtilityDao utilityDao;
+	private ActivityRepository activityRepository;
+	@Autowired
+	private ActivityRoleRepository activityRoleRepository;
+	@Autowired
+	private ActivityTypeRepository activityTypeRepository;
+	@Autowired
+	private EventRepository eventRepository;
 
 	@Override
-	public Activity findActivityById(Integer activityId) {
-		return activityDao.findActivityById(activityId);
+	public List<ActivityDto> findAllActivities() {
+		return converter.entitiesToDtos(activityRepository.findAll());
 	}
 
 	@Override
-	public Activities findAllActivities() {
-		return new Activities(activityDao.findAllActivities());
+	public ActivityDto findActivity(Long activityId) {
+		return converter.entityToDto(activityRepository.findOne(activityId));
 	}
 
 	@Override
-	public Activities findActivitiesByConfirmedType(ConfirmedType confirmedType) {
-		return new Activities(
-				activityDao.findActivitiesByConfirmedType(confirmedType));
-	}
-
-	@Override
-	public Activities findAllConfirmedActivities() {
-		String confirmedType = "Confirmed";
-		return findActivitiesByConfirmedType(utilityDao
-				.findConfirmedTypeByConfirmedType(confirmedType));
-	}
-
-	@Override
-	public Activities findAllNotConfirmedActivities() {
-		String confirmedType = "Not Confirmed";
-		return findActivitiesByConfirmedType(utilityDao
-				.findConfirmedTypeByConfirmedType(confirmedType));
-	}
-
-	@Override
-	public Activities findActivitiesByActivityType(ActivityType activityType) {
-		return new Activities(
-				activityDao.findActivitiesByActivityType(activityType));
-	}
-
-	@Override
-	public Activities findActivitiesByDescription(String description) {
-		return new Activities(
-				activityDao.findActivitiesByDescription(description));
+	public ActivityDto findActivityNested(Long activityId) {
+		return converter.entityToDtoNested(activityRepository
+				.findOne(activityId));
 	}
 
 	@Override
 	@Transactional(readOnly = false)
-	public void saveActivity(Activity activity) {
-		activityDao.saveActivity(activity);
-	}
-
-	@Override
-	public ActivityType findActivityTypeById(Integer id) {
-		return activityDao.findActivityTypeById(id);
-	}
-
-	@Override
-	public List<ActivityType> findAllActivityTypes() {
-		return activityDao.findAllActivityTypes();
+	public boolean deleteActivity(ActivityDto activityDto) {
+		return deleteActivityById(activityDto.getId());
 	}
 
 	@Override
 	@Transactional(readOnly = false)
-	public void saveActivityType(ActivityType activityType) {
-		activityDao.saveActivityType(activityType);
+	public boolean deleteActivityById(Long activityId) {
+		activityRepository.delete(activityId);
+		return true;
 	}
 
 	@Override
 	@Transactional(readOnly = false)
-	public void deleteActivityTypeById(Integer id) {
-		activityDao.deleteActivityTypeById(id);
+	public ActivityDto saveOrUpdateActivity(ActivityDto activityDto) {
+		Activity activity = converter.dtoToEntityNested(activityDto);
+		return converter.entityToDtoNested(activityRepository.save(activity));
 	}
 
 	@Override
-	public List<ActivitySummary> findActivitySummary(Date startDate) {
-		List<Object[]> activityTypes = activityDao
-				.findActivityTypesWithStaffCount(startDate);
-		List<ActivitySummary> activitySummaries = new ArrayList<ActivitySummary>();
-		for (Object[] obj : activityTypes) {
-			ActivitySummary actSummary = new ActivitySummary();
-			actSummary.setActivityType(((ActivityType) obj[0])
-					.getActivityType());
-			actSummary.setNumberOfStaff((Long) obj[1]);
-			activitySummaries.add(actSummary);
-		}
-		return activitySummaries;
+	public List<ActivityRoleDto> findAllActivityRoles() {
+		return converter.entitiesToDtos(activityRoleRepository.findAll());
 	}
 
-	public Requirement findRequirement(RequirementCriteria criteria) {
-		return null;
-	}
-
-	public Deployment findDeployment(DeploymentCriteria criteria) {
+	@Override
+	public ActivityRoleDto findActivityRole(Long activityRoleId) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Map<String, Integer> findActivityTypesWithId() {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		for (ActivityType activityType : findAllActivityTypes()) {
-			map.put(activityType.getActivityType(), activityType.getID());
-		}
-		return map;
+	public ActivityRoleDto findActivityRoleNested(Long activityRoleId) {
+		return converter.entityToDtoNested(activityRoleRepository
+				.findOne(activityRoleId));
 	}
 
 	@Override
-	public ActivityRole findActivityRoleById(Integer activityRoleID) {
-		return activityDao.findActivityRoleById(activityRoleID);
+	@Transactional(readOnly = false)
+	public boolean deleteActivityRole(ActivityRoleDto activityRoleDto) {
+		return deleteActivityRoleById(activityRoleDto.getId());
 	}
 
 	@Override
-	public List<ActivityRole> findAllActivityRoles() {
-		return activityDao.findAllActivityRoles();
+	@Transactional(readOnly = false)
+	public boolean deleteActivityRoleById(Long activityRoleId) {
+		activityRoleRepository.delete(activityRoleId);
+		return true;
 	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public ActivityRoleDto saveOrUpdateActivityRole(
+			ActivityRoleDto activityRoleDto) {
+		ActivityRole activityRole = converter
+				.dtoToEntityNested(activityRoleDto);
+		return converter.entityToDtoNested(activityRoleRepository
+				.save(activityRole));
+	}
+
+	@Override
+	public List<ActivityTypeDto> findAllActivityTypes() {
+		return converter.entitiesToDtos(activityTypeRepository.findAll());
+	}
+
+	@Override
+	public ActivityTypeDto findActivityType(Long activityTypeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActivityTypeDto findActivityTypeNested(Long activityTypeId) {
+		return converter.entityToDtoNested(activityTypeRepository
+				.findOne(activityTypeId));
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public boolean deleteActivityType(ActivityTypeDto activityTypeDto) {
+		return deleteActivityTypeById(activityTypeDto.getId());
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public boolean deleteActivityTypeById(Long activityTypeId) {
+		activityTypeRepository.delete(activityTypeId);
+		return true;
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public ActivityTypeDto saveOrUpdateActivityType(
+			ActivityTypeDto activityTypeDto) {
+		ActivityType activityType = converter.dtoToEntityNested(activityTypeDto);
+		return converter.entityToDtoNested(activityTypeRepository.save(activityType));
+	}
+
+	@Override
+	public List<EventDto> findAllEvents() {
+		return converter.entitiesToDtos(eventRepository.findAll());
+	}
+
+	@Override
+	public EventDto findEventNested(Long eventId) {
+		return converter.entityToDto(eventRepository.findOne(eventId));
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public boolean deleteEventById(Long eventId) {
+		eventRepository.delete(eventId);
+		return true;
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public EventDto saveOrUpdateEvent(EventDto eventDto) {
+		Event event = converter.dtoToEntity(eventDto);
+		return converter.entityToDto(eventRepository.save(event));
+	}
+
 }

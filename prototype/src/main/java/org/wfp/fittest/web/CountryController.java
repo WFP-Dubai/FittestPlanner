@@ -1,55 +1,54 @@
 package org.wfp.fittest.web;
 
+import java.util.List;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.wfp.fittest.entity.Country;
+import org.wfp.fittest.dto.CountryDto;
+import org.wfp.fittest.service.UtilityService;
 
 @Controller
-public class CountryController extends AbstractController {
+@RequestMapping(value = "/country")
+public class CountryController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CountryController.class);
-	
-	@RequestMapping(value = "/country", method = RequestMethod.GET)
-	public String country(Locale locale, Model model) {
-		logger.info("country Page!", locale);
-		return "main/country";
-	}
-	
-	@RequestMapping(value = "/country/new", method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public String countryNew(
-			@ModelAttribute("countryDetails") Country countryDetails,
-			Locale locale, Model model) {
-		logger.info("country new Page!", locale);
-		return "edit/country";
-	}
+	@Autowired
+	private UtilityService utilityService;
 
-	@RequestMapping(value = "/country/{countryID}/edit", method = RequestMethod.GET)
-	public String countryEdit(
-			@ModelAttribute("countryDetails") Country countryDetails,
-			@PathVariable("countryID") Integer countryID, Locale locale,
-			Model model) {
-		logger.info("country edit Page!", locale);
-		countryDetails = utilityService.findCountryById(countryID);
-		model.addAttribute("countryDetails", countryDetails);
-		return "edit/country";
+	@RequestMapping(value = "")
+	public String country(Model model, Locale locale) {
+		List<CountryDto> countries = utilityService.findAllCountries();
+		model.addAttribute("allCountries", countries);
+		return "country";
 	}
-
-	@RequestMapping(value = "/country/save", method = RequestMethod.POST)
-	public String countrySave(
-			@ModelAttribute("countryDetails") Country countryDetails,
-			@PathVariable("countryID") Integer countryID, Locale locale,
-			Model model) {
-		logger.info("country edit submit Page!", locale);
-		utilityService.saveCountry(countryDetails);
+	
+	@RequestMapping(value = "/{id}/view")
+	public String countryView(@PathVariable("id") Long id, Model model,
+			Locale locale) {
+		model.addAttribute("country", utilityService.findCountryById(id));
+		return "forms/country";
+	}
+	
+	@RequestMapping(value = "/new")
+	public String countryNew(Model model, Locale locale) {
+		model.addAttribute("country", new CountryDto());
+		return "forms/country";
+	}
+	
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String countrySave(@ModelAttribute CountryDto countryDto, Model model, Locale locale) {
+		utilityService.saveOrUpdateCountry(countryDto);
+		return "redirect:/country";
+	}
+	
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+	public String countryDelete(@PathVariable("id") Long id, Model model, Locale locale) {
+		utilityService.deleteCountryById(id);
 		return "redirect:/country";
 	}
 }

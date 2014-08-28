@@ -11,25 +11,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "events")
-@XmlRootElement
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Event {
+public class Event implements EntityId {
 
 	@Id
 	@Column(name = "eventid")
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="events_eventid_seq", name="events_eventid_seq")
 	@GeneratedValue(generator = "events_eventid_seq", strategy=GenerationType.SEQUENCE)
-	private Integer ID;
+	private Long id;
 	
 	@Column(name = "event")
 	private String event;
@@ -47,21 +38,24 @@ public class Event {
 
 	public Event() {}
 	
-	@XmlTransient
-	public Integer getID() {
-		return ID;
+	public Event(Long iD, String event, Date startDate, Date endDate,
+			String colorCode) {
+		super();
+		this.id = iD;
+		this.event = event;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.colorCode = colorCode;
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public Long getId() {
+		return id;
 	}
-	
-	@XmlID
-	@XmlElement(name = "ID")
-	public String getStringID() {
-		return Integer.toString(getID());
+
+	public void setId(Long iD) {
+		this.id = iD;
 	}
-	
+
 	public String getEvent() {
 		return event;
 	}
@@ -93,5 +87,29 @@ public class Event {
 	public void setColorCode(String colorCode) {
 		this.colorCode = colorCode;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Event other = (Event) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 }

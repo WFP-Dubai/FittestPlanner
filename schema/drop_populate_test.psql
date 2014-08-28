@@ -1,5 +1,6 @@
 
-\cd /home/public/FittestPlanner/schema
+\cd C:/Users/sami.zeinelabdin/Desktop/GIT/FittestPlanner_REST/schema
 
+set datestyle = 'mdy';
 \i drop_populate.psql
 \i testdata.psql

@@ -1,5 +1,5 @@
 
-\cd /home/public/FittestPlanner/schema
+\cd C:/Users/sami.zeinelabdin/Desktop/GIT/FittestPlanner_REST/schema
 
 -- \copy missiontypes (missiontype) from 'testdata/missiontypes.csv'
 

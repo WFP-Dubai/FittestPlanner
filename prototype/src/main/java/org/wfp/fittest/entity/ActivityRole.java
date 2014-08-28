@@ -1,6 +1,7 @@
 package org.wfp.fittest.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,40 +12,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.wfp.fittest.converter.EntityConverter;
 
 @Entity
 @Table(name = "activityroles")
-@XmlRootElement
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ActivityRole {
+public class ActivityRole implements EntityId {
 
 	@Id
 	@Column(name = "activityroleid")
 	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "activityroles_activityroleid_seq", name = "activityroles_activityroleid_seq")
 	@GeneratedValue(generator = "activityroles_activityroleid_seq", strategy = GenerationType.SEQUENCE)
-	private Integer ID;
+	private Long id;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
 	@JoinColumn(name = "activityid")
 	private Activity activity;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
 	@JoinColumn(name = "profiletypeid")
 	private ProfileType profileType;
@@ -60,41 +52,60 @@ public class ActivityRole {
 	@Column(name = "activityrolelocation")
 	private String location;
 
-	@ManyToMany(mappedBy = "activityRoles", fetch = FetchType.EAGER, cascade = {
+	@OneToMany(mappedBy = "activityRole", fetch = FetchType.LAZY, cascade = {
 			CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<StaffRole> staffRoles;
 
-	@XmlTransient
-	public Integer getID() {
-		return ID;
+	public ActivityRole() {
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public ActivityRole(Long id, Activity activity, ProfileType profileType,
+			Date startDate, Date endDate, String location,
+			Set<StaffRole> staffRoles) {
+		super();
+		this.id = id;
+		this.activity = activity;
+		this.profileType = profileType;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.location = location;
+		this.staffRoles = staffRoles;
 	}
 
-	@XmlID
-	@XmlElement(name = "ID")
-	public String getStringID() {
-		return Integer.toString(getID());
+	public Long getId() {
+		return id;
 	}
 
-	@XmlIDREF
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Activity getActivity() {
 		return activity;
+	}
+
+	public Long getActivityId() {
+		return activity.getId();
 	}
 
 	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
 
-	@XmlIDREF
 	public ProfileType getProfileType() {
 		return profileType;
 	}
 
+	public Long getProfileTypeId() {
+		return profileType.getId();
+	}
+
 	public void setProfileType(ProfileType profileType) {
 		this.profileType = profileType;
+	}
+	
+	public String getProfileTypeDescription() {
+		return getProfileType().getProfileType();
 	}
 
 	public Date getStartDate() {
@@ -121,22 +132,27 @@ public class ActivityRole {
 		this.location = location;
 	}
 
-	@XmlElementWrapper(name = "staffRoles")
-	@XmlElement(name = "staffRole")
-	@XmlIDREF
 	public Set<StaffRole> getStaffRoles() {
 		return staffRoles;
 	}
 
+	public List<Long> getStaffRoleIds() {
+		return EntityConverter.toIdList(getStaffRoles());
+	}
+
 	public void setStaffRoles(Set<StaffRole> staffRoles) {
 		this.staffRoles = staffRoles;
+	}
+	
+	public String getActivityDescription() {
+		return getActivity().getDescription();
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -149,10 +165,10 @@ public class ActivityRole {
 		if (getClass() != obj.getClass())
 			return false;
 		ActivityRole other = (ActivityRole) obj;
-		if (ID == null) {
-			if (other.ID != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!ID.equals(other.ID))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

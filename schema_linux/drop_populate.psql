@@ -1,0 +1,8 @@
+-- ! For testing purposes only
+
+\cd /home/public/FittestPlanner_REST/schema_linux
+drop schema public cascade;
+create schema public;
+\i schema.sql
+\i metadata.psql
+\i data.psql

@@ -6,3 +6,5 @@
 hs_err_pid*
 prototype/target
 schema/data/
+schema_linux/data
+access/src/main/resources

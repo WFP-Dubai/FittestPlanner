@@ -1,6 +1,7 @@
 package org.wfp.fittest.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,46 +14,44 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.wfp.fittest.converter.EntityConverter;
 
 @Entity
 @Table(name = "languages")
-@XmlRootElement
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Language {
+public class Language implements EntityId {
 
 	@Id
 	@Column(name = "languageid")
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="languages_languageid_seq", name="languages_languageid_seq")
 	@GeneratedValue(generator="languages_languageid_seq", strategy=GenerationType.SEQUENCE)
-	private Integer ID;
+	private Long id;
 	
 	@Column(name = "language")
 	private String language;
 	
-	@ManyToMany(mappedBy = "languages", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(mappedBy = "languages", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Staff> staffByLanguage = new HashSet<Staff>();
 
 	public Language() {}
-	
-	@XmlTransient
-	public Integer getID() {
-		return ID;
+		
+	public Language(Long iD, String language, Set<Staff> staffByLanguage) {
+		super();
+		this.id = iD;
+		this.language = language;
+		this.staffByLanguage = staffByLanguage;
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	@XmlTransient
+	public Long getId() {
+		return id;
 	}
-	
-	@XmlID
+
+	public void setId(Long iD) {
+		this.id = iD;
+	}
+
 	public String getLanguage() {
 		return language;
 	}
@@ -61,11 +60,12 @@ public class Language {
 		this.language = language;
 	}
 
-	@XmlElementWrapper(name = "staffLanguage")
-	@XmlElement(name = "staff")
-	@XmlIDREF
 	public Set<Staff> getStaffByLanguage() {
 		return staffByLanguage;
+	}
+	
+	public List<Long> getStaffByLanguageIds() {
+		return EntityConverter.toIdList(staffByLanguage);
 	}
 
 	public void setStaffByLanguage(Set<Staff> staffByLanguage) {
@@ -76,7 +76,7 @@ public class Language {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -89,10 +89,10 @@ public class Language {
 		if (getClass() != obj.getClass())
 			return false;
 		Language other = (Language) obj;
-		if (ID == null) {
-			if (other.ID != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!ID.equals(other.ID))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

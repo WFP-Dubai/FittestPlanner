@@ -1,47 +1,63 @@
 package org.wfp.fittest.service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
-import org.wfp.fittest.beans.Activities;
-import org.wfp.fittest.beans.ActivitySummary;
-import org.wfp.fittest.entity.Activity;
-import org.wfp.fittest.entity.ActivityRole;
-import org.wfp.fittest.entity.ActivityType;
-import org.wfp.fittest.entity.ConfirmedType;
+import org.wfp.fittest.dto.ActivityDto;
+import org.wfp.fittest.dto.ActivityRoleDto;
+import org.wfp.fittest.dto.ActivityTypeDto;
+import org.wfp.fittest.dto.EventDto;
 
 public interface ActivityService {
+	
+	// Activity
+	
+	public ActivityDto findActivity(Long activityId);
+	
+	public ActivityDto findActivityNested(Long activityId);
+	
+	public List<ActivityDto> findAllActivities();
+	
+	public boolean deleteActivity(ActivityDto activityDto);
+	
+	public boolean deleteActivityById(Long activityId);
+	
+	public ActivityDto saveOrUpdateActivity(ActivityDto activityDto);
 
-	public Activity findActivityById(Integer activityId);
+	// Activity Role
 	
-	public Activities findAllActivities();
+	public List<ActivityRoleDto> findAllActivityRoles();
 	
-	public Activities findActivitiesByConfirmedType(ConfirmedType confirmedType);
+	public ActivityRoleDto findActivityRole(Long activityRoleId);
 	
-	public Activities findAllConfirmedActivities();
+	public ActivityRoleDto findActivityRoleNested(Long activityRoleId);
 
-	public Activities findAllNotConfirmedActivities();
+	public boolean deleteActivityRole(ActivityRoleDto activityRoleDto);
 	
-	public Activities findActivitiesByActivityType(ActivityType activityType);
+	public boolean deleteActivityRoleById(Long activityRoleId);
 
-	public Activities findActivitiesByDescription(String description);
+	public ActivityRoleDto saveOrUpdateActivityRole(ActivityRoleDto activityRoleDto);
 	
-	public void saveActivity(Activity activity);
+	// Activity Type
 	
-	public ActivityType findActivityTypeById(Integer id);
+	public List<ActivityTypeDto> findAllActivityTypes();
 	
-	public List<ActivityType> findAllActivityTypes();
+	public ActivityTypeDto findActivityType(Long activityTypeId);
 	
-	public void saveActivityType(ActivityType activity);
+	public ActivityTypeDto findActivityTypeNested(Long activityTypeId);
 	
-	public void deleteActivityTypeById(Integer id);
+	public boolean deleteActivityType(ActivityTypeDto activityTypeDto);
 	
-	public List<ActivitySummary> findActivitySummary(Date date);
+	public boolean deleteActivityTypeById(Long activityTypeId);
 	
-	public Map<String, Integer> findActivityTypesWithId();
+	public ActivityTypeDto saveOrUpdateActivityType(ActivityTypeDto activityTypeDto);
 	
-	public ActivityRole findActivityRoleById(Integer activityRoleID);
+	// Event
 	
-	public List<ActivityRole> findAllActivityRoles();
+	public List<EventDto> findAllEvents();
+	
+	public EventDto findEventNested(Long eventId);
+	
+	public boolean deleteEventById(Long eventId);
+
+	public EventDto saveOrUpdateEvent(EventDto eventDto);
 }

@@ -1,0 +1,5 @@
+
+\cd /home/public/FittestPlanner_REST/schema_linux
+
+\i drop_populate.psql
+\i testdata.psql

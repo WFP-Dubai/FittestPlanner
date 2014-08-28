@@ -2,17 +2,32 @@ package org.wfp.fittest.service;
 
 import java.util.List;
 
-import org.wfp.fittest.entity.Country;
-import org.wfp.fittest.entity.Language;
+import org.wfp.fittest.dto.ConfirmedTypeDto;
+import org.wfp.fittest.dto.CountryDto;
+import org.wfp.fittest.dto.LanguageDto;
 
 public interface UtilityService {
-	public List<Country> findAllCountries();
-
-	public Country findCountryById(Integer countryID);
+	public List<CountryDto> findAllCountries();
 	
-	public Country findCountryByISOCode(String ISOcode);
+	public CountryDto findCountryById(Long countryId);
 	
-	public void saveCountry(Country country);
+	public CountryDto saveOrUpdateCountry(CountryDto countryDto);
+	
+	public boolean deleteCountryById(Long countryId);
+	
+	public List<LanguageDto> findAllLanguages();
+	
+	public LanguageDto findLanguageById(Long languageId);
+	
+	public LanguageDto saveOrUpdateLanguage(LanguageDto languageDto);
+	
+	public boolean deleteLanguageById(Long languageId);
+	
+	public List<ConfirmedTypeDto> findAllConfirmedTypes();
 
-	public List<Language> findAllLanguages();
+	public ConfirmedTypeDto findConfirmedTypeNested(Long confirmedTypeId);
+
+	public boolean deleteConfirmedTypeById(Long confirmedTypeId);
+
+	public ConfirmedTypeDto saveOrUpdateConfirmedType(ConfirmedTypeDto confirmedTypeDto);
 }
