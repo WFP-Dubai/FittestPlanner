@@ -20,6 +20,17 @@ public interface StaffRoleRepository extends
 	@Query("select sr from StaffRole sr where sr.id in :ids")
 	public List<StaffRole> findByIds(@Param("ids") List<Long> ids);
 
+	/**
+	 * Returns a list of StaffRoles that satisfy the requirements specified by the parameters.
+	 * The StaffRole must occur during the period specified by startDate and endDate.
+	 * The StaffRole may start before the startDate and end after the endDate.
+	 * 
+	 * @param startDate
+	 * @param endDate
+	 * @param activityIds
+	 * @param staffTypeIds
+	 * @return A list of StaffRoles that satisfy the requirements specified by the parameters.
+	 */
 	@Query("select sr from StaffRole sr"
 			+ " where ((sr.startDate >= :startDate and sr.endDate <= :endDate)"
 			+ " or (sr.startDate <= :startDate and (sr.endDate >= :startDate and sr.endDate <= :endDate))"
@@ -34,6 +45,18 @@ public interface StaffRoleRepository extends
 			@Param("activityIds") List<Long> activityIds,
 			@Param("staffTypeIds") List<Long> staffTypeIds);
 	
+	/**
+	 * Returns a list of StaffRoles that satisfy the requirements specified by the parameters.
+	 * <p>
+	 * A refinement of <code>findDeployments()</code> that only returns StaffRoles with ConfirmedType equal to 'Confirmed'.
+	 * 
+	 * @param startDate
+	 * @param endDate
+	 * @param activityIds
+	 * @param staffTypeIds
+	 * @return A list of StaffRoles that satisfy the requirements specified by the parameters and are also 'Confirmed'.
+	 * @see findDeployments
+	 */
 	@Query("select sr from StaffRole sr"
 			+ " where ((sr.startDate >= :startDate and sr.endDate <= :endDate)"
 			+ " or (sr.startDate <= :startDate and (sr.endDate >= :startDate and sr.endDate <= :endDate))"

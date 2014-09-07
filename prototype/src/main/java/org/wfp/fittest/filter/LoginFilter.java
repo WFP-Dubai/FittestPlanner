@@ -14,6 +14,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * A filter which ensures that only logged in users can view restricted pages.
+ * <p>
+ * URL's excluded from the filter are defined in the constant <code>excludePatterns</code>.
+ * <p>
+ * Unauthorized requests are redirected to back to the login page.
+ * @author Sami Zeinelabdin
+ *
+ */
 @Component
 public class LoginFilter implements Filter {
 

@@ -8,6 +8,21 @@ import java.util.Set;
 import org.apache.commons.beanutils.BeanUtils;
 import org.wfp.fittest.entity.EntityId;
 
+/**
+ * Converts between FITTESTPlanner Entity objects and Dto objects.
+ * <p>
+ * EntityConverter converts JPA entities into Dto POJOs and vice-versa. The converter
+ * uses Apache's BeanUtils to copy an object's properties to the converted object from
+ * the object to be converted.
+ * <p>
+ * The constant <code>BEAN_POSTFIX</code> is set to the default Dto postfix of the class name.
+ * The constant <code>BEAN_NAMESPACE</code> identifies the location of the Dto classes.
+ * The constant <code>ENTITY_NAMESPACE</code> identifies the location of the Entitiy classes.
+ * <p>
+ * Converters are also provided for List of objects.
+ * @author Sami Zeinelabdin
+ *
+ */
 public class EntityConverter {
 
 	private static final String BEAN_POSTFIX = "Dto";

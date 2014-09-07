@@ -54,6 +54,14 @@ public interface StaffRepository extends AbstractRepository<Staff, Long> {
 			@Param("activityType") String activityType,
 			@Param("date") @DateTimeFormat(iso = ISO.DATE) Date date);
 
+	/**
+	 * Returns a list of Staff who are not assigned to any ActivityRole during the date specified.
+	 * <p>
+	 * The only StaffTypes considered are <b>FITTEST CST</b>, <b>OSTF Dubai</b>, and <b>OSTF Rome</b>.
+	 * 
+	 * @param date
+	 * @return A list of available Staff
+	 */
 	@Query("select s from Staff s "
 	        + " where s.staffType.staffType in ('FITTEST CST', 'OSTF Dubai', 'OSTF Rome') and " 
 			+ " not (s in (select distinct(s2) from Staff s2"
@@ -61,10 +69,19 @@ public interface StaffRepository extends AbstractRepository<Staff, Long> {
 			+ " where sr.startDate <= :date and sr.endDate >= :date))")
 	public List<Staff> findByAvailableInDate(
 			@Param("date") @DateTimeFormat(iso = ISO.DATE) Date date);
-	
+
+	/**
+	 * Returns a list of Staff who are assigned to an ActivityRole during the date specified.
+	 * <p>
+	 * The only StaffTypes considered are <b>FITTEST CST</b>, <b>OSTF Dubai</b>, and <b>OSTF Rome</b>.
+	 * 
+	 * @param date
+	 * @return A list of Staff assigned to an ActivityRole during the date given.
+	 */
 	@Query("select distinct(s) from Staff s"
 			+ " join s.staffRoles sr"
-			+ " where sr.startDate <= :date and sr.endDate >= :date")
+			+ " where s.staffType.staffType in ('FITTEST CST', 'OSTF Dubai', 'OSTF Rome') and "
+			+ " sr.startDate <= :date and sr.endDate >= :date")
 	public List<Staff> findByNotAvailableInDate(
 			@Param("date") @DateTimeFormat(iso = ISO.DATE) Date date);
 

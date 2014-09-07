@@ -12,6 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * A filter which enables cross origin requests. This filter must be enabled to allow AJAX request
+ * originating from/to external URLs.
+ * @author Sami Zeinelabdin
+ *
+ */
 @Component
 public class SimpleCORSFilter implements Filter {
 

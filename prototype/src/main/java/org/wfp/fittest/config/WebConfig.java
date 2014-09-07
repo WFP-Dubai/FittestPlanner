@@ -7,6 +7,12 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+/**
+ * Configures spring data web and exports resource handlers.
+ * 
+ * @author Sami Zeinelabdin
+ *
+ */
 @Configuration
 @EnableSpringDataWebSupport
 @ComponentScan(basePackages = "org.wfp.fittest")

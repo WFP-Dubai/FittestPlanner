@@ -14,6 +14,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * A filter which restricts POST and PUT requests to users with administrative priviledges only.
+ * <p>
+ * URL's excluded from the filter are defined in the constant <code>excludePatterns</code>.
+ * Methods excluded from the filter are defined in the constant <code>excludeMethods</code>.
+ * <p>
+ * Unauthorized requests are redirected to <code>/admin_error</code>.
+ * @author Sami Zeinelabdin
+ *
+ */
 @Component
 public class AdminFilter implements Filter {
 

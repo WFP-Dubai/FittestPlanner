@@ -42,6 +42,24 @@ import org.wfp.fittest.repository.StaffTypeRepository;
 
 import com.google.common.collect.Sets;
 
+/**
+ * A converter service class used to convert between Entity objects and Dto objects.
+ * <p>
+ * Due to nested relationships between entities, the DtoConverter is used to transform
+ * lazily loaded entity resources into POJOs. This is necessary to avoid lazy loading
+ * exceptions in the view layer.
+ * <p>
+ * The DtoConverter is also used to convert POJOs back into Entity objects so that their
+ * data can be persisted in the database.
+ * <p>
+ * The DtoConverter is therefore the layer responsible for marshaling data between the service
+ * layer and the persistence layer.
+ * <p>
+ * All conversion operations come in both a nested and non-nested variant. The nested variant copies
+ * all embedded relationships as well as the entity's basic properties.
+ * @author Sami Zeinelabdin
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class DtoConverter {

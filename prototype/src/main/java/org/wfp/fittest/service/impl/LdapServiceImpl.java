@@ -27,6 +27,13 @@ public class LdapServiceImpl implements LdapService {
 		return token;
 	}
 	
+	/**
+	 * Returns the firstName + lastName of the logged in user
+	 * 
+	 * @param token The token returned by LdapService.validate()
+	 * @param userName The user name used to login to the system
+	 * @return firstName + lastName of the logged in user
+	 */
 	@Override
 	public String getLoggedInUserName(String token, String userName) {
 		PssuUser user;
@@ -40,6 +47,13 @@ public class LdapServiceImpl implements LdapService {
 		}
 	}
 
+	/**
+	 * Checks if a logged in user has administrator privileges.
+	 *
+	 * @param token The token returned by LdapService.validate()
+	 * @param userName The user name used to login to the system
+	 * @return <code>true</code> if the user's LDAP profile is <b>FITTEST_TRACKER_ADMIN</b>, otherwise <code>false</code>.
+	 */
 	@Override
 	public boolean isTrackerAdmin(String token, String userName) {
 		try {

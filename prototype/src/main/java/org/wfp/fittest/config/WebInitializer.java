@@ -16,8 +16,21 @@ import org.wfp.fittest.filter.AdminFilter;
 import org.wfp.fittest.filter.LoginFilter;
 import org.wfp.fittest.filter.SimpleCORSFilter;
 
+/**
+ * WebInitializer is an annotated configuration class which replaces the web.xml file
+ * used in XML based configurations.
+ * <p>
+ * Servlet startup options are configured here.
+ * 
+ * @author Sami Zeinelabdin
+ *
+ */
 public class WebInitializer implements WebApplicationInitializer {
 
+	/**
+	 * Sets startup options for the servlets launched by the FITTESTPlanner.
+	 * Also loads global request filters.
+	 */
 	@Override
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
@@ -58,6 +71,12 @@ public class WebInitializer implements WebApplicationInitializer {
 		*/
 	}
 
+	/**
+	 * Sets the root servlet context. Child servlets are launched within this root context.
+	 * Global application configuration is loaded from the <code>org.wfp.fittest.AppConfig</code> class.
+	 * @return AnnotationConfigWebApplicationContext
+	 * @see AnnotationConfigWebApplicationContext
+	 */
 	private AnnotationConfigWebApplicationContext getRootContext() {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.setDisplayName("FITTEST Tracker");

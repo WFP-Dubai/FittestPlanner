@@ -26,6 +26,16 @@ public interface ActivityRoleRepository extends
 	public List<ActivityRole> findByActivity_Id(
 			@Param("activityId") Long activityId, Pageable p);
 
+	/**
+	 * Returns a list of ActivityRoles that satisfy the requirements specified by the parameters.
+	 * The ActivityRole must occur during the period specified by startDate and endDate.
+	 * The ActivityRole may start before the startDate and end after the endDate.
+	 * 
+	 * @param startDate
+	 * @param endDate
+	 * @param activityIds
+	 * @return A list of ActivityRoles that satisfy the requirements specified by the parameters.
+	 */
 	@Query("select ar from ActivityRole ar"
 			+ " where ((ar.startDate >= :startDate and ar.endDate <= :endDate)"
 			+ " or (ar.startDate <= :startDate and (ar.endDate >= :startDate and ar.endDate <= :endDate))"

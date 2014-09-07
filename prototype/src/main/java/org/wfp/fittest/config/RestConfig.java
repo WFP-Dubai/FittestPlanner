@@ -20,8 +20,24 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 
+/**
+ * Configures the REST servlet.
+ * <p>
+ * The default JSON formatting/object mapper is configured in this class.
+ * Specific repositories can be configured for export using this annotated configuration class.
+ * 
+ * @author Sami Zeinelabdin
+ * @see RepositoryRestMvcConfiguration
+ */
 @Configuration
 public class RestConfig extends RepositoryRestMvcConfiguration {
+	
+	/**
+	 * Configures the default behavior of exported JPA repositories.
+	 * <p>
+	 * 
+	 * 
+	 */
 	@Override
 	protected void configureRepositoryRestConfiguration(
 			RepositoryRestConfiguration config) {
